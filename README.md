@@ -1,5 +1,8 @@
 # JHU Thesis or Dissertation Template
 
+> [!IMPORTANT]
+> **LICENSE**: The LaTeX template scaffolding is released under the [MIT License](LICENSE-template) (Copyright © 2024 bibekananda-datta). The dissertation content — written text, figures, and data — is Copyright © 2026 Wei Wang and licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
+
 This is an unofficial thesis (masters) or dissertation (PhD) template for Johns Hopkins with recent updates as listed below. This template is created to be used on Overleaf and the compilation details are given below. However, you can also compile it locally on your computer as well if you already know how to do it, but not within the scope of this README file.
 
 As of March 2024, the template follows the thesis or dissertation formatting requirements provided by the [Johns Hopkins University Sheridan Library](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/). Johns Hopkins Library is flexible in terms of the format except for the title page, margins, and overall double-spaced content. **However, be sure to check the requirements before you proceed any further. It is the user's responsibility to ensure all the formatting requirements are met.**
