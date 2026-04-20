@@ -37,7 +37,7 @@ jobs:
             "https://api.github.com/users/${{ github.repository_owner }}%5Bbot%5D" | jq .id)
           git config user.name "${{ github.repository_owner }}[bot]"
           git config user.email "${APP_USER_ID}+${{ github.repository_owner }}[bot]@users.noreply.github.com"
-          git add -f WANG-DISSERTATION-2026.pdf
+          git add WANG-DISSERTATION-2026.pdf
           git diff --cached --quiet || git commit -m ":bento: Update compiled dissertation PDF"
           git push
           if [ -n "${{ github.event.release.tag_name }}" ]; then

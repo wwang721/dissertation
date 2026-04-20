@@ -1,12 +1,11 @@
 MAIN     = 00-main
-JOBNAME  = WANG-DISSERTATION-2026
 LATEX    = latexmk
 FLAGS    = -pdf -interaction=nonstopmode -halt-on-error -file-line-error
 
 .PHONY: all clean
 
 all:
-	$(LATEX) $(FLAGS) -jobname=$(JOBNAME) $(MAIN).tex
+	$(LATEX) $(FLAGS) $(MAIN).tex
 
 clean:
 	find . -maxdepth 1 -name "*.aux" -o -name "*.bbl" -o -name "*.bcf" \
@@ -16,4 +15,4 @@ clean:
 	  -o -name "pdfa.xmpi" | xargs rm -f
 
 cleanall: clean
-	rm -f $(JOBNAME).pdf
+	rm -f $(MAIN).pdf
