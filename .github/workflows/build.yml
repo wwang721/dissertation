@@ -8,6 +8,8 @@ on:
       - 'LICENSE'
       - 'LICENSE-template'
       - '.gitignore'
+      - 'WANG-DISSERTATION-2026.pdf'
+      - '.github/workflows/build-publish.yml'
 
   pull_request:
     branches: [main]
@@ -16,6 +18,8 @@ on:
       - 'LICENSE'
       - 'LICENSE-template'
       - '.gitignore'
+      - 'WANG-DISSERTATION-2026.pdf'
+      - '.github/workflows/build-publish.yml'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

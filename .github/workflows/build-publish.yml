@@ -1,0 +1,46 @@
+name: Build and Publish LaTeX
+
+on:
+  release:
+    types: [published]
+    
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: 00-main.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error -jobname=WANG-DISSERTATION-2026
+
+      - name: Commit and push PDF
+        run: |
+          APP_USER_ID=$(curl -s -H "Authorization: Bearer ${{ steps.app-token.outputs.token }}" \
+            "https://api.github.com/users/${{ github.repository_owner }}%5Bbot%5D" | jq .id)
+          git config user.name "${{ github.repository_owner }}[bot]"
+          git config user.email "${APP_USER_ID}+${{ github.repository_owner }}[bot]@users.noreply.github.com"
+          git add -f WANG-DISSERTATION-2026.pdf
+          git diff --cached --quiet || git commit -m ":bento: Update compiled dissertation PDF"
+          git push
+          if [ -n "${{ github.event.release.tag_name }}" ]; then
+            git tag -f ${{ github.event.release.tag_name }}
+            git push origin -f ${{ github.event.release.tag_name }}
+          fi
