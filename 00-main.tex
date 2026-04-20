@@ -176,6 +176,7 @@
 %% Nature style bibliography
 \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
      date=year, isbn=false, url=false, doi=true]{biblatex}
+\AtEveryBibitem{\clearfield{doi}}  % suppress DOI for the final bibliography
 \DeclareSourcemap{
   \maps[datatype=bibtex]{
     \map{
@@ -584,7 +585,7 @@
 %%%% OPTIONAL but COMMON: preface chapters
 \include{03-dedication}
 \include{04-acknowledgement}        
-\include{05-epigraph}
+% \include{05-epigraph}
 %% you can have other chapters and the order does not matter
 
 
@@ -633,7 +634,7 @@
 %%%% BIBLIOGRAPHIC REFERENCES
 \BibTextSpacing                         % text spacing for each bib item
 \fancyhead[L]{\nouppercase \leftmark}
-\printbibliography[title={Bibliographic references},
+\printbibliography[title={References},
     heading=bibintoc, notcategory=mypapers]
 \clearpage                              % flushes out floating header
 

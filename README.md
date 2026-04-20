@@ -8,6 +8,16 @@
 > [!IMPORTANT]
 > **LICENSE**: The LaTeX template scaffolding is released under the [MIT License](LICENSE-template) (Copyright © 2024 bibekananda-datta). The dissertation content — written text, figures, and data — is Copyright © 2026 Wei Wang and licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
 
+## Changes from the original template
+
+Compared to the [original template](https://github.com/bibekanandadatta/JHU-Dissertation-Template), this repository adds:
+
+- [**`Makefile`**](/Makefile) — for local compilation using `latexmk` (`make`, `make clean`, `make cleanall`)
+- [**`.github/workflows/build.yml`**](/.github/workflows/build.yml) — GitHub Actions workflow that compiles the LaTeX source and uploads the PDF as an artifact on push to `main`
+- [**`.github/workflows/build-publish.yml`**](/.github/workflows/build-publish.yml) — GitHub Actions workflow that compiles and commits the PDF back to the repository, triggered on release or manually (configured to use my GitHub App as the commit bot; `@github-actions[bot]` can be used as an alternative)
+
+---
+
 This is an unofficial thesis (masters) or dissertation (PhD) template for Johns Hopkins with recent updates as listed below. This template is created to be used on Overleaf and the compilation details are given below. However, you can also compile it locally on your computer as well if you already know how to do it, but not within the scope of this README file.
 
 As of March 2024, the template follows the thesis or dissertation formatting requirements provided by the [Johns Hopkins University Sheridan Library](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/). Johns Hopkins Library is flexible in terms of the format except for the title page, margins, and overall double-spaced content. **However, be sure to check the requirements before you proceed any further. It is the user's responsibility to ensure all the formatting requirements are met.**

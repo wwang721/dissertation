@@ -7,7 +7,19 @@
 
 %%%% MUST: add the citation for the chapter if it is a reprint
 
+%%%% MUST: if the chapter is a reprint or submitted paper, you must declare it
+%% you can use enumerate or itemize environment if you have more than one paper 
+%% \mybibexclude{} will exclude this citation from the final bibliography
+%% if this paper appears somewhere else then remove \mybibexclude{} command
 
+\begin{singlespace}         % you can also use `onehalfspace` to relax the spacing
+    This chapter is adapted from the following articles with permission:% from <publisher>
+    
+    \begin{itemize}
+        \item \fullcite{wang2024limits}.
+        \item \fullcite{srinivasan2026perfect}.
+    \end{itemize}
+\end{singlespace} 
 
 %% remove the following and add your chapter text here
 \section{Introduction}
