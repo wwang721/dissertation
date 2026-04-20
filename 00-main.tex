@@ -176,6 +176,14 @@
 %% Nature style bibliography
 \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
      date=year, isbn=false, url=false, doi=true]{biblatex}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      % \step[fieldset=number, null]
+      \step[fieldset=issue, null]
+    }
+  }
+}
 
 %% APA style
 % \usepackage[backend=biber, defernumbers=true, style=apa, maxnames=99,
@@ -317,7 +325,7 @@
 %% set the width of the box based on the longest label name
 \renewcommand{\cftchappresnum}{\chaptername\space}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}  % dots for chapters too
-\setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~XXX~}}}
+\setlength{\cftchapnumwidth}{\widthof{\normalfont\textbf{Appendix~XX~}}}
 
 
 \setlength{\cftbeforechapskip}{\ChapTOCSpacing}
