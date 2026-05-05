@@ -100,7 +100,7 @@ Parameters: number of cells $N=100$, initial packing fraction $\phi=0.5$, $\ell=
 \label{fig:ch4:timestep}
 \end{figure}
 
-Fig.~\ref{fig:ch4:timestep}b,c shows our qualitative visual analysis is correct: the cells become more adherent as the time step $\Delta t$ decreases. Why does this happen? Does this reflect an issue with numerical algorithms, such as an incorrect choice of time integration schemes, or is it something more fundamental? In the next section, we show that this is an unavoidable consequence of the underlying geometric assumptions of the model.
+Fig.~\ref{fig:ch4:timestep}b,c shows that our qualitative visual analysis is correct: the cells become more adherent as the time step $\Delta t$ decreases. Why does this happen? Does this reflect an issue with numerical algorithms, such as an incorrect choice of time integration schemes, or is it something more fundamental? In the next section, we show that this is an unavoidable consequence of the underlying geometric assumptions of the model.
 
 
 \subsection{Forces between a cell doublet}
@@ -189,7 +189,7 @@ This prescription renders forces finite at detachment while leaving them unchang
 \includegraphics[width=0.7\textwidth]{chap4/truncated.pdf}
 \caption{Regularization by introducing a cutoff.
 \textbf{a}, Force between a cell doublet as a function of cell-center distance for $\Lambda=0.2$ and $P_0=4.8$. Empty circles and triangles represent forces obtained from simulations before and after implementing the truncation; analytical results are the corresponding curves in Fig.~\ref{fig:ch4:doublet}b. Inset: enlarged view around the cutoff $\delta=0.45$, which corresponds to $d_c=\sqrt{4\ell^2-\delta^2}\approx 1.95$.
-\textbf{b}, Phase diagram for the final detachment force $f_\mathrm{detach}$ when $d=2\ell$ in the $P_0$--$\Lambda$ plane, where the cutoff $\delta=0.45$.
+\textbf{b}, Phase diagram for the final detachment force $f_\mathrm{detach}$ when $d=2\ell$ in the $P_0$--$\Lambda$ plane, with cutoff $\delta=0.45$.
 Default parameters: $\ell=1$, $K_P=1$, and $A_0=\pi$.}
 \label{fig:ch4:truncated}
 \end{figure}
@@ -335,7 +335,7 @@ First, because no force cutoff was implemented, clusters can fracture only due t
 Secondly, choices about the calibration of $\ell$ and regularization can qualitatively change results. Using a fixed $\ell$ rather than the steady-state radius $\ell_0$ from the DP model reverses the trend of fracture behavior when varying $P_0$ (Figs.~\ref{fig:ch4:truncated}b and \ref{fig:ch4:detachment}c).
 Interestingly, in our model using a varying $\ell_0$ and calibrating to the detachment forces (Fig.~\ref{fig:ch4:calibrate}h), which we think is the most reasonable approach, we do see the same qualitative trends in the effect of $P_0$ that are observed by Ref.~\cite{huang2023bridging} in their phase diagrams (e.g., their Fig.~2b). However, we believe the origin of these behaviors may be subtler than expected, and they depend on our calibration choices.
 
-The associated purpose-builtPython package \texttt{PyAFV} is available on GitHub at \href{https://github.com/wwang721/pyafv}{wwang721/pyafv}. A snapshot of the package and other data and code required to reproduce this paper have been archived on Zenodo, doi:~\href{https://doi.org/10.5281/zenodo.18091659}{10.5281/zenodo.18091659}.
+The associated purpose-built Python package \texttt{PyAFV} is available on GitHub at \href{https://github.com/wwang721/pyafv}{wwang721/pyafv}. A snapshot of the package and other data and code required to reproduce this paper have been archived on Zenodo, doi:~\href{https://doi.org/10.5281/zenodo.18091659}{10.5281/zenodo.18091659}.
 
 
 \section{Appendices}
