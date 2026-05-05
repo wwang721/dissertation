@@ -1,41 +1,669 @@
-\chapter{Chapter title goes here} \label{chap:chap-3}
+\chapter{Controlling tissue size by active fracture}
+\label{chap:size-control}
 
-
-% epigraph after chapter heading
-\epigraph{Since it is written in \LaTeX, it must be true.}{-- Isaac Newton}
-
-
-%%%% MUST: add the citation for the chapter if it is a reprint
-
-%%%% MUST: if the chapter is a reprint or submitted paper, you must declare it
-%% you can use enumerate or itemize environment if you have more than one paper 
-%% \mybibexclude{} will exclude this citation from the final bibliography
-%% if this paper appears somewhere else then remove \mybibexclude{} command
-
-\begin{singlespace}         % you can also use `onehalfspace` to relax the spacing
-    This chapter is adapted from the following articles with permission:% from <publisher>
-    
+\begin{singlespace}
+    This chapter is adapted from the following article with permission:
     \begin{itemize}
-        \item \fullcite{wang2024limits}.
-        \item \fullcite{srinivasan2026perfect}.
+        \item \fullcite{wang2026controlling}.
     \end{itemize}
-\end{singlespace} 
+\end{singlespace}
 
-%% remove the following and add your chapter text here
+
 \section{Introduction}
-\blindtext 
+\label{sec:ch3:intro}
+
+How does an organ or an organism control its size? Size is thought to be tightly regulated by feedbacks controlling cell division~\cite{lecuit2007orchestrating}. However, two recent experiments suggest a different possibility---that the size of a group of cells can arise from a competition between growth, which tends to make the group larger, and random cell motility, which can make the group fracture into multiple pieces, reducing group size. In the metazoan \textit{Trichoplax adhaerens}, asexual reproduction by fission is driven by motility-induced fractures~\cite{prakash2021motility}. Similarly, germline cysts in mice are formed by a combination of cell division and fracture of intercellular bridges by random cell motility~\cite{levy2024tug}, as shown in Fig.~\ref{fig:ch3:cysts}. These mechanisms, which depend on material failure, are reminiscent of how cancerous cells break from an invading front~\cite{mukherjee2021cluster,law2023cytokinesis,wang2025confinement} (see also Chapter~\ref{chap:dissociation})---which seems very different than a well-regulated organism attempting to keep a fixed size. Analogous fracture-limited size control also occurs in multicellular snowflake yeast clusters, though driven by crowding-induced mechanical stress, not motility~\cite{jacobeen2018cellular}. We want to know: can motility-driven fracture alone reliably regulate the size of a group of cells? Both \textit{T. adhaerens} and germline cysts show significant variability in size~\cite{prakash2021motility,levy2024tug,ikami2023branched,lei2013mouse}. What physical factors control the group size and its variability?
+
+We argue that the size of cell clusters controlled by fracture is set by competition between the break rate of cell-cell junctions $k_b$ and the cell division rate $k_d$~\cite{nanda2024dynamic}. We model break rate $k_b$ from a mechanical perspective, using a simple one-dimensional model of cells as active particles connected by springs. The break rate depends on typical cell speed, cell-cell junction strength, and the cell's persistence time. We then develop models of cluster growth and fracture. We derive the exact steady-state cluster size distribution, finding that cluster sizes depend solely on the ratio $k_b/k_d$, allowing us to link cluster size to cell adhesion and motility. The quality of cluster size control can be improved if only cells on the edge of the cluster divide or if only cell-cell junctions near the cluster middle can fracture.
+
+In this chapter, we first develop a one-dimensional theory for motility-driven fracture and size regulation in cell clusters in Sec.~\ref{sec:ch3:1d}. We start, in Sec.~\ref{sec:ch3:mechanics}, by deriving an analytic expression for the junction break rate from a minimal mechanical model. Sec.~\ref{sec:ch3:growth_model} subsequently analyzes three biologically motivated growth scenarios and obtains exact steady-state size distributions. Sec.~\ref{sec:ch3:combine} shows how the model parameters are constrained by available experimental data, and Sec.~\ref{sec:ch3:survival} demonstrates that the survival probability of an intact cluster where all cells divide follows the universal decay $S(t)=\mathrm{e}^{-k_d t}$, governed solely by the cell division rate. Finally, we test the robustness of the theory by comparing with two-dimensional active-particle simulations in Sec.~\ref{sec:ch3:2d}.
 
 
-\section{Current approach}
-\blindtext\footnote{Hello, this is the first footnote with no indentation and single-spaced text. The spacing between two footnotes is also single-spaced.}
-
-\subsection{Hypothesis statement}
-\blindtext\footnote{This is the second footnote.}
-
-
-\subsection{Experimental evidences}
-\blindtext
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chap3/cysts.pdf}
+\caption{(a) Live image of an E12.5 ovary shows a germline cyst undergoing both cell division and fracture. Green arrows indicate cells that are about to divide, and orange arrows show the fracture of an intercellular bridge. {Reprinted from Ref.~\cite{levy2024tug}, with permission from Elsevier (License number: 6064951253296).}
+(b) Schematic illustration of cell division and fracture. Red lines denote intercellular bridges that undergo fracture.}
+\label{fig:ch3:cysts}
+\end{figure}
 
 
-\subsubsection{Data analysis}
-\blindtext
+\section{Results for one-dimensional chain}
+\label{sec:ch3:1d}
+
+\subsection{Mechanics}
+\label{sec:ch3:mechanics}
+
+We initially model our cell cluster as a one-dimensional chain of cells. This geometry is natural for germline cysts, which are composed of potentially-branched chains of cells that can be fragmented by a single junction break (Fig.~\ref{fig:ch3:cysts}), and linear geometries of strings of cells are often found in cells confined in extracellular matrix or experiments performed in microchannels or micropatterns~\cite{law2023cytokinesis,wang2025confinement,desai2013contact,jain2020role}. One dimension may be appropriate for \textit{T. adhaerens} when it takes on an elongated string-like shape~\cite{prakash2021motility}, though a higher-dimensional model is necessary for a full study of \textit{T. adhaerens}.
+
+We treat our chain of cells as self-propelled active particles with positions $\{x_n\}$ connected by springs [Fig.~\ref{fig:ch3:mechanics}(a)], assuming an overdamped environment:
+\begin{equation}\label{eq:ch3:EOM}
+    \dot{x}_n = -\mu \nabla_n\Phi +v_n(t),
+\end{equation}
+where $\mu$ is the particle mobility and $\Phi=\frac{1}{2}k\sum_{\langle i,j\rangle} \left(|x_i-x_j|-\ell_0\right)^2$ is the cell-cell interaction energy. Here, $k$ is the spring constant, $\ell_0$ is the natural length of the springs, and $\langle i,j\rangle$ denotes the summation over nearest neighbors. The active velocities $v_n$---the velocities the cell would have in the absence of cell-cell interactions---are Ornstein-Uhlenbeck (OU) processes~\cite{dunn1987unified}:
+\begin{equation}
+    \tau \dot{v}_n = -v_n+\sqrt{2D}\xi_n(t),
+\end{equation}
+where $\xi_n(t)$ are independent, zero-mean, unit-variance Gaussian white noises. $\tau$ is the persistence time of the cell, while $D$ controls the typical cell speeds---$v_n$ have mean zero and correlations $\langle v_n(t)v_{n'}(t') \rangle= \delta_{nn'}(D/\tau)\mathrm{e}^{-|t-t'|/\tau}$ if $t,t' \gg \tau$. In the limit $\tau\to 0$, the active velocities $v_n$ reduce to Gaussian white noises---in this limit the system is in thermal equilibrium, but will be out of equilibrium for a finite $\tau$.
+
+What is the mean first time to rupture for a given link? Our initial intuition was that the rupture rate within a cluster would be the same as that of a two-particle link, as in thermal equilibrium. To explore this, we first compute the variance of the stretched length $\delta\ell=\ell-\ell_0$ (where $\ell$ is the distance between the particles) in the two-particle case. Extending the approach of Ref.~\cite{woillez2020active}, we can map this problem to an inertial Brownian particle in a harmonic potential $U(\delta\ell)=\mu k\delta\ell^2$ experiencing a friction $\eta=1+2\mu k\tau$, and an effective temperature $k_BT_\textrm{eff}=2D/\eta$ (see Sec.~\ref{sec:ch3:two_particle}). The distribution of $\delta\ell$ in the steady state is Boltzmann-like $\sim\exp(-U/k_B T_\textrm{eff})$, i.e., a Gaussian distribution with zero mean and variance
+\begin{equation}
+  \langle\delta\ell^2\rangle_2=\frac{k_BT_\mathrm{eff}}{U''}=\frac{D}{\mu k (1+2\mu k\tau)}.
+\end{equation}
+The subscript indicates this is the two-particle result. When $\tau=0$, $\langle\delta\ell^2\rangle_2$ approaches the thermal equilibrium solution $\langle\delta\ell^2\rangle_\mathrm{th}=D/\mu k$. If the spring breaks when stretched beyond a critical length $\ell_0+\delta\ell_b$, the mean escape time can be estimated using standard Kramers' theory. For small effective temperatures, the time for the pair to break is given by
+\begin{equation}
+\tau_\textrm{esc}^\textrm{pair}=\tau_0\exp\left(\frac{\Delta U}{k_B T_\mathrm{eff}}\right)=\tau_0 \exp\left[\frac{\mu k\delta\ell_b^2(1+2\mu k\tau)}{2D}\right],
+\end{equation}
+where $\tau_0$ is a subexponential correction~\cite{woillez2020active,gardiner2009stochastic,hanggi1990reaction,haunggi1994colored,wexler2020dynamics}.
+
+For a long chain of $N\gg 1$ cells, we assume that $x_n(t)=n\ell_0+\delta x_n(t)$, where $\delta x_n$ represents the deviation of $x_n$ around the lattice point $n\ell_0$. We also assume periodic boundary conditions, $\delta x_{n+N} = \delta x_{n}$---we find this does not influence our central results in the limit $N \to \infty$ and makes calculation much simpler. We use a standard discrete Fourier transform:
+\begin{equation}
+    \tilde{x}_q=\frac{1}{N}\sum_{n=0}^{N-1}\delta x_n\mathrm{e}^{-iqn},
+\end{equation}
+where $q=2\pi m/N$ and the index $m=0,1,\cdots,N-1$. The inverse transform is $\delta x_n=\sum_q\tilde{x}_q\mathrm{e}^{iqn}$. By substituting the inverse transforms into Eq.~\eqref{eq:ch3:EOM} and matching terms for each mode $q$, we can then obtain (see Sec.~\ref{sec:ch3:chain} for more details):
+\begin{equation}\label{eq:ch3:EOM_q}
+    \dot{\tilde{x}}_q = -\mu k_q\tilde{x}_q+ \tilde{v}_q,
+\end{equation}
+where $k_q=2k(1-\cos q)$ and $\tilde{v}_q=(1/N)\sum_{n=0}^{N-1}v_n\mathrm{e}^{-iqn}$ is the Fourier amplitude of $v_n$, with mean $\langle \tilde{v}_q\rangle = 0$, and time correlations:
+\begin{equation}
+    \langle \tilde{v}^{\phantom{\ast}}_q(t)\tilde{v}^\ast_{q'}(t')\rangle = \delta_{qq'}\frac{D}{N\tau}\mathrm{e}^{-|t-t'|/\tau}.
+\end{equation}
+By solving Eq.~\eqref{eq:ch3:EOM_q}, the zeroth mode (center of mass) evolves as $\langle| \tilde{x}_0(t)|^2\rangle = 2D t/N$, while for the nonzero modes:
+\begin{equation}
+    \langle \tilde{x}^{\phantom{\ast}}_q(t)\tilde{x}^\ast_{q'}(t)\rangle =\delta_{qq'}\frac{D}{N\mu k_q(1+\mu k_q\tau)}.
+\end{equation}
+We can then calculate the stretched lengths of the springs by $\delta\ell_n = \delta x_{n+1}-\delta x_n$, where the mean is simply $\langle\delta\ell_n\rangle = 0$, and the variance is
+\begin{align}
+    \langle \delta\ell_n^2\rangle
+    &=\sum_{q\neq 0 }\sum_{q'\neq 0}\langle \tilde{x}^{\phantom{\ast}}_q\tilde{x}^\ast_{q'}\rangle \mathrm{e}^{i(q-q')n}(\mathrm{e}^{iq}-1)(\mathrm{e}^{-iq'}-1)\notag\\
+    &=\frac{D}{N\mu k}\sum_{q\neq 0}\frac{1}{1+2\mu k\tau (1-\cos q)}.\notag
+\end{align}
+Replacing the sum by an integral, we obtain
+\begin{equation}
+    \langle \delta\ell_n^2\rangle = \frac{D}{\mu k\sqrt{1+4\mu k\tau}},
+\end{equation}
+which is different from the two-particle result $\langle\delta\ell^2\rangle_2$ at large $\mu k \tau$ [Fig.~\ref{fig:ch3:mechanics}(b)].
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{chap3/mechanics.pdf}
+\caption{(a) Illustration of the active chain model. Cells are connected by springs; each cell has active velocity $v_n$.
+(b) Variance of the spring stretch $\langle\delta\ell_n^2\rangle$ as a function of $\mu k\tau$. Gray dashed line is the thermal variance $\langle\delta\ell^2\rangle_\mathrm{th}=D/\mu k$. We change $\mu k\tau$ by varying $\tau$ while fixing $\mu k$ in the simulations. Red dashed line is the two-particle result $\langle\delta\ell^2\rangle_2$.
+(c) Mean escape time $\tau_\mathrm{esc}=1/k_b$. Empty circles are simulation results with $N=1000$ cells; solid lines are theory, Eq.~\eqref{eq:ch3:break_rate}.}
+\label{fig:ch3:mechanics}
+\end{figure}
+
+Notably, $\langle\delta\ell_n^2\rangle=\langle\delta\ell^2\rangle_\mathrm{th}$ when $\tau\to0$, but $\langle\delta\ell_n^2\rangle$ also converges to the two-particle result $\langle\delta\ell^2\rangle_2$ when $0<\mu k\tau\ll 1$, as shown in Fig.~\ref{fig:ch3:mechanics}(b). This implies that when $\mu k\tau$ is small but finite, the system resides in an \emph{effective equilibrium} regime~\cite{fodor2016far}, and such a convergence can be understood through a modified equipartition theorem (see Sec.~\ref{sec:ch3:equipartition}). In the steady state, the distribution of $\delta\ell_n$ follows a Gaussian form, $P_s(\delta\ell_n)\sim\exp(-\delta\ell_n^2/2\langle\delta\ell_n^2\rangle)$. The escape rate will be proportional to the probability density at the breaking length $P_s(\delta \ell_b)$~\cite{woillez2020active}, yielding
+\begin{equation}\label{eq:ch3:break_rate}
+    k_b = \tau_0^{-1}\exp\left(-\frac{\mu k\delta\ell_b^2\sqrt{1+4\mu k\tau}}{2D}\right),
+\end{equation}
+where we have found the subexponential correction $\tau_0=\pi\eta/\mu k$ leads to a good fit to the escape time from our simulation of active cell motion [see Fig.~\ref{fig:ch3:mechanics}(c)]. Time to rupture increases with a higher break threshold $\delta\ell_b$, stiffer springs, or greater cell persistence, while it decreases if cells are faster (larger $D$). Unlike the two-particle problem, where the mean escape time grows exponentially with $k$ in equilibrium and $k^2$ in the $\mu k \tau \gg 1$ nonequilibrium limit, it grows here exponentially in $k^{3/2}$ for large $k$.
+
+
+\subsection{Growth models}
+\label{sec:ch3:growth_model}
+
+We have described an active chain in which links can break at a rate $k_b$, while cells can also divide, leading to an increase in the chain length. What controls the cluster size, and how broad is its distribution? As in germline cysts, where all cells can divide~\cite{levy2024tug}, we first assume that each cell divides independently with the same division rate $k_d$. To analyze the distribution of the chain length, we randomly pick one of the daughter chains to track once fragmentation occurs. The selected daughter chain then continues to grow and rupture in the same manner as the original chain, as illustrated in Fig.~\ref{fig:ch3:schematics}(a).
+
+Assuming $p_n(t)$ gives the probability that the length of the tracked chain at time $t$ is $n$, the master equation governing such a process is, generalizing models of polymerization and fragmentation~\cite{krapivsky2010kinetic},
+\begin{equation}\label{eq:ch3:master_all}
+    \frac{\mathrm{d} p_n}{\mathrm{d} t}=\sum_{m>n} k_b p_{m} -p_n\sum_{i+j=n}k_b+k_d(n-1)p_{n-1}-k_dnp_n,
+\end{equation}
+where the first two terms on the right-hand side describe the fragmentation process while the last two terms represent the growth of the chain through cell division. $\sum_{m>n} k_b p_{m}$ corresponds to the rate of obtaining an $n$-mer through the fragmentation of a longer chain. Though there are two possible rupture points when an $m$-mer breaks to form an $n$-mer, the random selection of one daughter chain causes the prefactors to cancel out. In the second term, $\sum_{i+j=n}k_b = (n-1)k_b$ describes the rupture of the $n$-mer chain into two daughter fragments, where $(n-1)$ is exactly the number of connections within an $n$-mer chain. The two terms for the growth process give the rates that an $(n-1)$-mer grows into an $n$-mer, and an $n$-mer grows into an $(n+1)$-mer, respectively. Using generating functions, we find the steady-state solution:
+\begin{equation}\label{eq:ch3:ss_solution_all}
+    p_n=\frac{\gamma}{(1+\gamma)^n},\qquad\textrm{(all-cell growth)}
+\end{equation}
+where $\gamma \equiv k_b/k_d$ is the ratio of the break rate to the division rate (see Sec.~\ref{sec:ch3:gen_func_1}).
+
+
+\begin{figure}
+\centering
+\vspace{0.3cm}
+\includegraphics[width=0.7\textwidth]{chap3/sketch.pdf}
+\caption{Growth and fracture of cell groups under different assumptions. (a) All cells can divide. After a rupture occurs, one daughter chain is selected at random. (b) Only the cell at one end of the chain can divide. (c) Only the cells at the two ends can divide. (d) Potential rupture points when a minimum cluster size $N_\textrm{min}$ is enforced. Rupture can only occur when the chain length $n\geqslant 2N_\textrm{min}$. Red cells have a non-zero division rate $k_d$, while blue cells have a division rate of zero; gray crosses indicate actual or potential rupture points.}
+\label{fig:ch3:schematics}
+\end{figure}
+
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chap3/statistics.pdf}
+\caption{(a) Steady-state distribution of chain length $p_n$ for the three growth modes, with $\gamma=0.1$ for the all-cell growth and two-end growth models, and $\gamma$ replaced by $\gamma'=\gamma/2=0.05$ for the one-end growth model (doubled division rate). Crosses represent simulation results, while lines correspond to theoretical predictions.
+Panels (b)--(d) display the mean $\langle n\rangle$, variance $\langle n^2\rangle-\langle n\rangle^2$, and coefficient of variation $\mathrm{CV}=\sigma_n/\langle n\rangle$, where $\sigma_n=\sqrt{\langle n^2\rangle-\langle n\rangle^2}$. Purple dashed lines are the one-end result after doubling the division rate [$\gamma \to \gamma'=\gamma/2$ in Eq.~\eqref{eq:ch3:ss_solution_one}], while the purple dotted lines show Eq.~\eqref{eq:ch3:ss_solution_one}.
+(e) Steady-state distribution $p_n$ when minimum cluster size $N_{\min}=200$. Crosses are simulation results, lines are theoretical predictions by the matrix method.
+Panels (f)--(h) show how mean, variance, and $\mathrm{CV}$ vary with $N_\mathrm{min}$ in the all-cell growth model. Gray dashed lines show predictions assuming log-uniform distributions [Eq.~\eqref{eq:ch3:loguniform}].}
+\label{fig:ch3:statistics}
+\end{figure*}
+
+
+So far, we have assumed that all cells in the chain can divide. However, cell division may be regulated by mechanical and spatial constraints. Cells with fewer neighbors or experiencing lower compression are more likely to divide---``contact inhibition of proliferation''~\cite{puliafito2012collective}. As an extreme limit of contact inhibition, we develop alternate models where only cells at the chain ends divide. First, consider the case where only one end of the chain grows---e.g., if the other end is constrained by a barrier. In contrast to the all-cell growth model, where the total growth rate scales as $k_dn$ (proportional to chain length), in one-end growth, the total growth rate is fixed at $k_d$ [Fig.~\ref{fig:ch3:schematics}(b)]. Here, the master equation becomes
+\begin{equation}\label{eq:ch3:master_one}
+    \frac{\mathrm{d} p_n}{\mathrm{d} t}=\sum_{m>n} k_b p_{m} -p_n\sum_{i+j=n}k_b+k_dp_{n-1}-k_dp_n.
+\end{equation}
+We find that the steady-state solution is
+\begin{equation}\label{eq:ch3:ss_solution_one}
+    p_n={n\gamma^{1-n}}\Big/{\left(\dfrac{1+\gamma}{\gamma}\right)_n},\qquad\textrm{(one-end growth)}
+\end{equation}
+where $(x)_n=x(x+1)(x+2)\cdots(x+n-1)$ is the Pochhammer symbol (see Sec.~\ref{sec:ch3:gen_func_2}). When $\gamma\ll 1$, $p_n$ can be approximated by a Rayleigh distribution
+\begin{equation}
+  f(n;\sigma)=n\gamma \mathrm{e}^{-\gamma n^2/2},
+\end{equation}
+with mode $\sigma =1/\sqrt{\gamma}$.
+
+If the chain can grow from both ends, i.e., only the two cells at the two ends can divide, the total growth rate is $2k_d$, except when $n=1$ where the total growth rate is $k_d$ [Fig.~\ref{fig:ch3:schematics}(c)]. For this case, the steady-state solution is (see Sec.~\ref{sec:ch3:gen_func_3})
+\begin{equation}\label{eq:ch3:ss_solution_two}
+    p_n =
+    \begin{cases}
+        \gamma/(1+\gamma)^n, & n=1,2,\\[4pt]
+        \dfrac{2+\gamma}{2(1+\gamma)}\dfrac{n(\gamma/2)^{1-n}}{\bm{(}(2+\gamma)/\gamma\bm{)}_n}, & n>2.
+    \end{cases}\quad\textrm{(two-end)}
+\end{equation}
+In the limit of rare breaking $\gamma\ll 1$ when clusters almost always have two ends, $p_n$ converges to Eq.~\eqref{eq:ch3:ss_solution_one} with a doubled division rate.
+
+Fig.~\ref{fig:ch3:statistics}(a) shows our theoretical predictions $p_n$ for the three growth models, validated by Monte Carlo simulations of chain evolution (see Sec.~\ref{sec:ch3:rfKMC}). If all cells can divide, the cluster size distribution is extremely broad with a peak at $n = 1$; if only end cells divide, we have a better-defined peak at $n \approx 1/\sqrt{\gamma}$.
+
+Larger growth rates relative to break rates lead to larger clusters, but does this also result in greater variability of cluster size? With the distributions $p_n$, we can compute the means and variances of $n$ [Figs.~\ref{fig:ch3:statistics}(b) and \ref{fig:ch3:statistics}(c)]. In the limit $\gamma\to 0$, fragmentation is rare, leading to both increased growth and increased variability in all models, while in the limit $\gamma \gg 1$, fragmentation dominates, and clusters become single-celled. To quantify the relative variability, we plot the ratio of the standard deviation of cluster size to the mean (coefficient of variation $\mathrm{CV}$) in Fig.~\ref{fig:ch3:statistics}(d). We see a key difference between the end-growth models and the all-growth model when $\gamma\ll 1$ and cluster sizes are large---$\mathrm{CV}$ approaches $1$ for the all-growth model, while it approaches $\sqrt{(4-\pi)/\pi}\approx 0.523$ for end-growth. The $\mathrm{CV}$ for end-growth is roughly half that for all-growth, indicating better size control. If the interior cells can still divide, but at a lower rate, the $\mathrm{CV}$ is intermediate between end- and all-growth (see Sec.~\ref{sec:ch3:basal}).
+
+We have so far assumed all rupture rates to be identical, but secreted factors~\cite{vennettilli2022autologous} or stress~\cite{trepat2009physical} may vary across the cluster. For instance, it is well established that in large epithelial sheets, stress is peaked at the center of the tissue~\cite{trepat2009physical}---suggesting that fractures are more likely to happen at the center of the cluster. Instead of explicitly modeling the stress profile from contact inhibition of locomotion (CIL)~\cite{zimmermann2016contact} and other factors, we include a somewhat \textit{ad hoc} extension of the model, making clusters more likely to break in the center by assuming that only the junctions sufficiently far from the cluster edge break. This is equivalent to introducing a minimum cluster size $N_\textrm{min}$ [Fig.~\ref{fig:ch3:schematics}(d)]. Once we include the constraint that all clusters are larger than $N_\textrm{min}$, we cannot solve the master equation analytically. However, in the steady state, we can write it simply as a matrix equation
+\begin{equation}
+    \bm{K}\mathbf{p}=\mathbf{0},
+\end{equation}
+which can be easily solved numerically to find $\mathbf{p}$ (see Sec.~\ref{sec:ch3:matrix}). This method leads to good agreement with stochastic simulations [Fig.~\ref{fig:ch3:statistics}(e)].
+
+In the absence of a minimum cluster size, large cluster sizes always come with an unavoidable variability [Figs.~\ref{fig:ch3:statistics}(b)--(d)], while large rupture rates $\gamma \gg 1$ lead to sizes being precise but $\langle n\rangle \to 1$. Given a minimum cluster size, it is possible to have precise size control and finite clusters [Figs.~\ref{fig:ch3:statistics}(e)--(h)]. In the limit $\gamma \gg 1$, cell clusters grow from size $N_\textrm{min}$ to $2 N_\textrm{min}$, then fragment in half. This is very similar to the dynamics of a single cell's growth, akin to a sizer model~\cite{ocal2025universal,amir2014cell}, and leads to distributions $p_n$ [Fig.~\ref{fig:ch3:statistics}(e)] like those of single cell size distributions~\cite{ocal2025universal,jia2022characterizing,amir2014cell,taheri2015cell}. During each growth cycle $t\in[0,t_c]$, we have $\langle n\rangle = N_\textrm{min}\mathrm{e}^{k_d t}$ if all cells can divide, where $t_c = \ln 2/k_d$ is the time required to double the chain's length. Over a long trajectory, any moment within the chain's lifecycle is equally likely to be sampled~\cite{ocal2025universal}. If $t$ is uniformly distributed in one cycle $[0,t_c]$, then $p_n$ should obey a log-uniform distribution, as shown in Fig.~\ref{fig:ch3:sm_distrib_all_models}(e):
+\begin{equation}
+    p_n = \frac{1}{n\ln 2},\quad n\in[N_\textrm{min}, 2N_\textrm{min}], \label{eq:ch3:loguniform}
+\end{equation}
+where the mean is $\langle n\rangle = N_\textrm{min}/\ln 2$ and the variance is $\langle n^2\rangle - \langle n\rangle^2 = (3\ln 2 - 2)\langle n\rangle^2/2$, i.e., the coefficient of variation $\mathrm{CV}$ is independent of $N_\textrm{min}$, as shown in Figs.~\ref{fig:ch3:statistics}(f)--(h). Similarly, if only edge cells can divide, the chain length increases linearly with time. $p_n$ is then uniformly distributed in $[N_\textrm{min}, 2N_\textrm{min}]$, leading to a mean of $3N_\textrm{min}/2$ and a variance of $N^2_\textrm{min}/12$. When $\gamma\gg 1$, mean cluster size scales as $N_\textrm{min}$ and the variance scales as $N^2_\textrm{min}$, but the $\mathrm{CV}$ goes to a nonzero constant, and is smaller than for clusters with no minimum size. Interestingly, even given this strict cluster size constraint, the coefficient of variation is still not so small, reaching a minimum of $\sqrt{(3 \ln 2 -2)/2} \approx 0.2$ for the all-growth model. This extreme example shows that the decrease in CV from $1$ to $\approx 0.523$ between all-growth and end-growth is a very relevant change, and even the extremely precise control implied by the minimum cluster size cannot reduce the CV much further.
+
+Our example of the minimum cluster size is more motivated by large epithelial tissues, where the role of CIL and spatially-varying traction forces are better established. This is why we focus on large $N_\textrm{min}$ in Fig.~\ref{fig:ch3:statistics}. However a minimum cluster size does reduce variability even if the minimum is quite small---compare finite $N_\textrm{min}$ in Fig.~\ref{fig:ch3:statistics}(h) with no minimum ($N_\textrm{min} = 1$).
+
+We note, however, that the strict minimum cluster size is a vast oversimplification. If we weaken the strict assumption of a minimum cluster size by assuming a basal break rate $k_b^0$ for all junctions, even a small $k_b^0$ creates a relevant population of small clusters (see Sec.~\ref{sec:ch3:basal}), increasing the variability.
+
+
+\subsection{Combining mechanics and statistics}
+\label{sec:ch3:combine}
+
+According to our theory, the break rate $k_b$ depends on four key parameters related to cell motility and mechanical properties of the cluster---$\tau$, $\mu k$, $D$, and $\delta \ell_b$. While these parameters have not yet been measured simultaneously for a single cell type, we can provide reasonable estimates. Experiments measuring velocity correlations of HaCaT cells~\cite{selmeczi2005cell} give a persistence time $\tau$ of roughly $0.5$ hour and $D$ of around $\sim 100\,\textrm{\textmu}\mathrm{m^2/h}$, leading to an active velocity $v_n$ on the order of $\sqrt{D/\tau}\approx 15\,\textrm{\textmu}\mathrm{m/h}$. The mobility $\mu$ and spring constant $k$ together create a relaxation timescale $1/\mu k$, estimated to be approximately $15\,\mathrm{min}$ based on measurements for MDCK cells~\cite{jain2020role} (details in Sec.~\ref{sec:ch3:AOUP_params}). According to Eq.~\eqref{eq:ch3:break_rate}, the break rate $k_b$ is highly sensitive to the critical break length $\delta\ell_b$. As a rough guess, $\delta\ell_b=5\,\textrm{\textmu}\mathrm{m}$ yields a mean escape time $\tau_\mathrm{esc}\approx 17.6\,\mathrm{h}$, or a break rate of approximately $0.057\,\mathrm{h^{-1}}$. This is the right order of magnitude for experiments in germline cyst fracture~\cite{levy2024tug} and cancer cell dissociation~\cite{law2023cytokinesis,wang2025confinement}. We use these values as our default parameters (Table~\ref{tab:ch3:param}).
+
+Our results suggest that clusters of cells may regulate their size not only by changing division rate but also by changing cell motility or persistence or cell-cell adhesion. Recent experiments found that germline cells have motility that decreases as cysts develop, decreasing fracture over time and controlling cyst size~\cite{levy2024tug}. In Ref.~\cite{levy2024tug}, Levy \textit{et al.} measured the break rates as the \textit{fractures per hour connected} for germline cysts at different embryonic stages (lower panel, Fig.~\ref{fig:ch3:expt}). They also reported that germline cysts have a cell cycle length of $\sim16$ hours. Thus, the break rate and division rate of germline cysts are approximately $0.02\,\mathrm{h^{-1}}$ and $\ln2/16\approx0.04\,\mathrm{h^{-1}}$, i.e., the ratio $\gamma\approx 0.5$, corresponding to a mean cluster size $\langle n\rangle\approx 3$ in the all-cell growth model. (We note this is not the value found by Ref.~\cite{levy2024tug}---their germline cysts do not reach the steady state. If we simulate for only $5$ division times, we get similar results to their experiment and model; see Sec.~\ref{sec:ch3:rfKMC}.) For germline cysts, we set $\delta \ell_b = 6.5\,\textrm{\textmu}\mathrm{m}$ to match $k_b$ to experiment.
+
+\begin{figure}
+\centering
+\hspace{-0.2cm}
+\includegraphics[width=0.7\textwidth]{chap3/expt.pdf}
+\caption{A modest change in cell motility can account for the observed decrease in fracture rates over embryonic time. The upper panel shows a logistic decrease in the typical cell speed, $v_\textrm{rms}=\sqrt{D/\tau}$, which we hypothesize underlies the fracture rate reduction. In the lower panel, symbols with error bars are experimental data from Fig.~4C of Ref.~\cite{levy2024tug}; the red dashed line shows the corresponding theoretical predictions for the break rate $k_b$, calculated from the upper panel's $v_\textrm{rms}$ using Eq.~\eqref{eq:ch3:break_rate}.}
+\label{fig:ch3:expt}
+\end{figure}
+
+Cell motility and cell-cell adhesion change $k_b$ and thus change $\gamma$, changing cluster size distributions. For instance, if cells double their adhesiveness by increasing $k$, $\gamma$ decreases to approximately $0.0067$, leading to a larger cluster size $\langle n\rangle\approx 150$ with significantly higher variability $\sigma_n\approx 150$. At long developmental times, the break rate of germline cysts drops to under $1/190\,\mathrm{h^{-1}}$, which Ref.~\cite{levy2024tug} attributes to changes in cell motility. We find this drop does not require a dramatic change in cell speed. To decrease the break rate to this level, $D$ must decrease by more than a factor of $1.5$, i.e., the typical speed of cells needs to decrease by more than a factor of $1.2$, as shown in Fig.~\ref{fig:ch3:expt}, where a small decrease in $v_\textrm{rms}=\sqrt{D/\tau}$ captures the observed drop in break rates.
+
+
+\subsection{Survival probability has a universal form for all-cell growth}
+\label{sec:ch3:survival}
+
+At steady state, how long does a given cluster stay intact before it fractures into two pieces? Our initial intuition for this survival problem was that survival time should depend strongly on the break rate $k_b$ of an individual junction. However, the break rate $k_b$ and division rate $k_d$ affect this time scale in several ways, making their effects not immediately obvious. For instance, a larger $k_b$ makes junctions more likely to break, but it also shifts the steady-state distribution toward smaller clusters, which are less likely to fracture---simply because they contain fewer cell-cell junctions. To tackle these questions, we compute the survival probability, i.e., the probability that the time $T$ of the first fracture event is larger than the current time, $S(t)=\mathbb{P}(T>t)$, for a given cluster which we draw from the steady-state distribution of clusters at $t = 0$. (We used similar approaches to quantify experimental data on cancer cell rupture in Refs.~\cite{law2023cytokinesis,wang2025confinement} and Chapter~\ref{chap:dissociation}.) Our Monte Carlo simulation results reveal that, for the all-cell growth model, the survival probability follows an exponential form:
+\begin{equation}
+    S(t)=\mathrm{e}^{-k_d t},
+\end{equation}
+which is surprisingly independent of the break rate $k_b$, and depends solely on the division rate $k_d$, as shown in Figs.~\ref{fig:ch3:survival_probs}(a) and \ref{fig:ch3:survival_probs}(b).
+
+We can show that this form of the survival probability holds not just for our simplest model, but a broader generalization of the all-cell growth model [Eq.~\eqref{eq:ch3:master_all}]:
+\begin{equation}\label{eq:ch3:master_survival}
+    \frac{\mathrm{d}p_n}{\mathrm{d}t}=\sum_{m>n}q_{mn} p_m - \lambda(n) p_n  + (n-1)k_d p_{n-1} - nk_d p_n,
+\end{equation}
+where $q_{mn}$ is the transition rate at which an $m$-cell cluster breaks into an $n$-cell cluster. Our earlier all-cell growth model is the simple case where $q_{mn}$ is just set to a constant $k_b$. The transition rate is symmetric in fragment size: $q_{mn}=q_{m,m-n}$. The total ``hazard rate'' for an $m$-cell cluster $\lambda(m)$---i.e., the total rate of fragmentation for a cluster of size $m$ to any size---is then given by $\lambda(m) = \sum_{n\geqslant 1}^{m-1}q_{mn}$. Now, let us consider a more general class than our earlier all-cell growth model, in which the transition rate depends on the pre-fracture cluster size $m$, but not on the post-fracture fragment size $n$:
+\begin{equation}\label{eq:ch3:survival_assm}
+    q_{mn}=\mathcal{Q}(m).
+\end{equation}
+This would include fracture rates in models where, for instance, each bond in a larger cluster is less likely to break. Given Eq.~\eqref{eq:ch3:survival_assm}, the total hazard rate for an $n$-cell cluster becomes $\lambda(n)=(n-1)\mathcal{Q}(n)$. In the steady state, we find a recurrence relation between successive probabilities:
+\begin{equation}\label{eq:ch3:recurrence}
+    \frac{p_n}{p_{n-1}}=\frac{(n-1)k_d}{(n-1)k_d + \lambda(n)}=\frac{k_d}{k_d+\mathcal{Q}(n)}.
+\end{equation}
+As this is a generalization of the all-cell growth model, the solution in Eq.~\eqref{eq:ch3:ss_solution_all} automatically satisfies the recurrence relation.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{chap3/survival_probs.pdf}
+\caption{Dependence of survival probability $S(t)$ on break and division rates in the one-dimensional all-cell growth model.
+(a) Survival curves for varying break rates $k_b$, with fixed division rate $k_d$, all collapse onto the exponential decay $S(t)=\mathrm{e}^{-k_d t}$ (dashed line).
+(b) Survival probabilities $S(t)$ for three different division rates $k_d$, corresponding to cell cycles of $4, 16$, and $64$ hours, respectively.
+We apply standard Kaplan-Meier survival analysis~\cite{kaplan1958nonparametric} to the data from our rejection-free kinetic Monte Carlo simulations; error bars represent 95\% confidence intervals.}
+\label{fig:ch3:survival_probs}
+\end{figure}
+
+To compute the total survival probability $S(t)$, we first consider the conditional survival probability $u_n(t)=\mathbb{P}(T>t|N(0)=n)$, defined as the probability that no fracture occurs by time $t$ given an initial chain length $N(0)=n$. For a Markov process with a time-varying hazard rate $\lambda(t)$, the probability that no failure occurs over a time interval can be generalized with an integral $\exp\left(-\int_0^{\Delta t}\lambda(t')\mathrm{d}t'\right)$~\cite{kalbfleisch2002statistical}. In our case, the total hazard rate $\lambda(t)=\lambda\bm{(}N(t)\bm{)}$ depends on a stochastic process $N(t)$, so we must average over all possible trajectories of $N(t)$:
+\begin{equation}
+\label{eq:ch3:conditional_average}
+u_n(t)=\mathbb{E}^N\left[\left.\exp\left(-\int_0^t\lambda(t')\mathrm{d}t'\right)\right|N(0)=n\right],
+\end{equation}
+where $\mathbb{E}^N[\cdot]$ represents the expectation over all realizations of the stochastic process $N(t)$.
+
+We can work out the average in Eq.~\eqref{eq:ch3:conditional_average} using the Kolmogorov backward equation (KBE). For such a discrete-state, continuous-time Markov jump process, the KBE is~\cite{ross1995stochastic,Norris_1997}:
+\begin{equation}
+    \partial_tP_{ij}(t)=\sum_k w_{ik} P_{kj}(t),
+\end{equation}
+where $P_{ij}(t)=\mathbb{P}(N(s+t)=j|N(s)=i)$ and $w_{ij}$ is the transition rate from state $i$ to state $j$. To compute the survival time, we are interested in the dynamics of the cluster to reach an absorbing state of ``ruptured'', which we denote as the ``0'' state. Following the KBE, one can show that
+\begin{equation}\label{eq:ch3:KBE}
+    \partial_t u_n(t)=\sum_{k> 0} w_{nk}u_k(t),
+\end{equation}
+which after separating the rates of rupture and division processes yields
+\begin{equation}
+    \partial_t u_n =-\lambda(n) u_n + n k_d (u_{n+1} - u_n).
+\end{equation}
+The total survival probability is then obtained by averaging $u_n(t)$ over the distribution of initial chain lengths. If we assume that the system is at steady state, it is then reasonable to use the steady-state $p_n$ as the distribution of initial chain lengths, and we therefore write
+\begin{equation}
+    S(t)=\sum_{n\geqslant 1} p_{n}\cdot u_n(t).
+\end{equation}
+By computing the time derivative of $S(t)$ and substituting Eq.~\eqref{eq:ch3:KBE} and the recurrence relation [Eq.~\eqref{eq:ch3:recurrence}], we obtain
+\begin{equation}
+    \dot{S}(t)=-k_d\sum_{n\geqslant 1} p_n u_n =-k_d S(t).
+\end{equation}
+Therefore, we arrive at the striking result that the survival probability decays exponentially as $S(t)=\mathrm{e}^{-k_d t}$, independent of the break rate $k_b$, and determined solely by the division rate $k_d$. We note that this derivation is independent of dimensionality and relies only on the assumption in Eq.~\eqref{eq:ch3:survival_assm} and the all-cell growth mechanism. In our one-dimensional all-cell growth model, where $q_{mn}=k_b$ is constant, the derived $S(t)=\mathrm{e}^{-k_d t}$ is the exact solution, as confirmed by the Monte Carlo simulation results shown in Fig.~\ref{fig:ch3:survival_probs}.
+
+The intriguing result that the survival probability depends only on $k_d$ depends on the assumption of steady state. However, germline cysts do not reach steady state---so for a comparison to experiment, an ensemble starting from a fixed number of cells corresponding to the initially observed condition would be easier to observe and compare to experiment. The quantity $u_1(t)$---the survival probability conditional on starting from a single cell---might be of particular interest. We present the analytical expression for the conditional survival probability $u_n(t)$ in our one-dimensional all-cell growth model in Sec.~\ref{sec:ch3:conditional_survival}.
+
+An essential assumption in this derivation is the all-cell growth mechanism. When alternative growth mechanisms are considered, the universal exponential form no longer holds [Fig.~\ref{fig:ch3:suppl_survival}(a)]. In this sense, the connection between the survival probability $S(t)$ and the single-cell division rate is a signature of simple all-cell growth. Additionally, imposing a minimum cluster size $N_\textrm{min}$---which breaks our assumption of fracture rates $q_{mn}$ being independent of $n$---also violates the universal $\mathrm{e}^{-k_d t}$ decay [Fig.~\ref{fig:ch3:suppl_survival}(b)].
+
+
+\section{Two-dimensional simulations}
+\label{sec:ch3:2d}
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth]{chap3/2d_simulations.pdf}
+\caption{2D simulation results.
+(a) Representative snapshots from a simulation with $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. The first dashed box shows a cell division event; the second dashed box shows a fracture event (highlighted by the white arrow), where only one of the two resulting sub-clusters is retained. Green arrows indicate instantaneous cell velocities, orange arrows indicate active self-propulsion velocity, and white dashed lines denote intercellular junctions.
+(b) Fractures per hour connected increase with the root-mean-square cell speed $v_\textrm{rms}$.
+(c) Lineage size distributions $p_n$ for different values of $v_\textrm{rms}$, compared to the 1D theoretical prediction $\gamma/(1+\gamma)^n$ (dashed lines), where we have used the corresponding fractures per hour connected in panel (b) as the break rate $k_b$ to compute $\gamma=k_b/k_d$.
+(d) How the mean, variance, and CV of cluster size vary with $\gamma$.
+(e) Survival probabilities for a wide range of $v_\textrm{rms}$ collapse to $S(t)=\mathrm{e}^{-k_d t}$. Kaplan-Meier analysis is used to generate survival curves, and 95\% confidence intervals are shown as error bars.
+Division rate in the simulations is fixed at $k_d=(\ln 2/16)\,\mathrm{h^{-1}}$.}
+\label{fig:ch3:2d_simulations}
+\end{figure*}
+
+Most of the preceding results are derived in a one-dimensional geometry, which simplifies analysis but does not capture the spatial complexity of most biological tissues---except for special cases such as germline cysts or tissues under strong confinement. Fracture of a two- or three-dimensional tissue is fundamentally different from our 1D model, because the fracture must cross the entire tissue, rather than break a single link. We extend our model to two dimensions using simulations. Specifically, we implement a two-dimensional model treating cells as active Ornstein-Uhlenbeck particles, governed by the equations:
+\begin{subequations}
+\begin{equation}
+    \dot{\mathbf{x}}_n = -\mu \bm{\nabla}\Phi + \mathbf{v}_n(t),
+\end{equation}
+\begin{equation}
+    \tau \dot{\mathbf{v}}_n = -\mathbf{v}_n+\sqrt{2D}\bm{\xi}_n(t),
+\end{equation}
+\end{subequations}
+where the Gaussian noises satisfy $\langle \xi_{n\alpha}(t)\xi_{n'\beta}(t')\rangle = \delta_{nn'}\delta_{\alpha\beta}\delta(t-t')$, with Greek indices corresponding to spatial components. As in 1D, we have a springlike potential between cells, $\Phi=\frac{1}{2} k\sum_{(i,j)}(|\mathbf{x}_i -\mathbf{x}_j|-\ell_0)^2$, where $(i,j)$ denotes the summation over all connected pairs. In this 2D setting, the root-mean-square speed of an isolated cell is given by
+\begin{equation}
+    v_\textrm{rms}=\sqrt{2D/\tau}.
+\end{equation}
+Upon division, the original cell is replaced by a mother-daughter pair positioned at the same location~\cite{soumya2015coherent}, with a small displacement $2\ell_0/3$ between them introduced along a random direction. The two daughter cells are initially given velocities with magnitude $v_\textrm{rms}$ pointing away from the cell-cell contact. Intercellular connections break when stretched beyond the threshold length $\ell_0+\delta\ell_b$, and we allow connections to be re-established when the distance between two cells becomes $\leqslant\ell_0+\epsilon$, where $\epsilon = 10^{-3}\ell_0$. When a cluster has broken into two separate pieces (established by finding the connected components of the cluster), we randomly select one of the two clusters as the daughter cluster we are following. Fig.~\ref{fig:ch3:2d_simulations}(a) shows representative snapshots of a cell division event and a cluster undergoing fracture.
+
+To explore the effect of cell motility, we vary the typical cell speed $v_\textrm{rms}$ by tuning $D$ while keeping $\tau$ fixed. As shown in Fig.~\ref{fig:ch3:2d_simulations}(b), the mean number of fractures per hour connected increases monotonically with $v_\textrm{rms}$. We then use this fracture rate from simulations as the break rate $k_b$; higher cell speeds result in larger values of $k_b$, and consequently, a larger break-to-division ratio $\gamma=k_b/k_d$. By measuring the lineage cluster size distribution from simulations, we find that, for the all-cell growth model, the one-dimensional theoretical prediction $p_n=\gamma/(1+\gamma)^n$ [Eq.~\eqref{eq:ch3:ss_solution_all}] can still describe the 2D results in a wide range of cell motility, as shown in Fig.~\ref{fig:ch3:2d_simulations}(c). Noticeable deviations occur mainly at small cluster sizes $n$ for low cell speeds. Further comparison of the mean, variance, and coefficient of variation (CV) of cluster sizes as functions of $\gamma$ [Fig.~\ref{fig:ch3:2d_simulations}(d)] confirms that the 1D theory can describe the 2D simulation outcomes, especially in the regime of large $\gamma$ (high motility). This agreement can be understood by noting that in the large $\gamma$ limit---where cell-cell junctions frequently rupture---only small clusters are likely to persist, so the system effectively behaves as quasi-one-dimensional.
+
+Interestingly, the exponential survival probability $S(t)=\mathrm{e}^{-k_d t}$ also shows up in our 2D simulation results [Fig.~\ref{fig:ch3:2d_simulations}(e)]. Is this reasonable? The derivation of this result in Sec.~\ref{sec:ch3:survival} assumes that the transition rate from clusters of size $m$ to $n$ depends only on $m$. This is more general than our earlier results assuming a strict 1D model, and in principle, this assumption is independent of dimension. However, this choice of assumption is most natural for a generalization of the 1D model---summarizing the clusters solely by size in 2D is potentially suspect given the potential roles of cluster geometry and topology. In fact, the assumption that the fracture rate does not depend on the final cluster size [Eq.~\eqref{eq:ch3:survival_assm}] is not strictly satisfied in the 2D simulations. We have quantified $q_{mn}$ by counting the number of occurrences where an $m$-cell cluster fragments into an $n$-cell cluster in our simulations. We find that, for a fixed pre-fracture size $m$, the values of $q_{mn}$ are not uniformly distributed across different $n$---the cluster is more likely to break asymmetrically, producing either small or large fragments rather than equal-sized ones, as shown in Fig.~\ref{fig:ch3:suppl_survival}(c). Nevertheless, the exponential form remains valid across a broad range of cell motility in 2D simulations, as shown in Fig.~\ref{fig:ch3:2d_simulations}(e).
+
+A caveat in our analysis of the 2D system is that we are not using the analytical expression for the break rate [Eq.~\eqref{eq:ch3:break_rate}] to directly predict the break rate in our 2D simulations. Instead, we extract the break rate $k_b$ using the measured fractures per hour connected from simulations. This is because Eq.~\eqref{eq:ch3:break_rate} is derived in one dimension and assumes the limit $N\to\infty$, making its prediction quantitatively incorrect for the 2D system. We also note that the model does not include some features that would be appropriate for a full model of the germline cysts. For instance, our cell-cell interactions are non-specific intercellular connections that can break and reform based on intercellular distances---effectively modeling E-cadherin-based adhesion. This differs from germline cysts, where intercellular bridges (ICBs) form specifically between sister cells during division and do not reconnect once severed~\cite{ikami2023branched,levy2024tug}.
+
+
+\section{Discussion}
+\label{sec:ch3:discussion}
+
+Our work provides a route to understand quantitatively how the size of groups of cells ranging from cancer to organs to organisms can emerge from balancing growth and random cell motility. Our model shows that differences in where cell division and rupture occur can lead to different characteristic distributions of cluster sizes, and that biologically relevant regulation of cluster size can occur from relatively small changes in cell motility. From a physics standpoint, our results show that even in a very simple one-dimensional active material, the collective rupture of a link is nontrivial and can't be understood from the properties of a single pair of cells---unlike in an equilibrium version of our model. This qualitative difference with the simple active trap model~\cite{woillez2020active} suggests that rupture rates may be sensitive to other collective features, e.g., differing between branched and linear chains of cells, or reflecting the degree of cell-cell correlation of velocities.
+
+Though the remarkable exponential decay of the survival probability $S(t)=\mathrm{e}^{-k_d t}$, derived in Sec.~\ref{sec:ch3:survival}, is independent of dimensionality and break rate $k_b$, and depends solely on the division rate $k_d$, it relies on two important underlying assumptions. First, the rate of a cluster splitting into two pieces must depend only on the pre-fracture cluster size $m$, and not on the post-fracture fragment size $n$, though the functional dependence on $m$ can be arbitrary. This first assumption may be able to be relaxed somewhat---even though in our 2D simulations, clusters of $m = 10$ cells are more likely to have single cells break off than split equally [Fig.~\ref{fig:ch3:suppl_survival}(c)], the total survival probability still follows the predicted exponential form $\mathrm{e}^{-k_d t}$ across a wide range of cell motility. If this first assumption is more dramatically violated, e.g., with a minimum cluster size, $S(t)$ will depend on the break rate $k_b$ [Fig.~\ref{fig:ch3:suppl_survival}(b)]. The second key assumption is the all-cell growth mechanism. When alternative growth mechanisms are considered, the universal exponential form no longer holds [Fig.~\ref{fig:ch3:suppl_survival}(a)]. In this sense, the connection between the survival probability $S(t)$ and the single-cell division rate is a signature of simple all-cell growth.
+
+We have generally chosen analytic tractability over biological detail in our approach to capture the key elements of this problem. There are many possible features that could be included in more general models of size control via fracture. These include the presence of polymer networks within the cell which can alter its ability to load stress onto the cell-cell junction~\cite{duque2024rupture}, cell-matrix interactions~\cite{zhang2025emergence,perez2024deposited}, cell shape~\cite{wang2025confinement,chen2022activation} and its coupling to division~\cite{kaiyrbekov2023migration,puliafito2012collective}, or mechanosensitive feedback~\cite{mcevoy2022feedback}, as well as cell-cell interactions like contact inhibition of locomotion~\cite{mayor2010keeping,camley2014polarity,wang2024limits,zimmermann2016contact} and collective alignment of cell polarity~\cite{camley2017physical,jain2020role}. Determining to what extent these features only change the relevant energy barrier, rescaling $k$, or qualitatively change our picture is an important open question.
+
+The data and code that support the findings of this chapter
+are openly available at Zenodo, doi:~\href{https://doi.org/10.5281/zenodo.18485014}{10.5281/zenodo.18485014}.
+
+
+%%% ===== SUPPLEMENTAL SECTIONS =====
+
+\section{Appendices}
+\label{sec:ch3:appendices}
+
+\subsection{Rates for breaking chains using Kramers' theory}
+\label{sec:ch3:kramers}
+
+\subsubsection{Results for two particles}
+\label{sec:ch3:two_particle}
+
+The rupture rate of a pair of cells can be found straightforwardly through a very simple generalization of the approach of Ref.~\cite{woillez2020active}, who mapped overdamped active Ornstein-Uhlenbeck particles (AOUPs) in a harmonic well to an equivalent thermal system. Here, we show that the same holds for a pair of harmonically bound AOUPs.
+
+For a pair of particles $\{x_1, x_2\}$ with a distance $\ell=x_2-x_1$ between them, we have
+\begin{align*}
+    \dot{x}_1 &= \mu k\delta\ell + v_1,\\
+    \dot{x}_2 &= -\mu k\delta\ell + v_2,
+\end{align*}
+where $\delta\ell=\ell-\ell_0$ is the stretched length of the spring. Thus we can obtain $\dot{\delta\ell}=-2\mu k\delta\ell + \delta v$, where $\delta v = v_2 -v_1$ is still an Ornstein-Uhlenbeck process but with correlation $\langle\delta v(t)\delta v(t')\rangle = (2D/\tau)\mathrm{e}^{-|t-t'|/\tau}$. By a standard change of variable $p=-2\mu k\delta\ell +\delta v$, we obtain a new set of Langevin equations for a thermal Brownian particle with displacement $\delta \ell$~\cite{woillez2020active,woillez2020nonlocal}:
+\begin{equation}\label{eq:ch3:recast_EOM}
+\begin{cases}
+    \phantom{\tau}\dot{\delta\ell}=p,\\
+    \tau\dot{p}=-\eta p -U' + \sqrt{4D}\xi(t),
+\end{cases}
+\end{equation}
+where the potential $U(\delta\ell)=\mu k\delta\ell^2$ is harmonic, the persistence time $\tau$ is acting as a mass, and the drag $\eta =1+2\mu k\tau$. Thus an effective temperature can be defined by
+\begin{equation}
+    k_BT_\textrm{eff} \coloneq \frac{2D}{\eta} = \frac{2D}{(1+2\mu k\tau)}.
+\end{equation}
+The Fokker-Planck equation from Eq.~\eqref{eq:ch3:recast_EOM} has a stationary solution given by a Boltzmann-like measure
+\begin{equation}
+    P_s(\delta\ell, p)=\mathcal{Z}\exp\left(-\frac{U}{k_B T_\textrm{eff}} -\frac{\tau p^2}{2k_B T_\textrm{eff}}\right),
+\end{equation}
+where $\mathcal{Z}$ is the partition function. The variance of $\delta\ell$ follows directly:
+\begin{equation}
+\langle\delta\ell^2\rangle =\frac{k_B T_\textrm{eff}}{U''} = \frac{D}{\mu k(1+2\mu k\tau)}.
+\end{equation}
+
+From standard Kramers' theory, for a trap in the potential $U(\delta\ell)$ of size $\delta\ell_b$, the mean escape time, when the effective temperature is small compared to the potential barrier height $\Delta U$, is given by~\cite{gardiner2009stochastic,hanggi1990reaction,haunggi1994colored}
+\begin{equation}
+    \tau_\textrm{esc}=\frac{2\pi}{\omega_0}\exp\left(\frac{\Delta U}{k_BT_\textrm{eff}}\right)=\pi\sqrt{\frac{2\tau}{\mu k}}\exp\left[\frac{\mu k\delta\ell_b^2(1+2\mu k\tau)}{2D}\right],
+\end{equation}
+where $\omega_0 = \sqrt{2\mu k/\tau}$ is the undamped angular frequency of the system. The subexponential correction $\tau_0=2\pi/\omega_0$ applies in the limit of moderate friction but may vary under different friction regimes~\cite{wexler2020dynamics,hanggi1990reaction}.
+
+
+\subsubsection{Results for a long chain}
+\label{sec:ch3:chain}
+
+We can explicitly write Eq.~\eqref{eq:ch3:EOM} as $\dot{x}_n = \mu k (x_{n+1}-2x_n+x_{n-1}) +v_n$. Assuming that $x_n(t)=n\ell_0+\delta x_n(t)$, we find that $\delta x_n$ obeys the same equation:
+\begin{equation}\label{eq:ch3:EOM_PBCs}
+    \dot{\delta x}_n = \mu k (\delta x_{n+1}-2\delta x_n+\delta x_{n-1}) +v_n.
+\end{equation}
+For a long chain with $N\gg 1$ particles, we impose periodic boundary conditions, $\delta x_{n+N} = \delta x_{n}$, and introduce a standard discrete Fourier transform:
+\begin{equation}
+    \tilde{x}_q=\frac{1}{N}\sum_{n=0}^{N-1}\delta x_n\mathrm{e}^{-iqn},
+\end{equation}
+where $q=2\pi m/N$ and the index $m=0,1,\cdots,N-1$. By substituting the inverse transforms into Eq.~\eqref{eq:ch3:EOM_PBCs} and matching terms for each mode $q$, we obtain
+\begin{equation}\label{eq:ch3:EOM_q_appendix}
+    \dot{\tilde{x}}_q = -\mu k_q\tilde{x}_q+ \tilde{v}_q,
+\end{equation}
+where $k_q=2k(1-\cos q)$ and $\tilde{v}_q=(1/N)\sum_{n=0}^{N-1}v_n\mathrm{e}^{-iqn}$. The mean is simply $\langle \tilde{v}_q\rangle = 0$, and the time correlation is
+\begin{align}
+    \langle \tilde{v}^{\phantom{\ast}}_q(t)\tilde{v}^\ast_{q'}(t')\rangle
+    &= \frac{1}{N^2}\sum_{n}\sum_{n'}\langle v_n(t) v_{n'}(t')\rangle\mathrm{e}^{-iqn+iq'n'} \notag\\
+    &= \delta_{qq'}\frac{D}{N\tau}\mathrm{e}^{-|t-t'|/\tau},
+\end{align}
+where we have used the orthogonality relation $\sum_{n=0}^{N-1}\mathrm{e}^{i(q-q')n}=N\delta_{qq'}$. Equation~\eqref{eq:ch3:EOM_q_appendix} can be solved by using the exponential ansatz. When $t\gg 1/\mu k_q$:
+\begin{equation}
+    \langle \tilde{x}^{\phantom{\ast}}_q(t)\tilde{x}^\ast_{q'}(t)\rangle =\delta_{qq'}\frac{D}{N\mu k_q(1+\mu k_q\tau)}.
+\end{equation}
+Ref.~\cite{henkes2020dense} shows that active Brownian particles (ABPs) exhibit a similar relationship, as their active velocities share the same Gaussian colored noise temporal correlations as those of AOUPs. Then we can calculate the stretched lengths of the springs, where the mean is simply $\langle\delta\ell_n\rangle = 0$, and the variance is
+\begin{equation}
+    \langle \delta\ell_n^2\rangle
+    =\frac{D}{N\mu k}\sum_{q\neq 0}\frac{1}{1+2\mu k\tau (1-\cos q)}
+    \approx\frac{D}{\mu k\sqrt{1+4\mu k\tau}},
+\end{equation}
+where in the limit $N\gg 1$ we have replaced the sum by an integral using $\frac{1}{2\pi}\int_0^{2\pi}\frac{\mathrm{d} q}{1+2\mu k\tau (1-\cos q)}=1/\sqrt{1+4\mu k\tau}$.
+
+Thus, in the steady state, the marginal distribution of $\delta\ell_n$ follows a Gaussian distribution since each $\delta \ell_n$ is the sum of Gaussian processes. In the small noise limit, the system rapidly relaxes to a quasi-stationary state described by $P_\mathrm{QS}(\delta\ell_n,t)\sim P_s(\delta\ell_n)\,\mathrm{e}^{-t/\tau_\mathrm{esc}}$, indicating that the escape process is Poissonian with a rate of $1/\tau_\mathrm{esc}$~\cite{woillez2020active}. Therefore, the mean escape time follows an effective ``Arrhenius law'' where the rate of rupture is proportional to the probability density at the breaking stretch $\delta \ell_b$:
+\begin{equation}
+\tau_\textrm{esc}=\frac{2\pi\eta}{\omega_0^2\tau}\exp\left(\frac{\mu k\delta\ell_b^2\sqrt{1+4\mu k\tau}}{2D}\right).
+\end{equation}
+We view this prefactor as a reasonable first approximation and it has a good fit to the simulated rates. The leading behavior for small effective temperatures is dominated by the exponential term~\cite{woillez2020active}.
+
+
+\subsubsection{When is the two-cell result the \textit{N}-cell result?---an effective equipartition theorem}
+\label{sec:ch3:equipartition}
+
+For the thermal equilibrium case where $\tau=0$, the variances of stretched lengths for both a cell pair and a chain are identical, given by $\langle\delta\ell^2\rangle_\mathrm{th}=D/\mu k$. This result can be easily verified using the equipartition theorem.
+
+The results for both the pair and the chain also converge to the same non-equilibrium value when $\mu k\tau \ll 1$ because $\sqrt{1+4\mu k\tau}\to 1+2\mu k\tau$ for small $\mu k \tau$. In Ref.~\cite{fodor2016far}, Fodor \textit{et al.} found that for a system of interacting AOUPs, at small but finite persistence time $\tau$, there exists an \emph{effective equilibrium} regime---the particle dynamics still respects detailed balance and time-reversal symmetry. Rather than defining an effective temperature, the authors stated that the system could be equivalently described using an effective potential, while defining $k_B T =D/\mu$~\cite{fodor2016far,martin2021statistical}:
+\begin{equation}
+   \tilde{\Phi} = \Phi + \tau\left[\frac{\mu}{2}(\nabla_n \Phi)^2 - D\nabla^2_n \Phi\right] +\mathcal{O}(\tau^2),
+\end{equation}
+where $\nabla_n \equiv \partial/\partial{x_n}$, and the Einstein summation convention is applied. Applying equipartition on this effective potential yields the variance derived in Sec.~\ref{sec:ch3:two_particle}. For a long chain, similar analysis shows that $\langle\delta\ell_n^2\rangle \approx D/\mu k(1+2\mu k\tau)$ when $\mu k\tau\ll 1$, matching the two-particle result.
+
+
+\subsection{Solving master equations with generating functions}
+\label{sec:ch3:gen_func}
+
+\subsubsection{All particles can divide}
+\label{sec:ch3:gen_func_1}
+
+To solve the master equation~\eqref{eq:ch3:master_all}, we first define a generating function $G(z,t)\coloneq\sum_{n\geqslant 1} p_n(t) z^n$. After multiplying the master equation by $z^n$ and summing over all $n$, we obtain a PDE for the generating function:
+\begin{equation}
+    \frac{\partial G}{\partial t}=(k_dz -k_b-k_d)z\frac{\partial G}{\partial z}-k_b\frac{z}{1-z}G+k_b\frac{z}{1-z},
+\end{equation}
+whose steady-state solution is
+\begin{equation}\label{eq:ch3:G_steadystate_intermediate}
+    G(z)=\frac{k_b-(1-z)C}{k_b+k_d-k_dz},
+\end{equation}
+where $C$ is a constant. By construction, $G(z)$ has no zeroth-order term, so $C=k_b$. Using this value, we find the steady-state generating function:
+\begin{equation}
+    G(z)=\frac{k_b z}{k_b+k_d-k_d z}=\sum_{n\geqslant 1}\frac{k_b}{k_d}\left(\frac{k_d}{k_b+k_d}\right)^n z^n.
+\end{equation}
+We can read the value of $p_n$ directly from this formal series, finding Eq.~\eqref{eq:ch3:ss_solution_all}:
+\begin{equation}\label{eq:ch3:app_pn_all}
+    p_n = \frac{k_b}{k_d}\left(\frac{k_d}{k_b+k_d}\right)^n = \frac{\gamma}{(1+\gamma)^n},
+\end{equation}
+where $\gamma\coloneq k_b/k_d$. The first two moments are
+\begin{subequations}
+\begin{align}
+    \langle n \rangle &= \sum_{n} p_n n = \frac{1+\gamma}{\gamma},\\
+    \langle n^2\rangle &= \sum_{n} p_n n^2 = \frac{(1+\gamma)(2+\gamma)}{\gamma^2},
+\end{align}
+\end{subequations}
+and the variance is $\langle n^2\rangle-\langle n\rangle^2 = (1+\gamma)/\gamma^2=\langle n\rangle/\gamma$. We can also calculate the coefficient of variation:
+\begin{equation}
+    \mathrm{CV}\coloneq\frac{\sigma_n}{\mathbb{E}[n]}=\frac{ \sqrt{\langle n^2\rangle-\langle n\rangle^2}}{\langle n\rangle}=\frac{1}{\sqrt{1+\gamma}}.
+\end{equation}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chap3/suppl_distributions.pdf}
+\caption{How the steady-state distributions $p_n$ vary with $\gamma$ and $N_{\min}$ across different growth models. (a) Steady-state distribution $p_n$ for various values of $\gamma$ in the all-cell growth model [Eq.~\eqref{eq:ch3:app_pn_all}]. (b) Steady-state distribution $p_n$ for different $\gamma$ in the one-end growth model, where we have doubled the division rate [$\gamma\to\gamma'=\gamma/2$ in Eq.~\eqref{eq:ch3:app_pn_1}]. (c) Steady-state distribution $p_n$ for different $\gamma$ in the two-end growth model from Eq.~\eqref{eq:ch3:app_pn_2}. (d) Steady-state distribution $p_n$ obtained from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$ incorporating different values of minimum cluster size $N_\mathrm{min}$ with $\gamma=0.1$. (e) Steady-state distribution $p_n$ obtained from the matrix equation method for different values of $\gamma$ with $N_\mathrm{min}=500$. The gray dashed line represents the corresponding log-uniform distribution $1/(n\ln2)$ within the range $[N_\mathrm{min}, 2N_\mathrm{min}]$.}
+\label{fig:ch3:sm_distrib_all_models}
+\end{figure*}
+
+
+\subsubsection{One-end growth}
+\label{sec:ch3:gen_func_2}
+
+To solve Eq.~\eqref{eq:ch3:master_one}, we apply the generating function method. The PDE for $G(z,t)$ for the one-end-growth model is:
+\begin{equation}
+    \frac{\partial G}{\partial t}=-k_b z \frac{\partial G}{\partial z} - \left(k_d(1-z)+k_b\frac{z}{1-z}\right)G+k_b\frac{z}{1-z}.
+\end{equation}
+The steady-state solution is
+\begin{equation}
+    G(z)=\frac{(1-z)}{z^{1/\gamma}}\mathrm{e}^{z/\gamma}\int_0^z\frac{x^{1/\gamma}}{(1-x)^2}\mathrm{e}^{-x/\gamma}\mathrm{d}x.
+\end{equation}
+By expanding $G(z)$ around $z=0$, we obtain Eq.~\eqref{eq:ch3:ss_solution_one}:
+\begin{equation}\label{eq:ch3:app_pn_1}
+    p_n=\frac{n\gamma}{\prod_{m=1}^n(1+m\gamma)}=\frac{n\gamma^{1-n}}{\bm{(}(1+\gamma)/\gamma\bm{)}_n},
+\end{equation}
+where $(x)_n=x(x+1)(x+2)\cdots(x+n-1)$ denotes the Pochhammer symbol. The distribution $p_n$ for one-end growth is shown in Fig.~\ref{fig:ch3:sm_distrib_all_models}(b), where a distinct peak is observed. For small $\gamma$, the peak location $n^\ast\approx 1/\sqrt{\gamma}$. When $\gamma\ll 1$, the distribution near the peak can be approximated as a Rayleigh distribution $p_n\approx n\gamma \mathrm{e}^{-\gamma n^2/2}$ with mode $\sigma=1/\sqrt{\gamma}$. Using the saddle-point approximation, the mean and variance of $n$ are directly obtained from the Rayleigh distribution:
+\begin{equation}
+    \langle n\rangle=\sigma\sqrt{\frac{\pi}{2}},\qquad\langle n^2\rangle -\langle n\rangle^2 = \frac{4-\pi}{2}\sigma^2,
+\end{equation}
+and the coefficient of variation is $\mathrm{CV} = \sqrt{(4-\pi)/\pi}$.
+
+
+\subsubsection{Two-end growth}
+\label{sec:ch3:gen_func_3}
+
+For the two-end growth scenario, the master equation differs from the all-cell and one-end cases for $n=1$ and $n=2$ (where only one cell can divide). Using the generating function method, the steady-state ODE for $G(z)$ is:
+\begin{align}
+    k_b z \frac{\partial G}{\partial z}&=-\left(2k_d(1-z)+k_b\frac{z}{1-z}\right)G+k_b\frac{z}{1-z}\notag\\
+    &\quad+\frac{k_bk_d}{k_b+k_d}z(1-z).
+\end{align}
+The solution is given by
+\begin{equation}
+    G(z)=\frac{(1-z)}{z^{2/\gamma}}\mathrm{e}^{2z/\gamma}\int_0^z\frac{x^{2/\gamma}(x^2-2x+2+\gamma)}{(1+\gamma)(1-x)^2}\mathrm{e}^{-2x/\gamma}\mathrm{d}x.
+\end{equation}
+By expanding $G(z)$ around $z=0$, we derive the exact analytical solution for two-end growth:
+\begin{equation}\label{eq:ch3:app_pn_2}
+    p_n =
+    \begin{cases}
+        \gamma/(1+\gamma), & n=1,\\[4pt]
+        \dfrac{2+\gamma}{2(1+\gamma)}\dfrac{n(\gamma/2)^{1-n}}{\bm{(}(2+\gamma)/\gamma\bm{)}_n}, & n\geqslant2.
+    \end{cases}
+\end{equation}
+Observe that the results are quite similar to the one-end growth case, but with a doubled division rate $2k_d$. When $\gamma \to 0$, meaning only growth without fragmentation, the two scenarios converge. In contrast, when $\gamma \gg 1$, the chain is most likely to be a monomer ($p_1 \approx 1$), and $p_n$ is reduced by half compared to the one-end growth scenario with $2k_d$ for $n\geqslant 2$.
+
+
+\subsection{Generalizations with a matrix equation method}
+\label{sec:ch3:matrix}
+
+A general master equation with a minimum cluster size $N_\textrm{min}$ and different growth mechanisms can be written as
+\begin{equation}\label{eq:ch3:generalmaster}
+\begin{split}
+   \frac{\mathrm{d} p_n}{\mathrm{d} t} &= k_b\sum_{m\geqslant n+N_{\min}}p_m - k_b\max(n-2N_{\min}+1, 0)p_n\\
+   &\quad + g(n-1)p_{n-1}-g(n)p_n, \quad (n\geqslant N_\textrm{min}),
+\end{split}
+\end{equation}
+where in the first term a cluster of size $m$ can only break into one of size $n$ if $m\geqslant n+N_\textrm{min}$, and in the second term we require that both daughter clusters satisfy $i,j\geqslant N_\textrm{min}$. In the third and fourth terms, $g(n)$ describes how the total growth rate scales with the length of the chain:
+\begin{equation}
+    g(n)\coloneq
+    \begin{cases}
+        k_d n, & \text{all-cell,}\\
+        k_d, & \text{one-end,}\\
+        k_d[1+\Theta(n-2)], & \text{two-end,}
+    \end{cases}
+\end{equation}
+where $\Theta(x)$ is the Heaviside step function. The master equation can be organized as $\dot{\mathbf{p}} = \bm{K}\mathbf{p}$, where $\bm{K}$ is the generator on the state space $\{N_\textrm{min}, N_{\textrm{min}}+1, \ldots\}$. We decompose $\bm{K}=\bm{A}+\bm{B}$, where $\bm{A}$ is an upper triangular matrix corresponding to fragmentation events, and $\bm{B}$ is a lower bidiagonal matrix with main diagonal $B_{nn}=-\lambda(n)$ and subdiagonal $B_{n+1, n}=g(n)$, where $\lambda(n)\coloneq k_b\max(n-2N_{\min}+1, 0)+g(n)$ is the total transition rate from the $n$-mer state. In the steady state, we obtain the homogeneous equation $\bm{K}\mathbf{p}=\mathbf{0}$. We find the null space of $\bm{K}$ and normalize to obtain the steady-state distribution $\mathbf{p}$. We must truncate to a maximum possible cluster size $N_\mathrm{max}\gg 2N_\mathrm{min}$, where $p_n$ is negligible for $n>N_\mathrm{max}$; $N_\textrm{max}$ is set to $N_\mathrm{min}+5000$ by default. When setting $N_{\min}=1$, the solutions $\mathbf{p}$ match those derived in Sec.~\ref{sec:ch3:gen_func} using the generating function method (see Fig.~\ref{fig:ch3:suppl_matrix}).
+
+\begin{figure}
+\centering
+\hspace{-0.5cm}
+\includegraphics[width=0.7\textwidth]{chap3/suppl_matrix.pdf}
+\caption{Comparison of the analytical solution obtained using the generating function method with numerical results from the matrix equation method. Lines represent the same analytical solutions for $\gamma=0.1$ as shown in Fig.~\ref{fig:ch3:statistics}(a) ($\gamma'=\gamma/2=0.05$ for the one-end growth model). Empty symbols denote exact numerical results from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$.}
+\label{fig:ch3:suppl_matrix}
+\end{figure}
+
+
+\subsection{Basal rates}
+\label{sec:ch3:basal}
+
+So far we have assumed that both the end-growth and minimum cluster size models are strictly enforced. However, in real cell clusters, it is not clear whether breakage would be completely absent even if its rate is larger near the cluster center. Similarly, cells within a cluster may still divide despite contact inhibition of proliferation. Therefore, it is reasonable to incorporate basal rates into our model.
+
+We first consider a scenario where, in addition to the regulated break rate $k_b$ (restricted by the minimum cluster size), there exists a basal break rate $k_b^0$ that applies uniformly to all links. In the matrix equation formulation, we solve $\bm{K}\mathbf{p}=\mathbf{0}$, where now $\mathbf{p}=(p_1,p_2,p_3,\cdots)^\top$. We decompose the transition-rate matrix as $\bm{K}=\bm{A}+\bm{B}$, where $\bm{A}$ remains an upper triangular matrix but with modified elements $A_{mn} = \Theta(n-m-1) k_b^0 + \Theta(m-N_\textrm{min})\Theta(n-m-N_\textrm{min})k_b$, and $\bm{B}$ is updated with the total transition rate $\lambda(n)=k_b^0(n-1)+k_b\max(n-2N_\textrm{min}+1,0)+g(n)$.
+
+Fig.~\ref{fig:ch3:suppl_basal}(a) illustrates how the steady-state distributions change when a small basal break rate $k_b^0=10^{-3}k_b$ is applied to all links, while keeping the definition $\gamma\coloneq k_b/k_d$. For small $k_b^0$ (low $\gamma$), the distribution remains nearly unchanged, but as $k_b^0$ increases with increasing $\gamma$ (near-deterministic), it effectively relaxes the minimum cluster size constraint, shifting the distribution toward an exponential decay. Even if the basal break rate is a factor of 100 lower than $k_b$, it can overwhelm the ``controlled'' break rate that respects $N_\textrm{min}$, leading to a system dominated by small clusters. This may argue that the limit of fast rupture $\gamma \gg 1$ is not a biologically robust way to control size, since it requires a very small basal break rate.
+
+If a basal division rate $k_d^0$ is introduced, the results are relatively straightforward---the system simply transitions from the end-growth case to the all-growth case. In the near-deterministic limit $\gamma\gg 1$, the distribution transitions from a uniform distribution in the range $[N_\textrm{min}, 2 N_\textrm{min}]$ to the predicted log-uniform distribution in the all-cell growth model. As shown in Fig.~\ref{fig:ch3:suppl_basal}(c)--(d), the key factor in the relevance of the basal growth rate is whether growth is dominated by basal growth or end-growth.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{chap3/suppl_basal.pdf}
+\caption{Effect of basal break and division rates on the steady-state distributions $p_n$. (a) Cluster sizes when $N_\textrm{min} = 500$ and $\gamma$ is varied, but with a basal break rate $k_b^0=10^{-3}k_b$; this figure should be compared to Fig.~\ref{fig:ch3:sm_distrib_all_models}(e). (b) The near-deterministic case $\gamma=10$ with varying basal break rates $k_b^0$. Minimum cluster size is set to $N_\mathrm{min}=500$; gray dashed lines are the corresponding log-uniform distributions. (c) The same distribution as in Fig.~\ref{fig:ch3:sm_distrib_all_models}(b), but with a basal division rate $k_d^0=k_d$. (d) Coefficients of variation ($\mathrm{CV}$) as a function of $\gamma$ for different basal division rates $k_d^0$. Note that we have used $\gamma\to\gamma'=\gamma/2$, as in Figs.~\ref{fig:ch3:sm_distrib_all_models}(b) and \ref{fig:ch3:statistics}(d).}
+\label{fig:ch3:suppl_basal}
+\end{figure}
+
+
+\subsection{Conditional survival probability}
+\label{sec:ch3:conditional_survival}
+
+For systems that do not reach a steady state, an ensemble initialized from a single cell is more directly comparable to experiments. Accordingly, the first conditional survival probability $u_1(t)$ is of particular interest. Solving Eq.~\eqref{eq:ch3:KBE} analytically for $u_1$, however, requires a closed-form expression for the total hazard rate $\lambda(n)$. While such an expression is not available in full generality, the problem can be solved explicitly under the simplest assumption $q_{mn}=k_b$, corresponding to our one-dimensional all-cell growth model, using a generating-function approach.
+
+With $q_{mn}=k_b$, the total hazard rate is $\lambda(n)=(n-1)k_b$, and Eq.~\eqref{eq:ch3:KBE} reduces to
+\begin{equation}
+    \partial_t u_n=-(n-1)k_b u_n +n k_d(u_{n+1}-u_n).
+\end{equation}
+We write $u_n(t)=a_n(t)\mathrm{e}^{k_b t}$, which yields
+\begin{equation}
+    \partial_t a_n=-n(k_b+k_d) a_n + nk_da_{n+1}.
+\end{equation}
+We define the generating function
+\begin{equation}
+    G(z,t)\coloneq\sum_{n\geqslant1} a_n(t) z^n.
+\end{equation}
+Multiplying the evolution equation for $a_n$ by $z^n$ and summing over $n\geqslant 1$, we obtain
+\begin{equation}
+    \partial_t G = -(k_b+k_d)z\partial_z G +k_d\partial_z G -(k_d/z)G.
+\end{equation}
+Solving this first-order PDE with the initial condition $G(z,0)=\sum_{n\geqslant1} z^n$, which follows from the definition $u_n(0)=1$ and hence $a_n(0)=1$, gives
+\begin{equation}
+    G(z,t)=\frac{(k_b+k_d)z}{k_b\mathrm{e}^{(k_b+k_d)t}+k_d-(k_b+k_d)z}.
+\end{equation}
+The coefficients $a_n(t)$ are then obtained by expanding $G(z,t)$ as a power series in $z$:
+\begin{equation}
+    G(z,t)=\sum_{n\geqslant1}\left(\frac{k_b+k_d}{k_b \mathrm{e}^{(k_b+k_d)t}+k_d}\right)^n z^n.
+\end{equation}
+Consequently,
+\begin{equation}
+    u_n(t)=a_n(t)\mathrm{e}^{k_bt} = \left(\frac{1+\gamma}{1+\gamma\mathrm{e}^{(1+\gamma)k_d t}}\right)^n \mathrm{e}^{k_b t},
+\end{equation}
+which depends explicitly on both $k_b$ and $k_d$, as shown in Fig.~\ref{fig:ch3:suppl_conditional_survival}. We can verify that the total survival probability, averaged over the steady-state distribution [Eq.~\eqref{eq:ch3:app_pn_all}], is
+\begin{equation}
+    S(t)=\sum_{n\geqslant1} p_n\cdot u_n(t)=\mathrm{e}^{-k_d t}.
+\end{equation}
+
+\begin{figure}
+\centering
+\hspace{-0.2cm}
+\includegraphics[width=0.7\textwidth]{chap3/conditional_survival.pdf}
+\caption{Conditional survival probability $u_n(t)$ for different initial cluster sizes $N(0)=n$ in the one-dimensional all-cell growth model, using the estimated break and division rates for germline cysts: $k_b = 0.02\,\mathrm{h}^{-1}$ and $k_d=(\ln2/16)\,\mathrm{h}^{-1}$. The gray dashed line shows the total survival probability $S(t)=\mathrm{e}^{-k_d t}$, averaged over the corresponding steady-state distribution in Eq.~\eqref{eq:ch3:app_pn_all}.}
+\label{fig:ch3:suppl_conditional_survival}
+\end{figure}
+
+
+\subsection{Monte Carlo simulations}
+\label{sec:ch3:mc}
+
+\subsubsection{Active-particle simulations}
+\label{sec:ch3:AOUP_simulation}
+
+We simulate the dynamics of $N$ active Ornstein-Uhlenbeck particles (AOUPs) described by Eq.~\eqref{eq:ch3:EOM} using the forward Euler method (Euler-Maruyama method~\cite{kloeden1992stochastic}) as in Ref.~\cite{fodor2016far}. We integrate the dynamics with a time step $\Delta t=10^{-3}\,\mathrm{h}$ over a total simulation time $T=10^3\,\mathrm{h}$. The variances of the stretched lengths of the springs $\langle\delta\ell_n^2\rangle$ are calculated from $4800$ independent simulation runs. We have verified that $\langle \delta\ell_n^2\rangle$ does not depend on the position $n$ within the chain when $N$ is large. Therefore, $\langle\delta\ell_{N/2}^2\rangle$ for the central link is used to represent the variance in Fig.~\ref{fig:ch3:mechanics}(b).
+
+To measure the mean escape time $\tau_\mathrm{esc}$, we first allow the chain to relax to its steady state by running the simulation for $10^3\,\mathrm{h}$. After relaxation, we track the stretched length of the central link $\delta\ell_{N/2}$, starting the timer when $|\delta\ell_{N/2}|<\varepsilon=0.1\,\textrm{\textmu}\mathrm{m}$. The break time $\tau_\mathrm{esc}$ is recorded as the time at which $\delta\ell_{N/2}$ reaches the critical break length $\delta\ell_b$. The final results shown in Fig.~\ref{fig:ch3:mechanics}(c) are averaged over $10^3$ independent simulations.
+
+
+\paragraph{Details of parameter estimates}
+\label{sec:ch3:AOUP_params}
+
+The default parameter values used in our model are listed in Table~\ref{tab:ch3:param}. We estimated $D = 100\,\textrm{\textmu}\mathrm{m^2/h}$ and $\tau \approx 0.5\,\mathrm{h}$ from data on HaCaT cells (a human keratinocyte cell line) from Ref.~\cite{selmeczi2005cell} (Fig.~4E of that paper). We estimate the spring relaxation time $1/\mu k$ based on the results of Jain \textit{et al.}, who calibrated a self-propelled particle model of collective cell migration using their experimental measurements~\cite{jain2020role}. Within our model, the force between cells is $-k\delta \ell$---so with a typical spacing of $\ell_0 = 2R$ of twice the radius of the cell, our $k$ value corresponds to $F_C/2R$ in the notation of Ref.~\cite{jain2020role}. By measuring how much a cell is compressed when another cell is pushing against it, Ref.~\cite{jain2020role} estimated the ratio of cell stiffness $F_C$ to the persistent motile force $F_M$ to be approximately $F_C/F_M\approx 5.5$. Using the speed of the cell for $F_M/\xi$ and the value from Ref.~\cite{jain2020role} of $R=20\,\textrm{\textmu}\mathrm{m}$ for MDCK cells, we find $\mu k\approx 4\,\mathrm{h^{-1}}$, or the timescale ${1}/{\mu k} \approx 0.25\,\mathrm{h} = 15\,\textrm{min}$.
+
+\begin{table}
+\centering
+\caption{Table of simulation parameters.\label{tab:ch3:param}}
+\begin{tabular}{llcc}
+\toprule
+Parameter & Description & Dimension & Value$^{a}$ \\
+\midrule
+$N$ & Number of particles & 1 & $1000$\\
+$\Delta t$ & Simulation time step & $T$ & $10^{-3}\,\mathrm{h}$\\
+$1/\mu k$ & Spring relaxation time & $T$ & $0.25\,\mathrm{h}$~\cite{jain2020role}\\
+$\tau$ & Persistence time & $T$ & $0.5\,\mathrm{h}$~\cite{selmeczi2005cell}\\
+$D$ & Diffusion coefficient & $L^2/T$ & $100\,\textrm{\textmu}\mathrm{m^2/h}$~\cite{selmeczi2005cell}\\
+$\delta\ell_b$ & Critical break length & $L$ & $5\,\textrm{\textmu}\mathrm{m}$\\
+\bottomrule
+\multicolumn{4}{l}{$^{a}$These serve as the default parameter values for the AOUP simulations;}\\
+\multicolumn{4}{l}{\phantom{$^{a}$}any deviations from them are explicitly specified.}
+\end{tabular}
+\end{table}
+
+
+\paragraph{2D AOUP simulations}
+\label{sec:ch3:2d_AOUP}
+
+For the 2D AOUP simulations in Sec.~\ref{sec:ch3:2d}, we integrate the dynamics using a time step $\Delta t= 0.01\,\mathrm{h}$ over a total simulation time of $T=10^3\,\mathrm{h}$. We also perform a time step convergence check by reducing the time step to $\Delta t=0.005\,\mathrm{h}$, which yields results consistent with Fig.~\ref{fig:ch3:2d_simulations} within statistical error. In each run, we track the lineage of a single cluster by randomly selecting one of the two daughter clusters once the cluster has broken into two separate pieces, and continuing the simulation with that daughter cluster. We fix the cell division rate $k_d = (\ln 2/16)\,\mathrm{h^{-1}}$, and set cell radius to $R =20\,\textrm{\textmu}\mathrm{m}$, so the natural length of the spring $\ell_0=2R =40\,\textrm{\textmu}\mathrm{m}$. The critical breaking length is set to $\delta\ell_b=6.5\,\textrm{\textmu}\mathrm{m}$ to match germline cysts. We vary the typical cell speed $v_\textrm{rms}$ by changing $D$ while keeping the persistence time $\tau$ fixed. The final results shown in Fig.~\ref{fig:ch3:2d_simulations} are from $100$ independent simulations.
+
+
+\subsubsection{Fragmentation-growth simulations}
+\label{sec:ch3:rfKMC}
+
+We implement a rejection-free kinetic Monte Carlo (rfKMC) algorithm to simulate the fragmentation-growth processes. The initial chain length is set to $n_0\gg N_\text{min}$. For a chain of $N$ particles, there are $N-1$ connections, each with a break rate. If breaking a connection violates the minimum cluster size $N_\textrm{min}$, the break rate is set to zero. Each particle has a division rate, which is set to zero for particles not allowed to divide (e.g., in the end-growth mechanism).
+
+In our simulations, we fix the division rate $k_d=1$ and vary the ratio $\gamma$ by adjusting the break rate $k_b=\gamma$, i.e., the time unit is $1/k_d$. In the rfKMC algorithm, the time step for each MC step is calculated as $\Delta t =Q_{k}^{-1}\ln(1/u)$, where the total rate $Q_k$ is the sum of all break and division rates, and $u$ is a uniform random number in $(0,1]$. Each step permits either a fragmentation or a division event. After fragmentation, one of the daughter chains is randomly selected as the new tracked chain. To obtain the steady-state distribution $p_n$, we must wait for a sufficiently long time $T$ for the chain length $n(t)$ to reach a stable increase-then-drop pattern (as shown in Fig.~\ref{fig:ch3:suppl_simulation}). The distribution is then generated from the results of $10^4$ independent simulation runs.
+
+We note that the cluster sizes of germline cysts shown in Fig.~5 of Ref.~\cite{levy2024tug} are smaller than our steady-state predictions using their measured break and division rates, as their system has not yet reached steady state. For instance, the break rate is approximately $0.015\,\mathrm{h^{-1}}$ at E11.5 and E12.5 ovaries (Fig.~4C of Ref.~\cite{levy2024tug}), while the division rate for germline cysts is about $\ln 2/16\,\mathrm{h^{-1}}$. Our steady-state solution predicts a mean cluster size $(1+\gamma)/\gamma\approx 4$, whereas their simulated average cyst sizes are $1.73$ and $3.26$ at E11.5 and E12.5, respectively. If we similarly evolve a single cell only from E10.5 to E11.5 and E12.5, as in Ref.~\cite{levy2024tug}, we obtain mean cluster sizes of approximately $2$ and $3$, which closely match their results.
+
+\begin{figure}
+\centering
+\vspace{0.3cm}
+\hspace{-0.5cm}
+\includegraphics[width=0.7\textwidth]{chap3/suppl_simulation.pdf}
+\caption{A representative time trajectory of chain length $n(t)$ from rfKMC simulation with $N_\textrm{min}=200$ and $\gamma=0.1$. The initial chain length is set to $n_0=1000$, and the simulation begins at $t=0$. The time unit is $1/k_d$.}
+\label{fig:ch3:suppl_simulation}
+\end{figure}
+
+
+\subsection{Additional figures}
+\label{sec:ch3:extra-figs}
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth]{chap3/suppl_survival.pdf}
+\caption{(a) Survival probability $S(t)$ from rfKMC simulations of the one-end growth model at fixed division rate $k_d$ with varying break rate $k_b$. (b) Survival probability $S(t)$ from rfKMC simulations of the all-cell growth model with minimum cluster size $N_\textrm{min}=200$, again varying $k_b$ at fixed $k_d$. Dashed lines are the exponential decay $\mathrm{e}^{-k_d t}$. Error bars on $S(t)$ represent 95\% confidence intervals. (c) Distribution of post-fracture size $n$ for pre-fracture size $m=10$ in 2D AOUP simulations with cell motility $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. Division rate $k_d=(\ln 2/16)\,\mathrm{h^{-1}}$.}
+\label{fig:ch3:suppl_survival}
+\end{figure*}
