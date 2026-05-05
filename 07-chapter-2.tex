@@ -1,4 +1,4 @@
-\chapter{Confinement, Jamming, and Adhesion in Cancer Cell Dissociations}
+\chapter{Confinement, jamming, and adhesion in cancer cell dissociations}
 \label{chap:dissociation}
 
 %%%% OPTIONAL EPIGRAPH EXAMPLE
@@ -59,7 +59,7 @@ Furthermore, we explore the relationship between cell dissociation behavior and 
 \section{Experimental results}
 \label{sec:ch2:expt}
 
-\begin{figure}[tbp]
+\begin{figure}[tp]
 \centering
 \includegraphics[width=0.7\textwidth]{chap2/expt_snapshot.png}
 \caption{Experimental setup.
@@ -74,7 +74,7 @@ Reprinted from Ref.~\cite{law2023cytokinesis}. Channel height from the substrate
 \label{fig:ch2:expt_snapshot}
 \end{figure}
 
-\begin{figure}[tbp]
+\begin{figure}[tp]
 \centering
 \includegraphics[width=\textwidth]{chap2/expt.pdf}
 \caption{Analysis of experimental dissociation events.
@@ -191,7 +191,7 @@ In the absence of chemotaxis ($k_\theta = 0$), the angle $\theta_i$ will simply 
 This representation of cell polarity is a very simplified one, and could be extended by models of Rho GTPase dynamics~\cite{kulawiak2016modeling, perez2024deposited} or stochastic protrusion dynamics~\cite{zadeh2024inferring}.
 
 \begin{figure}[tbp]
-\centering
+\centering\vspace{0.3cm}
 \includegraphics[width=0.7\textwidth]{chap2/schematic.pdf}
 \caption{Schematic of the model. For each cell, the blue arrow represents its polarity $\mathbf{P}_i$, and the red arrow shows its center of mass velocity $\mathbf{v}_i^{\textrm{c.m.}}$; chemoattractant concentration increases in the $+y$ direction. Scale bar, $15\,\mathrm{\mu m}$.}
 \label{fig:ch2:schematics}
@@ -241,7 +241,7 @@ Alternate models without leader cells are shown in Sec.~\ref{sec:ch2:alt-models}
 \subsection{Matching with experimental results}
 \label{sec:ch2:match}
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/snapshots.pdf}
 \caption{Evolution of rupture for simulations of cells in microchannels with different widths.
@@ -306,7 +306,7 @@ Differences in the self-propulsion from one cell to another lead to the cell cen
 This difference in self-propulsion could arise because cell polarities point in different directions, e.g., due to the rotational noise $D_r$, or have different magnitudes, due to one cell having a different state from its neighbors.
 The difference in motilities between cells tends to work against forces keeping cells together---largely cell-cell adhesion.
 In this way, we think of rupture as being initiated by fluctuations of cell motility leading to the cells crossing an energy barrier~\cite{bi2014energy, woillez2020active}.
-For channels wider than a single cell can span, a dissociation event will start with the breakage of a single cell-cell junction, but this fracture will then have to evolve to cross the channel, as seen in, e.g., Refs.~\cite{duque2023rupture, chen2022activation} and in Fig.~\ref{fig:ch2:expt_snapshot}(b) for the 50-micron channel.
+For channels wider than a single cell can span, a dissociation event will start with the breakage of a single cell-cell junction, but this fracture will then have to evolve to cross the channel, as seen in, e.g., Refs.~\cite{duque2024rupture, chen2022activation} and in Fig.~\ref{fig:ch2:expt_snapshot}(b) for the 50-micron channel.
 Our picture here is an oversimplification because there is not a single energy barrier, but a complex process involving re-arrangement of cells and cell boundary deformations.
 Nonetheless, this rough picture makes some clear predictions.
 We would expect faster rupture if the cell motion is noisier, and more rupture if there is more variability in cell speeds---both increasing the tendency for cells to be pulled apart.
@@ -358,7 +358,7 @@ The complete histograms for panels (a), (c) are shown in Figs.~\ref{fig:ch2:SI_v
 \label{fig:ch2:vary}
 \end{figure}
 
-Ruptures occur at cell-cell junctions for epithelial monolayers, and the intercellular adhesion complexes, such as different members of the cadherin family, can control the strength of tissues~\cite{duque2023rupture}.
+Ruptures occur at cell-cell junctions for epithelial monolayers, and the intercellular adhesion complexes, such as different members of the cadherin family, can control the strength of tissues~\cite{duque2024rupture}.
 In our model, cell-cell adhesion strength $\omega$ is one of the most important parameters that prescribe the rupture behavior.
 Our intuition is that increasing cell-cell adhesion strength $\omega$ should increase the barrier to rupture and reduce the frequency of rupture events.
 Figures~\ref{fig:ch2:vary}(a) and~\ref{fig:ch2:vary}(b) show the simulation results for $50\,\mathrm{\mu m}$ microchannels.
@@ -501,7 +501,7 @@ These models make predictions about the influence of cell-cell adhesion---but ad
 Our focus on non-confluent tissues forces us to include cell-cell adhesion in a different form.
 We find that, in our phase field model, increasing cell-cell adhesion leads to less rearrangement and increased jamming.
 However, even within phase field models, there is no universal form of the cell-cell adhesion model, with Refs.~\cite{lober2015collisions, zhang2020active, zadeh2022picking, camley2014polarity} all including adhesion in slightly different forms, and~\cite{loewe2020solid} disregarding it entirely, while~\cite{chiang2024multiphase} do not include a cell-cell adhesive force but do include the effect of a cell-cell friction, which also changes dynamics of rearrangement.
-Our model could also be extended to include more explicit dynamics of bond rupture~\cite{duque2023rupture, weng2022convergent, mcevoy2022feedback}.
+Our model could also be extended to include more explicit dynamics of bond rupture~\cite{duque2024rupture, weng2022convergent, mcevoy2022feedback}.
 Broadly, our results that increasing cell-cell adhesion leads to jamming is supported by experiments, but with some contradictory results.
 Many experiments support the idea that decreasing cell-cell adhesion can lead to tissue fluidization~\cite{blauth2021jamming, lin2025gradients, sadati2013collective, tambe2011collective} consistent with our observation.
 However, unjamming may also co-occur with the amplification of local adhesive intercellular stresses in human bronchial epithelial cells~\cite{park2015unjamming}.
@@ -539,7 +539,7 @@ However, the survival probability curves are less strongly affected by the absen
 
 Our work has focused on the rupture and dissociation in collective cancer invasion, but it may have interesting connections to fracture events in other biological systems.
 Reproduction by fission in the metazoan \textit{Trichoplax adhaerens} occurs by a motility-driven ductile-to-brittle transition of their epithelial layers~\cite{prakash2021motility}, which might also reflect some of the control parameters we identify here.
-Fracture of epithelial monolayers under strain has been shown to depend on both keratin organization within the cell and cell-cell adhesive bond rupture~\cite{duque2023rupture}.
+Fracture of epithelial monolayers under strain has been shown to depend on both keratin organization within the cell and cell-cell adhesive bond rupture~\cite{duque2024rupture}.
 Epithelial fracture has also been modeled within a vertex model with a detachment energy~\cite{chen2022activation}, predicting that the transition between the ability of the tissue to rearrange under strain and its tendency to break depends on the effective interfacial tension and contractility of the cells.
 Our model may also reflect this difference---but in our case, ruptures are not induced by a strain applied to the tissue but self-generated by the cells' noisy motility.
 Formation of holes and voids can also occur in the spongy mesophyll, resulting in stable porous cell networks~\cite{treado2022localized}, or driven by cell contractility in epithelioid tissues~\cite{lv2024active}.
@@ -548,7 +548,10 @@ An exciting future line of research is to understand to what extent and at what 
 Data and code to reproduce the model have been deposited at Zenodo, doi:~\href{https://doi.org/10.5281/zenodo.14890129}{10.5281/zenodo.14890129}.
 
 
-\section{Alternate models}
+\section{Appendices}
+\label{sec:ch2:appendices}
+
+\subsection{Alternate models}
 \label{sec:ch2:alt-models}
 
 In this section, we present various models with different assumptions we have tested and show the process of how we reach our final model given in the main text.
@@ -565,7 +568,7 @@ For the simulation results of $100\,\mathrm{\mu m}$ channels shown in panels (b)
 \label{fig:ch2:SI_no_tuning}
 \end{figure}
 
-\subsection{Initial baseline model}
+\subsubsection{Initial baseline model}
 
 As a starting point, we implement the simplest model with fixed intercellular adhesion $\omega=\omega_0$ and only two cell states.
 We designate cells inside the channel or near the channel entrance as guided cells, while all other cells are classified as follower cells.
@@ -576,26 +579,26 @@ By intuition, we would expect the survival probability to decrease with increasi
 Surprisingly, we notice that the $10\,\mathrm{\mu m}$ curve is higher than the other curves.
 We will discuss this fact later in Sec.~\ref{sec:ch2:vary-radius}.
 
-\subsection{Downregulating intercellular adhesion}
+\subsubsection{Downregulating intercellular adhesion}
 
 In the experiments, we observe a good collapse of all survival curves for different channel widths on top of each other.
 However, the survival curves of our initial model in Fig.~\ref{fig:ch2:SI_no_tuning}(b) do not collapse.
 We attempt to address this issue by reducing intercellular adhesion in narrow channels, as motivated by earlier experimental work~\cite{law2023cytokinesis}.
 With a reduction of only 30\% in 6- and 10-micron channels and 20\% in 20-micron channels, we achieve the collapse of all survival curves [see Fig.~\ref{fig:ch2:SI_no_tuning}(d)], but the cluster-size distribution and the average cluster size [Fig.~\ref{fig:ch2:SI_no_tuning}(c)] are still qualitatively different from the experimental data, with only rare single-cell ruptures.
 
-\subsection{Introducing leader cells}
+\subsubsection{Introducing leader cells}
 
 Compared to the initial model, here we introduce the high-metabolic-activity leader cells at the leading edge into the model, but do not tune cell-cell adhesion as a function of channel width.
 We notice that single-cell ruptures are predominant now [see Fig.~\ref{fig:ch2:SI_no_tuning}(e)].
 As for the survival probability, they decrease more rapidly with time, but still do not collapse onto a single curve [Fig.~\ref{fig:ch2:SI_no_tuning}(f)].
 Again, we see that the 10-micron channel has the longest survival curves, which we address in Sec.~\ref{sec:ch2:vary-radius}.
 
-\subsection{Final model}
+\subsubsection{Final model}
 
 Our final model featured in the main text combines the adjustments made in the two models above: downregulating intercellular adhesion in narrow channels and introducing leader cells, which recapitulates both the cluster-size distribution and the collapse of survival curves observed in experiments.
 
 
-\section{How does cell size affect ruptures?}
+\subsection{How does cell size affect ruptures?}
 \label{sec:ch2:vary-radius}
 
 \begin{figure}[tbp]
@@ -627,7 +630,7 @@ We notice that in Fig.~\ref{fig:ch2:SI_small_radius}(b), the 6-micron channels a
 After computing the corresponding median survival times, we find that the channel width where $t_{1/2}$ peaks is indeed around the cell diameter and increases with cell size [Fig.~\ref{fig:ch2:SI_small_radius}(c)], which confirms our thoughts.
 
 
-\section{Initial conditions and domain wall profile}
+\subsection{Initial conditions and domain wall profile}
 \label{sec:ch2:init}
 
 We first consider the static solution to the equation of motion [Eq.~\eqref{eq:ch2:EOM}] for an isolated cell in one dimension $\phi(x)$, so the active polarity vector $\mathbf{P}=0$, $\mathcal{H}_\textrm{exclusion}=0$, and all adhesion terms vanish.
@@ -650,7 +653,7 @@ as the initial configuration, where $r=|\mathbf{r}-\mathbf{r}_0|$ is the distanc
 The geometric-confinement field $\phi_\textrm{wall}(\mathbf r)$ is defined by a series of logistic sigmoid functions in a similar manner.
 
 
-\section{Numerical details}
+\subsection{Numerical details}
 \label{sec:ch2:numerical}
 
 \begin{table}[tbp]
@@ -778,7 +781,7 @@ We apply standard Kaplan--Meier survival analysis~\cite{kaplan1958nonparametric}
 The 95\% confidence intervals are computed using the exponential Greenwood confidence interval method~\cite{greenwood1926natural}.
 
 
-\section{Additional figures}
+\subsection{Additional figures}
 \label{sec:ch2:extra-figs}
 
 Within the main text of this chapter (e.g., Fig.~\ref{fig:ch2:expt} and Fig.~\ref{fig:ch2:simu}), we show the cluster size histograms with some cluster sizes grouped together, for legibility and clarity.
@@ -787,7 +790,7 @@ We also show the scatter plots of cluster size vs.\ rupture time for different c
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.85\textwidth]{chap2/SI_expt.pdf}
+\includegraphics[width=0.7\textwidth]{chap2/SI_expt.pdf}
 \caption{Experimental results.
 (a) Cluster-size distributions for microchannels of different widths.
 The dashed lines and gray areas denote the average cluster sizes $A$ and their corresponding standard errors of the mean (SEM, or just SE).
@@ -800,7 +803,7 @@ The standard error of the mean (SE) is calculated as $\textrm{SE} = \textrm{SD}/
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.85\textwidth]{chap2/SI_simu.pdf}
+\includegraphics[width=0.7\textwidth]{chap2/SI_simu.pdf}
 \caption{Simulation results with $\omega=0.7\omega_0$ for narrow channels, $\omega=0.8\omega_0$ for $20\,\mathrm{\mu m}$ channels, and $\omega=\omega_0$ for $50\,\mathrm{\mu m}$ channels.
 (a) Cluster-size distributions for different channel widths.
 The dashed lines and gray areas denote the average cluster sizes $A$ and their corresponding standard errors of the mean (SE).
