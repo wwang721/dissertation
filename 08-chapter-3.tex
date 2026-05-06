@@ -73,11 +73,10 @@ By solving Eq.~\eqref{eq:ch3:EOM_q}, the zeroth mode (center of mass) evolves as
     \langle \tilde{x}^{\phantom{\ast}}_q(t)\tilde{x}^\ast_{q'}(t)\rangle =\delta_{qq'}\frac{D}{N\mu k_q(1+\mu k_q\tau)}.
 \end{equation}
 We can then calculate the stretched lengths of the springs by $\delta\ell_n = \delta x_{n+1}-\delta x_n$, where the mean is simply $\langle\delta\ell_n\rangle = 0$, and the variance is
-\begin{align}
+\begin{equation*}
     \langle \delta\ell_n^2\rangle
-    &=\sum_{q\neq 0 }\sum_{q'\neq 0}\langle \tilde{x}^{\phantom{\ast}}_q\tilde{x}^\ast_{q'}\rangle \mathrm{e}^{i(q-q')n}(\mathrm{e}^{iq}-1)(\mathrm{e}^{-iq'}-1)\notag\\
-    &=\frac{D}{N\mu k}\sum_{q\neq 0}\frac{1}{1+2\mu k\tau (1-\cos q)}.\notag
-\end{align}
+    =\sum_{q\neq 0 }\sum_{q'\neq 0}\langle \tilde{x}^{\phantom{\ast}}_q\tilde{x}^\ast_{q'}\rangle \mathrm{e}^{i(q-q')n}(\mathrm{e}^{iq}-1)(\mathrm{e}^{-iq'}-1)=\frac{D}{N\mu k}\sum_{q\neq 0}\frac{1}{1+2\mu k\tau (1-\cos q)}.
+\end{equation*}
 Replacing the sum by an integral, we obtain
 \begin{equation}
     \langle \delta\ell_n^2\rangle = \frac{D}{\mu k\sqrt{1+4\mu k\tau}},
@@ -156,7 +155,7 @@ If the chain can grow from both ends, i.e., only the two cells at the two ends c
     \begin{cases}
         \gamma/(1+\gamma)^n, & n=1,2,\\[4pt]
         \dfrac{2+\gamma}{2(1+\gamma)}\dfrac{n(\gamma/2)^{1-n}}{\bm{(}(2+\gamma)/\gamma\bm{)}_n}, & n>2.
-    \end{cases}\quad\textrm{(two-end)}
+    \end{cases}\qquad\textrm{(two-end)}
 \end{equation}
 In the limit of rare breaking $\gamma\ll 1$ when clusters almost always have two ends, $p_n$ converges to Eq.~\eqref{eq:ch3:ss_solution_one} with a doubled division rate.
 
@@ -190,6 +189,7 @@ Our results suggest that clusters of cells may regulate their size not only by c
 
 \begin{figure}
 \centering
+\vspace{0.3cm}
 \hspace{-0.2cm}
 \includegraphics[width=0.7\textwidth]{chap3/expt.pdf}
 \caption{A modest change in cell motility can account for the observed decrease in fracture rates over embryonic time. The upper panel shows a logistic decrease in the typical cell speed, $v_\textrm{rms}=\sqrt{D/\tau}$, which we hypothesize underlies the fracture rate reduction. In the lower panel, symbols with error bars are experimental data from Fig.~4C of Ref.~\cite{levy2024tug}; the red dashed line shows the corresponding theoretical predictions for the break rate $k_b$, calculated from the upper panel's $v_\textrm{rms}$ using Eq.~\eqref{eq:ch3:break_rate}.}
@@ -284,12 +284,10 @@ Division rate in the simulations is fixed at $k_d=(\ln 2/16)\,\mathrm{h^{-1}}$.}
 
 Most of the preceding results are derived in a one-dimensional geometry, which simplifies analysis but does not capture the spatial complexity of most biological tissues---except for special cases such as germline cysts or tissues under strong confinement. Fracture of a two- or three-dimensional tissue is fundamentally different from our 1D model, because the fracture must cross the entire tissue, rather than break a single link. We extend our model to two dimensions using simulations. Specifically, we implement a two-dimensional model treating cells as active Ornstein-Uhlenbeck particles, governed by the equations:
 \begin{subequations}
-\begin{equation}
-    \dot{\mathbf{x}}_n = -\mu \bm{\nabla}\Phi + \mathbf{v}_n(t),
-\end{equation}
-\begin{equation}
-    \tau \dot{\mathbf{v}}_n = -\mathbf{v}_n+\sqrt{2D}\bm{\xi}_n(t),
-\end{equation}
+\begin{align}
+    \dot{\mathbf{x}}_n &= -\mu \bm{\nabla}\Phi + \mathbf{v}_n(t),\\
+    \tau \dot{\mathbf{v}}_n&=-\mathbf{v}_n+\sqrt{2D}\bm{\xi}_n(t),
+\end{align}
 \end{subequations}
 where the Gaussian noises satisfy $\langle \xi_{n\alpha}(t)\xi_{n'\beta}(t')\rangle = \delta_{nn'}\delta_{\alpha\beta}\delta(t-t')$, with Greek indices corresponding to spatial components. As in 1D, we have a springlike potential between cells, $\Phi=\frac{1}{2} k\sum_{(i,j)}(|\mathbf{x}_i -\mathbf{x}_j|-\ell_0)^2$, where $(i,j)$ denotes the summation over all connected pairs. In this 2D setting, the root-mean-square speed of an isolated cell is given by
 \begin{equation}
@@ -338,7 +336,7 @@ For a pair of particles $\{x_1, x_2\}$ with a distance $\ell=x_2-x_1$ between th
 where $\delta\ell=\ell-\ell_0$ is the stretched length of the spring. Thus we can obtain $\dot{\delta\ell}=-2\mu k\delta\ell + \delta v$, where $\delta v = v_2 -v_1$ is still an Ornstein-Uhlenbeck process but with correlation $\langle\delta v(t)\delta v(t')\rangle = (2D/\tau)\mathrm{e}^{-|t-t'|/\tau}$. By a standard change of variable $p=-2\mu k\delta\ell +\delta v$, we obtain a new set of Langevin equations for a thermal Brownian particle with displacement $\delta \ell$~\cite{woillez2020active,woillez2020nonlocal}:
 \begin{equation}\label{eq:ch3:recast_EOM}
 \begin{cases}
-    \phantom{\tau}\dot{\delta\ell}=p,\\
+    \,\dot{\delta\ell}=p,\\
     \tau\dot{p}=-\eta p -U' + \sqrt{4D}\xi(t),
 \end{cases}
 \end{equation}
@@ -378,11 +376,9 @@ where $q=2\pi m/N$ and the index $m=0,1,\cdots,N-1$. By substituting the inverse
     \dot{\tilde{x}}_q = -\mu k_q\tilde{x}_q+ \tilde{v}_q,
 \end{equation}
 where $k_q=2k(1-\cos q)$ and $\tilde{v}_q=(1/N)\sum_{n=0}^{N-1}v_n\mathrm{e}^{-iqn}$. The mean is simply $\langle \tilde{v}_q\rangle = 0$, and the time correlation is
-\begin{align}
-    \langle \tilde{v}^{\phantom{\ast}}_q(t)\tilde{v}^\ast_{q'}(t')\rangle
-    &= \frac{1}{N^2}\sum_{n}\sum_{n'}\langle v_n(t) v_{n'}(t')\rangle\mathrm{e}^{-iqn+iq'n'} \notag\\
-    &= \delta_{qq'}\frac{D}{N\tau}\mathrm{e}^{-|t-t'|/\tau},
-\end{align}
+\begin{equation}
+    \langle \tilde{v}^{\phantom{\ast}}_q(t)\tilde{v}^\ast_{q'}(t')\rangle = \frac{1}{N^2}\sum_{n}\sum_{n'}\langle v_n(t) v_{n'}(t')\rangle\mathrm{e}^{-iqn+iq'n'} = \delta_{qq'}\frac{D}{N\tau}\mathrm{e}^{-|t-t'|/\tau},
+\end{equation}
 where we have used the orthogonality relation $\sum_{n=0}^{N-1}\mathrm{e}^{i(q-q')n}=N\delta_{qq'}$. Equation~\eqref{eq:ch3:EOM_q_appendix} can be solved by using the exponential ansatz. When $t\gg 1/\mu k_q$:
 \begin{equation}
     \langle \tilde{x}^{\phantom{\ast}}_q(t)\tilde{x}^\ast_{q'}(t)\rangle =\delta_{qq'}\frac{D}{N\mu k_q(1+\mu k_q\tau)}.
@@ -393,7 +389,7 @@ Ref.~\cite{henkes2020dense} shows that active Brownian particles (ABPs) exhibit 
     =\frac{D}{N\mu k}\sum_{q\neq 0}\frac{1}{1+2\mu k\tau (1-\cos q)}
     \approx\frac{D}{\mu k\sqrt{1+4\mu k\tau}},
 \end{equation}
-where in the limit $N\gg 1$ we have replaced the sum by an integral using $\frac{1}{2\pi}\int_0^{2\pi}\frac{\mathrm{d} q}{1+2\mu k\tau (1-\cos q)}=1/\sqrt{1+4\mu k\tau}$.
+where in the limit $N\gg 1$ we have replaced the sum by an integral using $\displaystyle\frac{1}{2\pi}\int_0^{2\pi}\frac{\mathrm{d} q}{1+2\mu k\tau (1-\cos q)}=1/\sqrt{1+4\mu k\tau}$.
 
 Thus, in the steady state, the marginal distribution of $\delta\ell_n$ follows a Gaussian distribution since each $\delta \ell_n$ is the sum of Gaussian processes. In the small noise limit, the system rapidly relaxes to a quasi-stationary state described by $P_\mathrm{QS}(\delta\ell_n,t)\sim P_s(\delta\ell_n)\,\mathrm{e}^{-t/\tau_\mathrm{esc}}$, indicating that the escape process is Poissonian with a rate of $1/\tau_\mathrm{esc}$~\cite{woillez2020active}. Therefore, the mean escape time follows an effective ``Arrhenius law'' where the rate of rupture is proportional to the probability density at the breaking stretch $\delta \ell_b$:
 \begin{equation}
@@ -482,10 +478,9 @@ and the coefficient of variation is $\mathrm{CV} = \sqrt{(4-\pi)/\pi}$.
 \label{sec:ch3:gen_func_3}
 
 For the two-end growth scenario, the master equation differs from the all-cell and one-end cases for $n=1$ and $n=2$ (where only one cell can divide). Using the generating function method, the steady-state ODE for $G(z)$ is:
-\begin{align}
-    k_b z \frac{\partial G}{\partial z}&=-\left(2k_d(1-z)+k_b\frac{z}{1-z}\right)G+k_b\frac{z}{1-z}\notag\\
-    &\quad+\frac{k_bk_d}{k_b+k_d}z(1-z).
-\end{align}
+\begin{equation}
+    k_b z \frac{\partial G}{\partial z}=-\left(2k_d(1-z)+k_b\frac{z}{1-z}\right)G+k_b\frac{z}{1-z} +\frac{k_bk_d}{k_b+k_d}z(1-z).
+\end{equation}
 The solution is given by
 \begin{equation}
     G(z)=\frac{(1-z)}{z^{2/\gamma}}\mathrm{e}^{2z/\gamma}\int_0^z\frac{x^{2/\gamma}(x^2-2x+2+\gamma)}{(1+\gamma)(1-x)^2}\mathrm{e}^{-2x/\gamma}\mathrm{d}x.
@@ -504,12 +499,9 @@ Observe that the results are quite similar to the one-end growth case, but with 
 \subsection{Generalizations with a matrix equation method}
 \label{sec:ch3:matrix}
 
-A general master equation with a minimum cluster size $N_\textrm{min}$ and different growth mechanisms can be written as
+A general master equation with a minimum cluster size $N_\textrm{min}$---i.e., the cluster size $n\geqslant N_\textrm{min}$---and different growth mechanisms can be written as
 \begin{equation}\label{eq:ch3:generalmaster}
-\begin{split}
-   \frac{\mathrm{d} p_n}{\mathrm{d} t} &= k_b\sum_{m\geqslant n+N_{\min}}p_m - k_b\max(n-2N_{\min}+1, 0)p_n\\
-   &\quad + g(n-1)p_{n-1}-g(n)p_n, \quad (n\geqslant N_\textrm{min}),
-\end{split}
+   \frac{\mathrm{d} p_n}{\mathrm{d} t} = k_b\sum_{m\geqslant n+N_{\min}}p_m - k_b\max(n-2N_{\min}+1, 0)p_n + g(n-1)p_{n-1}-g(n)p_n,
 \end{equation}
 where in the first term a cluster of size $m$ can only break into one of size $n$ if $m\geqslant n+N_\textrm{min}$, and in the second term we require that both daughter clusters satisfy $i,j\geqslant N_\textrm{min}$. In the third and fourth terms, $g(n)$ describes how the total growth rate scales with the length of the chain:
 \begin{equation}
@@ -524,6 +516,7 @@ where $\Theta(x)$ is the Heaviside step function. The master equation can be org
 
 \begin{figure}
 \centering
+\vspace{0.4cm}
 \hspace{-0.5cm}
 \includegraphics[width=0.7\textwidth]{chap3/suppl_matrix.pdf}
 \caption{Comparison of the analytical solution obtained using the generating function method with numerical results from the matrix equation method. Lines represent the same analytical solutions for $\gamma=0.1$ as shown in Fig.~\ref{fig:ch3:statistics}(a) ($\gamma'=\gamma/2=0.05$ for the one-end growth model). Empty symbols denote exact numerical results from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$.}
@@ -544,7 +537,7 @@ If a basal division rate $k_d^0$ is introduced, the results are relatively strai
 
 \begin{figure}
 \centering
-\includegraphics[width=0.7\textwidth]{chap3/suppl_basal.pdf}
+\includegraphics[width=0.85\textwidth]{chap3/suppl_basal.pdf}
 \caption{Effect of basal break and division rates on the steady-state distributions $p_n$. (a) Cluster sizes when $N_\textrm{min} = 500$ and $\gamma$ is varied, but with a basal break rate $k_b^0=10^{-3}k_b$; this figure should be compared to Fig.~\ref{fig:ch3:sm_distrib_all_models}(e). (b) The near-deterministic case $\gamma=10$ with varying basal break rates $k_b^0$. Minimum cluster size is set to $N_\mathrm{min}=500$; gray dashed lines are the corresponding log-uniform distributions. (c) The same distribution as in Fig.~\ref{fig:ch3:sm_distrib_all_models}(b), but with a basal division rate $k_d^0=k_d$. (d) Coefficients of variation ($\mathrm{CV}$) as a function of $\gamma$ for different basal division rates $k_d^0$. Note that we have used $\gamma\to\gamma'=\gamma/2$, as in Figs.~\ref{fig:ch3:sm_distrib_all_models}(b) and \ref{fig:ch3:statistics}(d).}
 \label{fig:ch3:suppl_basal}
 \end{figure}
@@ -648,18 +641,19 @@ We note that the cluster sizes of germline cysts shown in Fig.~5 of Ref.~\cite{l
 
 \begin{figure}
 \centering
-\vspace{0.3cm}
+\vspace{0.4cm}
 \hspace{-0.5cm}
 \includegraphics[width=0.7\textwidth]{chap3/suppl_simulation.pdf}
 \caption{A representative time trajectory of chain length $n(t)$ from rfKMC simulation with $N_\textrm{min}=200$ and $\gamma=0.1$. The initial chain length is set to $n_0=1000$, and the simulation begins at $t=0$. The time unit is $1/k_d$.}
 \label{fig:ch3:suppl_simulation}
 \end{figure}
 
-
+\clearpage
 \subsection{Additional figures}
 \label{sec:ch3:extra-figs}
+\vspace{0.5cm}
 
-\begin{figure*}
+\begin{figure*}[h]
 \centering
 \includegraphics[width=\textwidth]{chap3/suppl_survival.pdf}
 \caption{(a) Survival probability $S(t)$ from rfKMC simulations of the one-end growth model at fixed division rate $k_d$ with varying break rate $k_b$. (b) Survival probability $S(t)$ from rfKMC simulations of the all-cell growth model with minimum cluster size $N_\textrm{min}=200$, again varying $k_b$ at fixed $k_d$. Dashed lines are the exponential decay $\mathrm{e}^{-k_d t}$. Error bars on $S(t)$ represent 95\% confidence intervals. (c) Distribution of post-fracture size $n$ for pre-fracture size $m=10$ in 2D AOUP simulations with cell motility $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. Division rate $k_d=(\ln 2/16)\,\mathrm{h^{-1}}$.}
