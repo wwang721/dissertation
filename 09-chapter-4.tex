@@ -89,7 +89,7 @@ A convenient summary statistic is the median survival time $t_{1/2}=S^{-1}(1/2)$
 
 \begin{figure}[tp]
 \centering
-\includegraphics[width=0.7\textwidth]{chap4/timestep.pdf}
+\includegraphics[width=0.85\textwidth]{chap4/timestep.pdf}
 \caption{Tissue cohesion is strongly dependent on simulation timestep.
 \textbf{a}, Simulation snapshots of an $N=100$ cell cluster at $t=100$ for time steps $\Delta t = 0.01$ (upper) and $\Delta t = 0.005$ (lower).
 Each simulation was first evolved for $20$ time units with zero motility to reach a steady state, followed by $100$ time units of active dynamics.
@@ -113,7 +113,7 @@ In this geometry, each cell boundary consists of a circular arc of length $P^{(n
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.7\textwidth]{chap4/doublet.pdf}
+\includegraphics[width=0.85\textwidth]{chap4/doublet.pdf}
 \caption{Cell doublet.
 \textbf{a}, Schematic of a cell doublet with centers positioned symmetrically at $\mathbf{r}_\pm=\pm(\ell - \epsilon)\hat{x}$. The arc radius of each cell is $\ell$, and the distance between the two cell centers is given by $d = 2(\ell - \epsilon)$, thus the contact length (red) is $2\sqrt{\ell^2-(\ell-\epsilon)^2}$.
 \textbf{b}, Force between a cell doublet as a function of their separation distance for $\Lambda=0,$ $0.1$, $0.2$, $0.3$, $0.4$, and $0.5$ (blue to red). Positive values $f>0$ correspond to attractive forces. Solid lines show Eq.~\eqref{eq:ch4:force}, and dashed lines are the asymptotic form for $d\to2\ell$ from Eq.~\eqref{eq:ch4:force-asymp}. Default parameters: $\ell=1$, $K_P=1$, $A_0=\pi$, and $P_0=4.8$.}
@@ -133,11 +133,10 @@ where the area and perimeter of each cell are
 The (passive) interaction force between the two cells follows from the derivative of $E_\mathrm{s}$ with respect to the separation parameter,
 $f=-\partial E_\mathrm{s}/\partial\epsilon$.
 Evaluating this derivative gives (see Sec.~\ref{sec:ch4:appendices} for details and some asymptotic limits)
-\begin{eqnarray}
+\begin{equation}
 \label{eq:ch4:force}
-    f&=&4\sqrt{(2\ell-\epsilon)\epsilon}\left[K_A(A-A_0)+ K_P\dfrac{(P-P_0)}{2\ell-\epsilon}\right] \nonumber\\
-    &&+ {\Lambda}\dfrac{2\ell}{\sqrt{(2\ell-\epsilon)\epsilon}},~~~~~~(\ell\geqslant\epsilon>0)
-\end{eqnarray}
+    f=4\sqrt{(2\ell-\epsilon)\epsilon}\left[K_A(A-A_0)+ K_P\dfrac{(P-P_0)}{2\ell-\epsilon}\right] + {\Lambda}\dfrac{2\ell}{\sqrt{(2\ell-\epsilon)\epsilon}},~~~(\ell\geqslant\epsilon>0)
+\end{equation}
 where in our sign convention $f>0$ corresponds to attractive forces (i.e., forces that tend to increase $\epsilon$). We see that the last term in Eq.~\eqref{eq:ch4:force} diverges as the two cells separate, $\epsilon \to 0^+$. This term comes from the diverging derivative of the non-contacting perimeter $P^{(n)}$ with $\epsilon$---in the finite Voronoi representation, small changes of the cell centers can lead to very large changes of perimeters.
 
 The divergence of the detachment forces explains the time-step dependence of the rupture time scale: when $\Lambda > 0$, cells \emph{should not be able to detach from one another} in the FV model of Refs.~\cite{huang2023bridging, teomy2018confluent}. The presence of detachment occurs only because we are using a finite time step $\Delta t$, where the numerical evolution can allow the cell to ``skip'' the divergence to reach full cell-cell separation, where the force is zero.
@@ -166,11 +165,10 @@ For two cells $i$ and $j$ sharing an outer vertex, there are two points $\mathbf
 \end{equation}
 The $\pm$ reflects the two symmetric intersection points of the circles of radius $\ell$ centered at $\mathbf{r}_i$ and $\mathbf{r}_j$, lying on opposite sides of the line $ij$.
 Their derivatives with respect to $x_i$ are given by
-\begin{eqnarray}
+\begin{equation}
 \label{eq:ch4:outer-deriv}
-    \frac{\partial \mathbf{h}^\textrm{out}_\pm}{\partial x_i}&=&\dfrac{\hat{x}}{2}\mp\frac{2\ell^2(x_i-x_j)}{\sqrt{4\ell^2-|\mathbf{r}_i-\mathbf{r}_j|^2}}\frac{(\mathbf{r}_i-\mathbf{r}_j)}{|\mathbf{r}_i-\mathbf{r}_j|^3}\times\hat{z}\nonumber\\
-    &&\phantom{\frac{1}{2}}\mp\frac{\sqrt{4\ell^2-|\mathbf{r}_i-\mathbf{r}_j|^2}}{2|\mathbf{r}_i-\mathbf{r}_j|}\hat{y}.
-\end{eqnarray}
+    \frac{\partial \mathbf{h}^\textrm{out}_\pm}{\partial x_i}=\dfrac{\hat{x}}{2}\mp\frac{2\ell^2(x_i-x_j)}{\sqrt{4\ell^2-|\mathbf{r}_i-\mathbf{r}_j|^2}}\frac{(\mathbf{r}_i-\mathbf{r}_j)}{|\mathbf{r}_i-\mathbf{r}_j|^3}\times\hat{z}\mp\frac{\sqrt{4\ell^2-|\mathbf{r}_i-\mathbf{r}_j|^2}}{2|\mathbf{r}_i-\mathbf{r}_j|}\hat{y}.
+\end{equation}
 We can see that $\partial \mathbf{h}_\pm^{\mathrm{out}}/\partial x_i$ contains a term with $\sqrt{4\ell^2-|\mathbf{r}_i-\mathbf{r}_j|^2}$ in the denominator, which diverges as $|\mathbf{r}_i-\mathbf{r}_j|\to2\ell$.
 This geometric divergence is the origin of the divergent detachment force in Eq.~\eqref{eq:ch4:force}.
 
@@ -186,7 +184,7 @@ This prescription renders forces finite at detachment while leaving them unchang
 \begin{figure}[ht]
 \centering
 \vspace{0.3cm}
-\includegraphics[width=0.7\textwidth]{chap4/truncated.pdf}
+\includegraphics[width=0.75\textwidth]{chap4/truncated.pdf}
 \caption{Regularization by introducing a cutoff.
 \textbf{a}, Force between a cell doublet as a function of cell-center distance for $\Lambda=0.2$ and $P_0=4.8$. Empty circles and triangles represent forces obtained from simulations before and after implementing the truncation; analytical results are the corresponding curves in Fig.~\ref{fig:ch4:doublet}b. Inset: enlarged view around the cutoff $\delta=0.45$, which corresponds to $d_c=\sqrt{4\ell^2-\delta^2}\approx 1.95$.
 \textbf{b}, Phase diagram for the final detachment force $f_\mathrm{detach}$ when $d=2\ell$ in the $P_0$--$\Lambda$ plane, with cutoff $\delta=0.45$.
@@ -230,7 +228,7 @@ The values of the steady-state radius $\ell_0$ for different sets of $(P_0,\Lamb
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.7\textwidth]{chap4/steady_state.pdf}
+\includegraphics[width=0.85\textwidth]{chap4/steady_state.pdf}
 \caption{Steady states of deformable polygon model.
 \textbf{a}, Simulation snapshots of how the cell doublet relaxes from its initial shape to the steady state in DP model. Blue shapes indicate the optimal $(\ell_0, \epsilon_0)\approx(0.87, 0.12)$ computed from Eq.~\eqref{eq:ch4:optimal} for $P_0=4.8$ and $\Lambda=0.2$.
 \textbf{b}, Phase diagram for optimal $\ell_0$ in the $P_0$--$\Lambda$ plane.
@@ -261,7 +259,7 @@ We have found that, simply by choosing the energy-minimizing $\ell_0$, the small
 
 \begin{figure*}[tp]
 \centering
-\includegraphics[width=0.85\textwidth]{chap4/detachment.pdf}
+\includegraphics[width=0.9\textwidth]{chap4/detachment.pdf}
 \caption{Detachment of cell doublets in the finite Voronoi model (FV) and deformable polygon (DP) models.
 \textbf{a}, Snapshots of a cell doublet for both deformable polygon model and finite Voronoi model at different centroid distances.
 Preferred perimeter is set to $P_0=4.8$ and $\Lambda=0.2$, yielding the optimal $(\ell_0, \epsilon_0)\approx (0.87, 0.12)$ which has been used to set the maximum radius $\ell=\ell_0$ in FV model. The four centroid distances from left to right are $1.374$ (compressed), $1.550$ (steady state), 1.735 (approaching detachment threshold $2\ell_0$ in FV), and $1.912$ ($>2\ell_0$).
@@ -335,7 +333,7 @@ First, because no force cutoff was implemented, clusters can fracture only due t
 Secondly, choices about the calibration of $\ell$ and regularization can qualitatively change results. Using a fixed $\ell$ rather than the steady-state radius $\ell_0$ from the DP model reverses the trend of fracture behavior when varying $P_0$ (Figs.~\ref{fig:ch4:truncated}b and \ref{fig:ch4:detachment}c).
 Interestingly, in our model using a varying $\ell_0$ and calibrating to the detachment forces (Fig.~\ref{fig:ch4:calibrate}h), which we think is the most reasonable approach, we do see the same qualitative trends in the effect of $P_0$ that are observed by Ref.~\cite{huang2023bridging} in their phase diagrams (e.g., their Fig.~2b). However, we believe the origin of these behaviors may be subtler than expected, and they depend on our calibration choices.
 
-The associated purpose-built Python package \texttt{PyAFV} is available on GitHub at \href{https://github.com/wwang721/pyafv}{wwang721/pyafv}. A snapshot of the package and other data and code required to reproduce this paper have been archived on Zenodo, doi:~\href{https://doi.org/10.5281/zenodo.18091659}{10.5281/zenodo.18091659}.
+The associated purpose-built Python package \texttt{PyAFV} is available on GitHub at \href{https://github.com/wwang721/pyafv}{wwang721/pyafv}. A snapshot of the package and other data and code required to reproduce this chapter have been archived on Zenodo, doi:~\href{https://doi.org/10.5281/zenodo.18091659}{10.5281/zenodo.18091659}.
 
 
 \section{Appendices}
@@ -355,8 +353,8 @@ The time since relaxation is used in the survival probability and mean survival 
 \caption{Default simulation parameters used throughout this chapter; any deviations are explicitly specified.}
 \label{tab:ch4:params}
 \begin{tabular}{llcc}
-\hline\hline
-Parameter & \quad Description & Scale & Value\\\hline
+\toprule\toprule
+Parameter & \quad Description & Scale & Value\\\midrule
 $A_0$ & Preferred area & $L^2$ & $\pi$\\
 $P_0$ & Preferred perimeter & $L$ & $4.8$\\
 $\ell$ & Maximum radius & $L$ & $1$\\
@@ -367,7 +365,7 @@ $T_\textrm{relax}$ & Initial relaxation time& $1/\mu K_A L^2$ & $20$\\
 $T$ & Total simulation time & $1/\mu K_A L^2$ & $1000$\\
 $D_r$ & Rotational noise & $\mu K_A L^2$ & $1.33$\\
 $N$ & Number of cells & 1 & $100$\\
-\hline\hline
+\bottomrule\bottomrule
 \end{tabular}
 \end{table}
 
@@ -386,10 +384,9 @@ The three barycentric coordinates of the circumcenter are
 \end{eqnarray}
 \end{subequations}
 where $D=2|(\mathbf{r}_i-\mathbf{r}_j)\times(\mathbf{r}_j-\mathbf{r}_k)|^2$. Thus, its derivative with respect to $x_i$ is given by
-\begin{eqnarray}
-    \frac{\partial\mathbf{h}^\textrm{in}}{\partial x_i}&=&\alpha_i\hat{x}+\frac{\partial\alpha_i} {\partial x_i}\mathbf{r}_i+\frac{\partial\alpha_j}{\partial x_i}\mathbf{r}_j+\frac{\partial\alpha_k}{\partial x_i}\mathbf{r}_k \nonumber\\
-    &=&\alpha_i\hat{x}+\frac{\partial\alpha_j}{\partial x_i}(\mathbf{r}_j-\mathbf{r}_i)+\frac{\partial\alpha_k}{\partial x_i}(\mathbf{r}_k-\mathbf{r}_i),
-\end{eqnarray}
+\begin{equation}
+    \frac{\partial\mathbf{h}^\textrm{in}}{\partial x_i}=\alpha_i\hat{x}+\frac{\partial\alpha_i} {\partial x_i}\mathbf{r}_i+\frac{\partial\alpha_j}{\partial x_i}\mathbf{r}_j+\frac{\partial\alpha_k}{\partial x_i}\mathbf{r}_k =\alpha_i\hat{x}+\frac{\partial\alpha_j}{\partial x_i}(\mathbf{r}_j-\mathbf{r}_i)+\frac{\partial\alpha_k}{\partial x_i}(\mathbf{r}_k-\mathbf{r}_i),
+\end{equation}
 where in the second equation we have used the relation $\alpha_i + \alpha_j+ \alpha_k=1$.
 We note this corrects a typo in Ref.~\cite{teomy2018confluent}.
 A similar formula naturally holds for the derivative with respect to $y_i$.
@@ -407,11 +404,11 @@ The mechanical force experienced by cell $i$ is given by the gradient of the ene
 We note that each cell can be decomposed into a polygon (connecting all vertices belonging to that cell), together with additional circular segments (a segment is defined as the circular sector minus the isosceles triangle formed by the two radii and the chord), i.e., $A_j=A_j^\textrm{poly}+A_j^\textrm{seg}$ and $P_j=P_j^\textrm{poly}+P_j^{(n)}$.
 Thus, the derivatives of the area and perimeter can be decomposed into two corresponding parts:
 \begin{equation}
-    \frac{\partial A_j}{\partial x_i}=\frac{\partial A_j^\textrm{poly}}{\partial x_i}+\frac{\partial A_j^\textrm{seg}}{\partial x_i},~~~\frac{\partial P_j}{\partial x_i}=\frac{\partial P_j^\textrm{poly}}{\partial x_i}+\frac{\partial P_j^{(n)}}{\partial x_i}.
+    \frac{\partial A_j}{\partial x_i}=\frac{\partial A_j^\textrm{poly}}{\partial x_i}+\frac{\partial A_j^\textrm{seg}}{\partial x_i},\qquad\frac{\partial P_j}{\partial x_i}=\frac{\partial P_j^\textrm{poly}}{\partial x_i}+\frac{\partial P_j^{(n)}}{\partial x_i}.
 \end{equation}
 For the polygon part,
 \begin{equation}
-    \frac{\partial A_j^\textrm{poly}}{\partial x_i} = \sum_m\frac{\partial A_j^\textrm{poly}}{\partial \mathbf{h}_m}\cdot\frac{\partial \mathbf{h}_m}{\partial x_i},~~~\frac{\partial P_j^\textrm{poly}}{\partial x_i} = \sum_m\frac{\partial P_j^\textrm{poly}}{\partial \mathbf{h}_m}\cdot\frac{\partial \mathbf{h}_m}{\partial x_i},
+    \frac{\partial A_j^\textrm{poly}}{\partial x_i} = \sum_m\frac{\partial A_j^\textrm{poly}}{\partial \mathbf{h}_m}\cdot\frac{\partial \mathbf{h}_m}{\partial x_i},\qquad\frac{\partial P_j^\textrm{poly}}{\partial x_i} = \sum_m\frac{\partial P_j^\textrm{poly}}{\partial \mathbf{h}_m}\cdot\frac{\partial \mathbf{h}_m}{\partial x_i},
 \end{equation}
 where the sum runs over all vertices (both inner and outer), as in Eq.~\eqref{eq:ch4:chainrule}. The derivatives $\partial\mathbf{h}_m/\partial x_i$ are already given above, while the derivatives ${\partial A_j^\textrm{poly}}/{\partial \mathbf{h}_m}$ and ${\partial P_j^\textrm{poly}}/{\partial \mathbf{h}_m}$ are provided in Eq.~(B15) of Ref.~\cite{teomy2018confluent}.
 
@@ -421,7 +418,7 @@ We now compute the contribution from the segment part. For a cell $j$ with a tot
 \end{equation}
 where $\Delta\phi\equiv \phi_m^{j}-\phi_{m+1}^{j}\pmod{2\pi}$. Thus we have
 \begin{equation}
-    \frac{\partial P_j^{(n)}}{\partial\phi_m^{j}}=\ell,~~~\frac{\partial A^\textrm{seg}_j}{\partial\phi_{m}^{j}}=\frac{\ell^2}{2}(1-\cos\Delta\phi),
+    \frac{\partial P_j^{(n)}}{\partial\phi_m^{j}}=\ell,\qquad\frac{\partial A^\textrm{seg}_j}{\partial\phi_{m}^{j}}=\frac{\ell^2}{2}(1-\cos\Delta\phi),
 \end{equation}
 and ${\partial P_j^{(n)}}/{\partial\phi_{m+1}^{j}} = -{\partial P_j^{(n)}}/{\partial\phi_{m}^{j}}$, ${\partial A^\textrm{seg}_j}/{\partial\phi_{m+1}^{j}}=-{\partial A^\textrm{seg}_j}/{\partial\phi_{m}^{j}}$.
 Because an outer vertex such as $\mathbf{h}_m^\textrm{out}$ is shared by cell $j$ and a neighboring cell $i$ [see Eq.~\eqref{eq:ch4:hout}], the angle $\phi_m^{j}$ depends on both $\mathbf{r}_i$ and $\mathbf{r}_j$. With the definition $\mathbf{u}=\mathbf{h}_m^\textrm{out}-\mathbf{r}_j=|\mathbf{u}|(\cos\phi_m^j,\sin\phi_m^j)$ and $|\mathbf{u}|=\ell$, we have
@@ -436,7 +433,7 @@ Thus, taking the dot product with $(-\sin\phi_m^j,\cos\phi_m^j)/\ell$, we obtain
 and the $y$-component has an analogous form.
 Since $\mathbf{u}$ (and hence $\phi^j_m$) depends only on the relative position $\mathbf{r}_i-\mathbf{r}_j$, we also have $\partial{\phi^{j}_m}/\partial \mathbf{r}_j=-\partial{\phi^{j}_m}/\partial \mathbf{r}_i$. With all these derivatives in hand, we can then compute the segment contributions to the derivative of the area and perimeter:
 \begin{eqnarray}
-    \frac{\partial A_j^\textrm{seg}}{\partial x_i}=\sum_{\mathbf{h}_m^\textrm{out}}\frac{\partial A_j^\textrm{seg}}{\partial\phi_m^{j}}\frac{\partial\phi^{j}_m}{\partial x_i},~~~\frac{\partial P_j^{(n)}}{\partial x_i}=\sum_{\mathbf{h}^\textrm{out}_m}\frac{\partial P_j^{(n)}}{\partial \phi_m^j}\frac{\partial \phi_m^j}{\partial x_i}.
+    \frac{\partial A_j^\textrm{seg}}{\partial x_i}=\sum_{\mathbf{h}_m^\textrm{out}}\frac{\partial A_j^\textrm{seg}}{\partial\phi_m^{j}}\frac{\partial\phi^{j}_m}{\partial x_i},\qquad\frac{\partial P_j^{(n)}}{\partial x_i}=\sum_{\mathbf{h}^\textrm{out}_m}\frac{\partial P_j^{(n)}}{\partial \phi_m^j}\frac{\partial \phi_m^j}{\partial x_i}.
 \end{eqnarray}
 
 
@@ -453,7 +450,7 @@ We need the derivative of area $A_i$ with respect to $\mathbf{h}_m$~\cite{teomy2
 \end{equation}
 and derivatives of $P_m$ and $P_{m-1}$ with respect to $\mathbf{h}_m$~\cite{teomy2018confluent}:
 \begin{equation}
-    \frac{\partial P_m}{\partial \mathbf{h}_m}=\frac{\mathbf{h}_m-\mathbf{h}_{m+1}}{|\mathbf{h}_m-\mathbf{h}_{m+1}|},~~~\frac{\partial P_{m-1}}{\partial \mathbf{h}_m}=\frac{\mathbf{h}_m-\mathbf{h}_{m-1}}{|\mathbf{h}_m-\mathbf{h}_{m-1}|},
+    \frac{\partial P_m}{\partial \mathbf{h}_m}=\frac{\mathbf{h}_m-\mathbf{h}_{m+1}}{|\mathbf{h}_m-\mathbf{h}_{m+1}|},\qquad\frac{\partial P_{m-1}}{\partial \mathbf{h}_m}=\frac{\mathbf{h}_m-\mathbf{h}_{m-1}}{|\mathbf{h}_m-\mathbf{h}_{m-1}|},
 \end{equation}
 where $P_{m}=|\mathbf{h}_m-\mathbf{h}_{m+1}|$, and $\mathbf{h}_{m-1}$ and $\mathbf{h}_{m+1}$ are two adjacent vertices of $\mathbf{h}_m$ in cell $i$.
 External forces are applied quasi-statically, starting from zero, and the system is evolved for $5\times10^4$ steps (step size $\Delta t=0.001$) to reach a sequence of steady states.
@@ -469,7 +466,7 @@ To derive the interaction force $f=-\partial E_s/\partial \epsilon$ of a cell do
 \end{equation}
 This gives
 \begin{equation}
-    \frac{\partial A}{\partial \epsilon} = -2\sqrt{(2\ell-\epsilon)\epsilon},~~~\frac{\partial P}{\partial \epsilon}=-\frac{2\epsilon}{\sqrt{(2\ell-\epsilon)\epsilon}}.
+    \frac{\partial A}{\partial \epsilon} = -2\sqrt{(2\ell-\epsilon)\epsilon},\qquad\frac{\partial P}{\partial \epsilon}=-\frac{2\epsilon}{\sqrt{(2\ell-\epsilon)\epsilon}}.
 \end{equation}
 We therefore see that the divergent contribution arises from the non-contacting perimeter $P^{(n)}=\ell\phi$ rather than from the area $A$ or the total perimeter $P$.
 
