@@ -461,7 +461,7 @@ where in the second and last steps we have defined the total amount of unbound a
 In the penultimate step, we introduce a transformation from $(c_0, c')$ to the total concentration $c_t=c_0+c'$ and correct ligand fraction $\chi=c_0/c_t$, i.e., we substitute $c'=c_t(1-\chi)$, $r=\alpha r'$, and $c(x)=c_t\chi g(x)$.
 After taking a logarithm, $\ln\mathcal{L}$ can be written as a sum of five independent contributions:
 \begin{eqnarray}
-    &&\ln\mathcal{L}_0=\sum_{n=1}^N\sum_{i=1}^{M_n}\ln kr'=\sum_{i=1}^{N}M_n\ln k r',\nonumber\\
+    &&\ln\mathcal{L}_0=\sum_{n=1}^N\sum_{i=1}^{M_n}\ln kr'=\sum_{n=1}^{N}M_n\ln k r',\nonumber\\
     &&\ln\mathcal{L}_1=-r'\sum_{n=1}^N\sum_{i=1}^{M_n}\tau_{b,i}^{(n)}=-r'\sum_{n=1}^NT_b^{(n)},\nonumber\\
     &&\ln\mathcal{L}_2=\sum_{n=1}^N\sum_{i=1}^{M_n}\ln c_t=\sum_{n=1}^N M_n \ln c_t,\label{eq:ch6:log-likelihood}\\
     &&\ln\mathcal{L}_3=\sum_{n=1}^N\sum_{i=1}^{M_n}\ln\left[1-\chi+\alpha\chi g(na)\mathrm{e}^{(1-\alpha)r'\tau_{b,i}^{(n)}}\right],\nonumber\\
@@ -470,7 +470,7 @@ After taking a logarithm, $\ln\mathcal{L}$ can be written as a sum of five indep
 where $a$ is the receptor spacing and $x_n=na$ gives the position of the $n$-th receptor.
 Note that $\mathcal{L}_0$ and $\mathcal{L}_1$ are trivial terms since they don't depend on any parameter we are concerned with, and thus we only need to include the other three terms in the following computation.
 Calculating the derivatives $\partial^2\ln\mathcal{L}/\partial\theta_\alpha\partial\theta_\beta$ is straightforward but not particularly informative.
-These derivatives depend on the bound/unbound times through terms like $T_u^{(n)}, M_n$, but also in more complex forms $f(\tau_{b,i}^{(n)})$ like $\mathrm{e}^{(1-\alpha)r'\tau_{b,i}^{n}}$.
+These derivatives depend on the bound/unbound times through terms like $T_u^{(n)}, M_n$, but also in more complex forms $f(\tau_{b,i}^{(n)})$ like $\mathrm{e}^{(1-\alpha)r'\tau_{b,i}^{(n)}}$.
 
 The complex part during the derivation of the Fisher information matrix $I(\boldsymbol{\theta})_{\mu\nu}=-\langle\partial^2\ln\mathcal{L}/\partial\theta_\mu\partial\theta_\nu\rangle$ arises from computing the average $\langle\cdots\rangle$.
 To begin, we can calculate the average of the bound and unbound times for the $n$-th receptor:
@@ -495,7 +495,7 @@ To sum up, to go from the analytical derivatives of Eq.~\eqref{eq:ch6:log-likeli
 \begin{eqnarray}
     \langle\sum_{n=1}^N M_n\rangle&\to&\sum_{n=1}^N\langle M_n\rangle,\nonumber\\
     \langle\sum_{n=1}^N T_u^{(n)}\rangle&\to&\sum_{n=1}^N \langle T_u^{(n)}\rangle,\label{eq:ch6:avg-approx}\\
-    \langle\sum_{n=1}^N\sum_{i=1}^{M_n}f(\tau_{b,i}^{(n)})\rangle&\to&\sum_{n=1}^N\langle M_n\rangle\int_0^\infty\mathrm{d}\tau ~P(\tau_b^{n}=\tau) f(\tau),\nonumber
+    \langle\sum_{n=1}^N\sum_{i=1}^{M_n}f(\tau_{b,i}^{(n)})\rangle&\to&\sum_{n=1}^N\langle M_n\rangle\int_0^\infty\mathrm{d}\tau ~P\bm{(}\tau_b^{(n)}=\tau\bm{)} f(\tau),\nonumber
 \end{eqnarray}
 where the last term is computed by numerical integration using Gaussian quadrature (\texttt{integrate.quad} method provided by SciPy~\cite{virtanen2020scipy}).
 
