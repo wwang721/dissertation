@@ -7,6 +7,9 @@
 
 > [!IMPORTANT]
 > **LICENSE**: The LaTeX template scaffolding is released under the [MIT License](LICENSE-template) (Copyright © 2024 bibekananda-datta). The dissertation content — written text, figures, and data — is Copyright © 2026 Wei Wang and licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
+> 
+> <a href="https://creativecommons.org/licenses/by/4.0"><img src=".github/by.svg" width="100"></a>
+
 
 ## Changes from the original template
 
