@@ -177,6 +177,11 @@
 \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
      date=year, isbn=false, url=false, doi=true]{biblatex}
 \AtEveryBibitem{\clearfield{doi}}  % suppress DOI for the final bibliography
+\DeclareFieldFormat{doi}{%
+  DOI:\addspace
+  \ifhyperref
+    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
 \DeclareSourcemap{
   \maps[datatype=bibtex]{
     \map{
