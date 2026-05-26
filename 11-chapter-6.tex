@@ -1,31 +1,49 @@
 \chapter{Conclusion and future directions} \label{chap:conclusion}
 
 
-%% remove the following and add your chapter text here
 \section{Summary}
 \label{sec:ch6:summary}
 
-\blindtext %\parencite{knuth-fa}
+Cancer cell dissociation from an invading tumor strand sets the rate at which metastases are seeded, yet it has been difficult to say which features of the strand and its surroundings actually control how often cells leave and in what configurations.
+The microchannel experiments of Law \textit{et al.} gave a clean readout (most dissociations are single cells, larger clusters are rare, and the rupture time is independent of channel width), but did not settle whether these patterns reflect a common underlying mechanism or three separate ones.
+In Chapter~\ref{chap:dissociation} I built a phase-field model of the strand crawling through the channel and showed that all three patterns follow from one feature of the dynamics: a fast leader cell that pulls ahead of its neighbors and shears off.
+The model also predicts that stronger cell-cell adhesion produces fewer but larger ruptures, which gives a route to bias the cluster-size distribution by tuning adhesion alone.
+A perhaps more useful insight is what the model rules out: unjamming the tissue is necessary but not sufficient to create a rupture, since the strand must also be polarized enough for a leader cell to pull ahead.
 
-%% this is an example table
-\begin{table}[h!]
-\centering
-\begin{tabular}{c c c c} 
-\toprule \toprule
-Col1 & Col2 & Col2 & Col3 \\ 
-\toprule \toprule
-1 & 6 & 87837 & 787 \\ 
-2 & 7 & 78 & 5415 \\
-3 & 545 & 778 & 7507 \\
-4 & 545 & 18744 & 7560 \\
-5 & 88 & 788 & 6344 \\ 
-\bottomrule
-\end{tabular}
-\caption{Table to test captions and labels taken from Overleaf.}
-\label{table:1}
-\end{table}
+The dominant picture of how a tissue or organ sets its size is feedback on cell proliferation, but several animal-scale systems, including germline cysts in the mouse, snowflake yeast, and the placozoan \textit{Trichoplax adhaerens}, instead seem to regulate size through a balance between growth and motility-driven fracture.
+The minimum theoretical question is whether such a balance can produce a characteristic size at all, or whether it inevitably broadens into a scale-free distribution.
+In Chapter~\ref{chap:size-control} I model the cluster as a chain of active particles joined by breakable junctions and derive the exact steady-state size distribution.
+The result is a single-ratio scaling: the distribution depends only on the ratio of the junction break rate to the cell division rate, with the broadest distributions appearing when the two are comparable.
+Restricting division to the cluster edge or localizing fracture to its middle sharpens the distribution but does not change which ratio sets it.
+The lesson is that motility-driven fracture can, in principle, regulate size without any centralized signaling, provided growth and fracture are not perfectly balanced.
 
-\Blindtext[2]
+Pushing the same modeling program to the scale of a real organism such as \textit{Trichoplax} (on the order of $10^5$ cells) is the obvious next step, and the finite Voronoi model is the natural candidate because it scales linearly with cell number and admits both confluent and nonconfluent regimes.
+In Chapter~\ref{chap:voronoi} I find that the model has a hidden numerical pathology: the detachment force between two separating cells diverges as they lose contact, so the simulated rupture time depends on the numerical time step rather than on the underlying physics, an artifact that may have biased earlier results.
+I propose a regularization that bounds the detachment force, with parameters calibrated against a deformable polygon model that shares the same energy function but does not impose a Voronoi geometry.
+The calibrated model recovers the deformable polygon's rupture statistics at a fraction of its computational cost, which opens the door to simulating tissue rupture at the scale of a whole animal.
+More broadly, the chapter is a reminder that simulation models built for confluent tissues can fail subtly when they are pushed past their intended regime, and that fixing the artifact requires anchoring against a model whose limiting behavior one trusts.
+
+Contact inhibition of locomotion has long been known to fire from cell-cell contacts only a micron across, which carry very few Eph-ephrin bindings against a background of nonspecific interfering ligands.
+Earlier work has focused on the downstream signaling, but has not asked whether the contact-detection step itself is a physical bottleneck.
+In Chapter~\ref{chap:cil} I treat CIL as a sensing problem and use maximum-likelihood estimation and the Cram\'er-Rao bound to compute the best possible sensing accuracy.
+A cell can decide whether a neighbor is present with high reliability even when interfering ligands are ten times as abundant as the correct ligand, and the accuracy of locating the contact depends only weakly on its width.
+Both findings agree with the experimental robustness of CIL across very different contact geometries.
+The framework also makes clear that specificity, not counting noise, is the limiting factor at typical CIL parameters, which places contact inhibition in the same theoretical family as bacterial chemoreception under interfering chemicals.
+
 
 \section{Future directions}
 \label{sec:ch6:future}
+
+A clear extension of Chapters~\ref{chap:size-control} and~\ref{chap:voronoi} is to ask how an organism as simple as the placozoan \textit{Trichoplax adhaerens} regulates its size without any centralized genetic control.
+Recent experiments show that \textit{Trichoplax} fractures only after long periods of coherent motion, with polarity reorienting on the timescale of seconds but fission events separated by days; that fracture geometry varies from ductile thinning to brittle hole formation; and that the velocity field inside the tissue is correlated over a length $\xi$ that scales with the size of the animal.
+None of these features is captured by the one-dimensional chain model of Chapter~\ref{chap:size-control}, which treats junction breaks as independent.
+I plan to treat fracture as a barrier crossing in a high-dimensional active system, with the effective barrier set by $\xi$, the polarity persistence time, and the mechanical cohesion of cell-cell junctions, and to test this picture in two complementary settings.
+The first is to extract $\xi$ from existing particle image velocimetry traces as a function of organism size and of the perturbations the experimental collaborators control (nutrient availability, calcium-dependent adhesion, mechanical confinement), and to check whether the measured fission rate collapses onto a single Arrhenius-like curve in $\xi$.
+The second is to simulate the same picture with the regularized finite Voronoi model of Chapter~\ref{chap:voronoi}, which reaches the $\sim 10^5$ cells of \textit{Trichoplax} without imposing a fracture geometry by hand and would predict not only the fission rate but also the daughter-size distribution and the ductile-to-brittle crossover from collective dynamics alone.
+The expected payoff is a theory in which the fission rate is an emergent consequence of correlated motion rather than a phenomenological input, and in which a single collective parameter sets the organism's size distribution.
+
+A second direction uses the germline cyst data of Levy \textit{et al.} from Chapter~\ref{chap:size-control} to ask a question the chain model alone cannot answer: is motility-driven fracture sufficient to explain the experimentally observed drop in the intercellular-bridge fracture rate over embryonic development, or are additional mechanisms such as contact inhibition of locomotion (Chapter~\ref{chap:cil}) needed?
+The forward model of Chapter~\ref{chap:size-control} maps a small number of microscopic parameters (the per-junction break rate, the motility persistence, and a CIL strength that would have to be added) onto observables the embryo experiments can read out: cyst size distributions over time, fracture rate as a function of cyst age, and the spatial location of breaks within a cyst.
+Several of these microscopic parameters are hard to measure directly in the embryo and are degenerate at the level of any single observable, which rules out fitting them by traditional least-squares.
+Simulation-based inference is the natural tool for this problem: a neural density estimator is trained on $(\boldsymbol{\theta}, \mathrm{data})$ pairs generated by running the forward model across the prior, and the trained network then returns the posterior $P(\boldsymbol{\theta} \mid \mathrm{data})$ for any new observation, without ever evaluating the likelihood explicitly.
+Applied to the Levy \textit{et al.} data, this would quantify the posterior probability that motility alone suffices, return credible intervals for the inferred parameters in either case, and identify the observable whose measurement would most tighten the posterior, guiding the next round of experiments.
