@@ -4,46 +4,45 @@
 \section{Summary}
 \label{sec:ch6:summary}
 
-Cancer cell dissociation from an invading tumor strand sets the rate at which metastases are seeded, yet it has been difficult to say which features of the strand and its surroundings actually control how often cells leave and in what configurations.
-The microchannel experiments of Law \textit{et al.} gave a clean readout (most dissociations are single cells, larger clusters are rare, and the rupture time is independent of channel width), but did not settle whether these patterns reflect a common underlying mechanism or three separate ones.
-In Chapter~\ref{chap:dissociation} I built a phase-field model of the strand crawling through the channel and showed that all three patterns follow from one feature of the dynamics: a fast leader cell that pulls ahead of its neighbors and shears off.
-The model also predicts that stronger cell-cell adhesion produces fewer but larger ruptures, which gives a route to bias the cluster-size distribution by tuning adhesion alone.
-A perhaps more useful insight is what the model rules out: unjamming the tissue is necessary but not sufficient to create a rupture, since the strand must also be polarized enough for a leader cell to pull ahead.
+The dissociation of cells from a collectively invading strand is an early step in cancer metastasis, but it has been hard to say which mechanical features of the strand and its confinement control how often cells leave, and whether they leave singly or in clusters.
+The microchannel experiments of Law \textit{et al.} gave several clean readouts: most dissociations are single cells, larger clusters become more common in wider channels, and the time to the first rupture is independent of channel width.
+In Chapter~\ref{chap:dissociation} I reproduced these observations with a phase-field model of cells crawling through the channel.
+The single-cell predominance arises from rare, highly motile leader cells at the invading front that pull ahead and detach on their own, while the width-independence of the rupture time can be explained by a modest weakening of cell-cell adhesion in the narrower channels.
+The model also shows that stronger cell-cell adhesion makes ruptures rarer but larger, which may help explain the paradoxical role of E-cadherin in metastasis, where loss of adhesion increases invasion yet larger clusters seed metastases more efficiently.
+A complementary result concerns the role of tissue fluidization: unjamming is necessary but not sufficient for rupture, because the cells must also be motile enough to invade the channel and pull their junctions apart.
 
-The dominant picture of how a tissue or organ sets its size is feedback on cell proliferation, but several animal-scale systems, including germline cysts in the mouse, snowflake yeast, and the placozoan \textit{Trichoplax adhaerens}, instead seem to regulate size through a balance between growth and motility-driven fracture.
-The minimum theoretical question is whether such a balance can produce a characteristic size at all, or whether it inevitably broadens into a scale-free distribution.
-In Chapter~\ref{chap:size-control} I model the cluster as a chain of active particles joined by breakable junctions and derive the exact steady-state size distribution.
-The result is a single-ratio scaling: the distribution depends only on the ratio of the junction break rate to the cell division rate, with the broadest distributions appearing when the two are comparable.
-Restricting division to the cluster edge or localizing fracture to its middle sharpens the distribution but does not change which ratio sets it.
-The lesson is that motility-driven fracture can, in principle, regulate size without any centralized signaling, provided growth and fracture are not perfectly balanced.
+The size of an organ or an organism is usually thought to be set by feedback on cell division, but several systems instead appear to regulate size through a competition between growth and motility-driven fracture, including germline cysts in the mouse, snowflake yeast clusters, and the metazoan \textit{Trichoplax adhaerens}.
+Can such a competition set a well-defined size, or does it only produce a broad spread of sizes?
+In Chapter~\ref{chap:size-control} I modeled the cluster as a one-dimensional chain of active particles joined by breakable junctions and solved for the exact steady-state size distribution.
+The distribution is controlled by a single ratio, the junction break rate over the cell division rate.
+When every cell can divide, the distribution always peaks at a single cell, and although the mean size grows as fracture becomes rare, the spread grows just as fast, so the size is never sharply defined.
+Restricting division to the edge of the cluster improves size control; in the limit of rare fracture, where clusters are large, it roughly halves the coefficient of variation of the cluster size, from about $1$ to about $0.5$.
+Allowing fracture only near the cluster middle reduces the variability further.
+The model also shows that the experimentally observed drop in fracture rate over embryonic development in germline cysts requires only a small reduction in cell motility.
 
-Pushing the same modeling program to the scale of a real organism such as \textit{Trichoplax} (on the order of $10^5$ cells) is the obvious next step, and the finite Voronoi model is the natural candidate because it scales linearly with cell number and admits both confluent and nonconfluent regimes.
-In Chapter~\ref{chap:voronoi} I find that the model has a hidden numerical pathology: the detachment force between two separating cells diverges as they lose contact, so the simulated rupture time depends on the numerical time step rather than on the underlying physics, an artifact that may have biased earlier results.
-I propose a regularization that bounds the detachment force, with parameters calibrated against a deformable polygon model that shares the same energy function but does not impose a Voronoi geometry.
-The calibrated model recovers the deformable polygon's rupture statistics at a fraction of its computational cost, which opens the door to simulating tissue rupture at the scale of a whole animal.
-More broadly, the chapter is a reminder that simulation models built for confluent tissues can fail subtly when they are pushed past their intended regime, and that fixing the artifact requires anchoring against a model whose limiting behavior one trusts.
+A natural next step is to push this program to the scale of a real organism such as \textit{Trichoplax} (up to $\sim 10^5$ cells), where the finite Voronoi model is an appealing candidate because it captures cell shape, allows both confluent and nonconfluent tissue, and is cheaper than phase-field or deformable polygon models.
+In Chapter~\ref{chap:voronoi} I found that this model has a numerical pathology: when the cell-cell and cell-medium tensions differ, the force needed to separate two cells diverges as they detach, so the simulated fracture time is set by the numerical time step rather than by the physics, which may have affected earlier results.
+I traced the divergence to the Voronoi geometry analytically, proposed a cutoff that removes it and restores a well-defined fracture timescale, and calibrated the cutoff against a deformable polygon model with the same energy but without the Voronoi shape constraint.
+It also shows that a simulation method built for confluent tissues can fail in subtle ways when it is pushed to describe fracture and detachment.
 
-Contact inhibition of locomotion has long been known to fire from cell-cell contacts only a micron across, which carry very few Eph-ephrin bindings against a background of nonspecific interfering ligands.
-Earlier work has focused on the downstream signaling, but has not asked whether the contact-detection step itself is a physical bottleneck.
-In Chapter~\ref{chap:cil} I treat CIL as a sensing problem and use maximum-likelihood estimation and the Cram\'er-Rao bound to compute the best possible sensing accuracy.
-A cell can decide whether a neighbor is present with high reliability even when interfering ligands are ten times as abundant as the correct ligand, and the accuracy of locating the contact depends only weakly on its width.
-Both findings agree with the experimental robustness of CIL across very different contact geometries.
-The framework also makes clear that specificity, not counting noise, is the limiting factor at typical CIL parameters, which places contact inhibition in the same theoretical family as bacterial chemoreception under interfering chemicals.
+Contact inhibition of locomotion can fire even when two cells touch over only a micron-scale patch, which raises the question of how a cell reliably registers a neighbor through so small a contact.
+Earlier work has focused on the downstream signaling, but had not asked whether the contact-detection step itself sets a physical limit.
+In Chapter~\ref{chap:cil} I treated CIL as a sensing problem and used maximum-likelihood estimation and the Cram\'er-Rao bound to find the best possible sensing accuracy.
+A cell can decide whether a neighbor is present with high reliability even when interfering ligands are nearly ten times as abundant as the correct ephrin ligand, and the accuracy of locating the contact depends only weakly on its width.
+Both results are consistent with the robustness of CIL across very different contact geometries, and they suggest that stochastic ligand-receptor noise is not the limiting factor for CIL unless the fraction of correct ligands is very small.
 
 
 \section{Future directions}
 \label{sec:ch6:future}
 
-A clear extension of Chapters~\ref{chap:size-control} and~\ref{chap:voronoi} is to ask how an organism as simple as the placozoan \textit{Trichoplax adhaerens} regulates its size without any centralized genetic control.
-Recent experiments show that \textit{Trichoplax} fractures only after long periods of coherent motion, with polarity reorienting on the timescale of seconds but fission events separated by days; that fracture geometry varies from ductile thinning to brittle hole formation; and that the velocity field inside the tissue is correlated over a length $\xi$ that scales with the size of the animal.
-None of these features is captured by the one-dimensional chain model of Chapter~\ref{chap:size-control}, which treats junction breaks as independent.
-I plan to treat fracture as a barrier crossing in a high-dimensional active system, with the effective barrier set by $\xi$, the polarity persistence time, and the mechanical cohesion of cell-cell junctions, and to test this picture in two complementary settings.
-The first is to extract $\xi$ from existing particle image velocimetry traces as a function of organism size and of the perturbations the experimental collaborators control (nutrient availability, calcium-dependent adhesion, mechanical confinement), and to check whether the measured fission rate collapses onto a single Arrhenius-like curve in $\xi$.
-The second is to simulate the same picture with the regularized finite Voronoi model of Chapter~\ref{chap:voronoi}, which reaches the $\sim 10^5$ cells of \textit{Trichoplax} without imposing a fracture geometry by hand and would predict not only the fission rate but also the daughter-size distribution and the ductile-to-brittle crossover from collective dynamics alone.
-The expected payoff is a theory in which the fission rate is an emergent consequence of correlated motion rather than a phenomenological input, and in which a single collective parameter sets the organism's size distribution.
+A clear extension of Chapters~\ref{chap:size-control} and~\ref{chap:voronoi} is to ask how an organism as simple as the metazoan \textit{Trichoplax adhaerens} regulates its size without any centralized genetic control.
+Several features seen in experiments lie beyond the simplest model of Chapter~\ref{chap:size-control}.
+The AOUP model almost always sheds small cell clusters, yet \textit{Trichoplax} often splits into two comparable halves, which hints at some alignment of cell polarity across the tissue that the model does not include~\cite{davidescu2023growth}, for example a velocity-alignment interaction that would make neighboring cells tend to crawl in the same direction~\cite{camley2014velocity}.
+Experiments also report occasional rotation of the whole animal, and a wide separation of timescales: individual cells reorient within seconds, but fission events are separated by days~\cite{leria2025fast, prakash2021motility}.
+These observations point to a picture in which correlated, collective motion, rather than independent single-junction fluctuations, controls when and where the tissue breaks.
+The regularized finite Voronoi model of Chapter~\ref{chap:voronoi} can simulate large systems, and I am accelerating the code through domain-decomposition-based parallelization to reach the scale of \textit{Trichoplax}, which would make it a natural tool for exploring these questions.
 
-A second direction uses the germline cyst data of Levy \textit{et al.} from Chapter~\ref{chap:size-control} to ask a question the chain model alone cannot answer: is motility-driven fracture sufficient to explain the experimentally observed drop in the intercellular-bridge fracture rate over embryonic development, or are additional mechanisms such as contact inhibition of locomotion (Chapter~\ref{chap:cil}) needed?
-The forward model of Chapter~\ref{chap:size-control} maps a small number of microscopic parameters (the per-junction break rate, the motility persistence, and a CIL strength that would have to be added) onto observables the embryo experiments can read out: cyst size distributions over time, fracture rate as a function of cyst age, and the spatial location of breaks within a cyst.
-Several of these microscopic parameters are hard to measure directly in the embryo and are degenerate at the level of any single observable, which rules out fitting them by traditional least-squares.
-Simulation-based inference is the natural tool for this problem: a neural density estimator is trained on $(\boldsymbol{\theta}, \mathrm{data})$ pairs generated by running the forward model across the prior, and the trained network then returns the posterior $P(\boldsymbol{\theta} \mid \mathrm{data})$ for any new observation, without ever evaluating the likelihood explicitly.
-Applied to the Levy \textit{et al.} data, this would quantify the posterior probability that motility alone suffices, return credible intervals for the inferred parameters in either case, and identify the observable whose measurement would most tighten the posterior, guiding the next round of experiments.
+A second direction uses the germline cyst data of Levy \textit{et al.} from Chapter~\ref{chap:size-control} to ask whether motility-induced fracture alone can explain the observed drop in the intercellular-bridge fracture rate over embryonic development, or whether additional mechanisms such as contact inhibition of locomotion (Chapter~\ref{chap:cil}) are needed.
+Our model uses several parameters that are hard to measure directly in the cyst: the junction relaxation time, the cell motility persistence time, and the velocity-alignment and CIL strengths that we would like to add.
+These might be inferred from the embryo data using simulation-based inference (SBI), a modern neural-network-based inference approach.
+Such an analysis would tell us whether motility alone is sufficient, and which measurements would best constrain the parameters.

@@ -4,7 +4,7 @@
 Groups of cells can both grow and break apart.
 A primary tumor extends a strand of cells into the surrounding tissue and then sheds single cells and small clusters that can seed metastases~\cite{cheung2016collective, haeger2014cell}.
 Germline cysts in the mouse reach different characteristic sizes during embryonic development through a balance between cell division, which grows the cluster, and fracture of intercellular bridges, which breaks it into smaller groups~\cite{levy2024tug}.
-The placozoan \textit{Trichoplax adhaerens}, one of the simplest known animals, reproduces by a motility-induced fracture~\cite{prakash2021motility}.
+The metazoan \textit{Trichoplax adhaerens}, one of the simplest known animals, reproduces by a motility-induced fracture~\cite{prakash2021motility}.
 In each case the outcome is set by mechanics: cells adhere to one another, crawl, generate forces, and eventually detach.
 What controls when a group of cells breaks apart, and what sets the size of the pieces that result?
 Cells must also sense their surroundings.
@@ -29,7 +29,7 @@ Surprisingly, the time a strand takes to rupture does not depend on the channel 
 These observations raise the question of what mechanical features of the strand and the channel set the rupture statistics, and motivate the model developed in Chapter~\ref{chap:dissociation}.
 
 Recent experiments on germline cysts in the mouse have shown that two competing processes can set the size of a small cell cluster: cell division builds the cluster, while random cell motility fractures the intercellular bridges that connect its cells~\cite{levy2024tug}.
-A related mechanism drives reproduction in the placozoan \textit{Trichoplax adhaerens}, one of the simplest known animals.
+A related mechanism drives reproduction in the metazoan \textit{Trichoplax adhaerens}, one of the simplest known animals.
 \textit{Trichoplax} has no nervous system, no basement membrane, and no visible extracellular matrix; its body is a flat sheet of two epithelial layers only about $25\,\mu\mathrm{m}$ thick but several millimeters wide~\cite{prakash2021motility, ueda1999dynamic, smith2019coherent}.
 This minimal anatomy makes it simple enough to model and yet still a complete animal, and it reproduces by motility-induced fracture as it crawls~\cite{prakash2021motility}.
 A similar fracture-limited size control occurs in multicellular snowflake yeast, though there it is driven by crowding stress rather than by motility~\cite{jacobeen2018cellular}.
@@ -88,7 +88,7 @@ Because the cell boundary is free to take any shape, phase-field models resolve 
 The cost is computational: representing every cell as a field on a grid limits phase-field simulations to relatively small numbers of cells.
 Chapter~\ref{chap:dissociation} uses a phase-field model for cancer cell dissociation, where resolving cell shape and detachment matters more than reaching large system sizes.
 
-For larger nonconfluent tissues, such as the placozoan \textit{Trichoplax adhaerens} (an animal composed of up to $\sim 10^5$ cells), neither family of models is ideal: phase-field simulations do not scale to that many cells, and the standard vertex and Voronoi models tile space without gaps and so cannot represent a nonconfluent tissue.
+For larger nonconfluent tissues, such as the metazoan \textit{Trichoplax adhaerens} (an animal composed of up to $\sim 10^5$ cells), neither family of models is ideal: phase-field simulations do not scale to that many cells, and the standard vertex and Voronoi models tile space without gaps and so cannot represent a nonconfluent tissue.
 Some intermediate approaches have been proposed to bridge the two regimes.
 The finite Voronoi model truncates each cell's Voronoi region at a maximum radius, so that cells keep a polygonal shape where they touch but can also pull apart and leave gaps between cells~\cite{graner1993can, teomy2018confluent, huang2023bridging}.
 Deformable polygon models instead represent each cell by an explicit polygon with many vertices, without imposing a Voronoi geometry~\cite{boromand2018jamming, lv2024active}.
