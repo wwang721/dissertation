@@ -4,7 +4,7 @@
 Groups of cells can both grow and break apart.
 A primary tumor extends a strand of cells into the surrounding tissue and then sheds single cells and small clusters that can seed metastases~\cite{cheung2016collective, haeger2014cell}.
 Germline cysts in the mouse reach different characteristic sizes during embryonic development through a balance between cell division, which grows the cluster, and fracture of intercellular bridges, which breaks it into smaller groups~\cite{levy2024tug}.
-The placozoan \textit{Trichoplax adhaerens}, one of the simplest known animals, reproduces by a motility-induced fracture~\cite{prakash2021motility}.
+The metazoan \textit{Trichoplax adhaerens}, one of the simplest known animals, reproduces by a motility-induced fracture~\cite{prakash2021motility}.
 In each case the outcome is set by mechanics: cells adhere to one another, crawl, generate forces, and eventually detach.
 What controls when a group of cells breaks apart, and what sets the size of the pieces that result?
 Cells must also sense their surroundings.
@@ -29,7 +29,7 @@ Surprisingly, the time a strand takes to rupture does not depend on the channel 
 These observations raise the question of what mechanical features of the strand and the channel set the rupture statistics, and motivate the model developed in Chapter~\ref{chap:dissociation}.
 
 Recent experiments on germline cysts in the mouse have shown that two competing processes can set the size of a small cell cluster: cell division builds the cluster, while random cell motility fractures the intercellular bridges that connect its cells~\cite{levy2024tug}.
-A related mechanism drives reproduction in the placozoan \textit{Trichoplax adhaerens}, one of the simplest known animals.
+A related mechanism drives reproduction in the metazoan \textit{Trichoplax adhaerens}, one of the simplest known animals.
 \textit{Trichoplax} has no nervous system, no basement membrane, and no visible extracellular matrix; its body is a flat sheet of two epithelial layers only about $25\,\mu\mathrm{m}$ thick but several millimeters wide~\cite{prakash2021motility, ueda1999dynamic, smith2019coherent}.
 This minimal anatomy makes it simple enough to model and yet still a complete animal, and it reproduces by motility-induced fracture as it crawls~\cite{prakash2021motility}.
 A similar fracture-limited size control occurs in multicellular snowflake yeast, though there it is driven by crowding stress rather than by motility~\cite{jacobeen2018cellular}.
@@ -66,11 +66,11 @@ What matters is whether a few simple physical ingredients, mechanical contact, a
 Physical models of motile cells therefore vary widely in their level of detail, from cells as single self-propelled points to fields that resolve each cell's shape [Fig.~\ref{fig:ch1:models}(a)], and each chapter of this dissertation uses a model from this hierarchy chosen to match its question.
 A more complete survey of the modeling toolbox is given by the review~\cite{camley2017physical}.
 
-The simplest models treat each cell as a self-propelled particle (SPP)~\cite{fily2012athermal, levine2000self}.
+The simplest models treat each cell as a self-propelled particle (SPP)~\cite{fily2012athermal, levine2000self, copenhagen2018frustration, sanoria2026chemotaxis}.
 In the active Brownian particle (ABP) model the velocity has fixed magnitude and a direction that rotates diffusively, while in the active Ornstein-Uhlenbeck particle (AOUP) model the velocity itself is an Ornstein-Uhlenbeck (OU) process with fluctuating magnitude and direction~\cite{dunn1987unified, fily2012athermal, fodor2016far}.
 These models are cheap enough to simulate many particles and are often analytically tractable, which makes them well suited to statistical questions about clustering, fracture rates, and steady-state distributions~\cite{fodor2016far, henkes2020dense, wang2026controlling}.
 Chapter~\ref{chap:size-control} uses the active Ornstein-Uhlenbeck model to study tissue size control by motility-driven fracture.
-What such models give up is cell shape: dense packings of identical particles tend to crystallize into ordered lattices~\cite{prakash2021motility}, which is a problem for modeling real tissues, where the cells are disordered.
+What such models give up is cell shape. Moreover, dense packings of identical particles tend to crystallize into ordered lattices~\cite{prakash2021motility}, which is a problem for modeling real tissues, where the cells are disordered.
 
 Adding cell shape gives vertex and Voronoi models for confluent tissue, in which cells tile space without gaps~\cite{bi2015density, bi2016motility, henkes2020dense, park2015unjamming}.
 In a vertex model, each cell is a polygon defined by its vertices, and the energy penalizes departures from a preferred area and perimeter~\cite{fletcher2014vertex}.
@@ -88,7 +88,7 @@ Because the cell boundary is free to take any shape, phase-field models resolve 
 The cost is computational: representing every cell as a field on a grid limits phase-field simulations to relatively small numbers of cells.
 Chapter~\ref{chap:dissociation} uses a phase-field model for cancer cell dissociation, where resolving cell shape and detachment matters more than reaching large system sizes.
 
-For larger nonconfluent tissues, such as the placozoan \textit{Trichoplax adhaerens} (an animal composed of up to $\sim 10^5$ cells), neither family of models is ideal: phase-field simulations do not scale to that many cells, and the vertex and Voronoi models tile space without gaps and so cannot represent a nonconfluent tissue at all.
+For larger nonconfluent tissues, such as the metazoan \textit{Trichoplax adhaerens} (an animal composed of up to $\sim 10^5$ cells), neither family of models is ideal: phase-field simulations do not scale to that many cells, and the standard vertex and Voronoi models tile space without gaps and so cannot represent a nonconfluent tissue.
 Some intermediate approaches have been proposed to bridge the two regimes.
 The finite Voronoi model truncates each cell's Voronoi region at a maximum radius, so that cells keep a polygonal shape where they touch but can also pull apart and leave gaps between cells~\cite{graner1993can, teomy2018confluent, huang2023bridging}.
 Deformable polygon models instead represent each cell by an explicit polygon with many vertices, without imposing a Voronoi geometry~\cite{boromand2018jamming, lv2024active}.
@@ -104,7 +104,7 @@ Two cells in contact form a different kind of adhesion: cadherins on the membran
 A third class of contacts uses receptor tyrosine kinases such as Eph receptors that bind ephrin ligands on the neighbor, triggering downstream signaling rather than a long-lived mechanical attachment~\cite{larranaga2022ephrin, lin2015interplay}.
 
 Physical models capture these interactions through effective potentials and energies that summarize the underlying molecular and mechanical detail.
-For cell-cell coupling, particle models use a short-range pairwise potential with soft repulsion and an attractive tail, or explicit breakable spring junctions as in the chain of Chapter~\ref{chap:size-control}; vertex and Voronoi models encode adhesion in a line tension on cell-cell interfaces, where a lower tension corresponds to stronger adhesion and a longer preferred contact~\cite{bi2015density, bi2016motility, huang2023bridging}; and phase-field models use an interaction energy between the fields of neighboring cells, typically a surface-overlap term that lowers the energy when two cell boundaries coincide~\cite{zadeh2024inferring, camley2014polarity}.
+For cell-cell coupling, particle models use a short-range pairwise potential with soft repulsion and an attractive tail~\cite{sanoria2026chemotaxis, copenhagen2018frustration}, or explicit breakable spring junctions as in the chain of Chapter~\ref{chap:size-control}; vertex and Voronoi models encode adhesion in a line tension on cell-cell interfaces, where a lower tension corresponds to stronger adhesion and a longer preferred contact~\cite{bi2015density, bi2016motility, huang2023bridging}; and phase-field models use an interaction energy between the fields of neighboring cells, typically a surface-overlap term that lowers the energy when two cell boundaries coincide~\cite{zadeh2024inferring, camley2014polarity}.
 Cell-environment coupling enters analogously, as a soft-wall potential or an attraction to a substrate field.
 For numerical stability at strong adhesion, Chapter~\ref{chap:dissociation} adapts the phase-field framework by introducing an advection term that handles both the cell-cell and cell-wall adhesion.
 
@@ -116,7 +116,7 @@ External cues, including chemical gradients, electromagnetic fields, the mechani
 Physical models usually reduce this machinery to a phenomenological dynamics for the cell's polarity vector, the direction in which it tends to move.
 In the simplest case the polarity diffuses freely, giving the persistent random walks of active Brownian and active Ornstein-Uhlenbeck particles introduced above.
 The Vicsek model is the canonical example of velocity alignment: each particle rotates its velocity toward the average velocity of its neighbors, originally for flocks of self-propelled particles and later for cells~\cite{vicsek1995novel}.
-A common way to model chemotaxis is to bias the polarity along an external chemical gradient, while in models of CIL, the polarity is most often rotated away from contacting neighbors, taken as the vector sum of unit vectors pointing away from each contact~\cite{camley2016emergent, ipina2022collective}.
+A common way to model chemotaxis is to bias the polarity along an external chemical gradient, while in models of CIL, the polarity is most often rotated away from contacting neighbors, taken as the vector sum of unit vectors pointing away from each contact~\cite{camley2016emergent, ipina2022collective, sanoria2026chemotaxis, copenhagen2018frustration}.
 The phase-field model of Chapter~\ref{chap:dissociation} includes guided cells whose polarity vector points along the serum gradient imposed in the experiments.
 
 
@@ -169,4 +169,4 @@ Chapter~\ref{chap:cil} turns from mechanics to sensing and treats CIL as a probl
 Modeling a cell that detects a neighbor by binding ephrin to its Eph receptors against nonspecific interfering ligands, I use maximum-likelihood estimation and the Cram\'er-Rao bound to find the best possible sensing accuracy.
 I find that a cell can decide whether a neighbor is present with high reliability even when the concentration of interfering ligands is ten times that of the correct ligand, and that the accuracy of locating the contact depends only weakly on its width.
 
-Chapter~\ref{chap:summary} provides a summary of the dissertation and outlines potential directions for future research.
+Chapter~\ref{chap:conclusion} provides a summary of the dissertation and outlines potential directions for future research.
