@@ -37,8 +37,8 @@
 
 Collective cell migration shows up in many developmental processes, like wound healing~\cite{poujade2007collective}, embryogenesis~\cite{chuai2012collective, weijer2009collective}, and tumor growth and invasion~\cite{haeger2014cell, cheung2016collective}.
 Compared to single-cell migration, collective migration is often more persistent since cells are more coordinated due to their mutual communications and interactions~\cite{cheung2016collective, green2022pillarx}.
-The ability of cells to rearrange fluidly in collective migration may be controlled by an unjamming transition~\cite{loewe2020solid, bi2016motility, zhang2020active, chiang2024multiphase} shown in dense biological tissues, which is similar to the well-known solid--liquid phase transition of materials~\cite{loewe2020solid}.
-This jamming--unjamming transition has been extensively studied using different theoretical models~\cite{bi2016motility, loewe2020solid, zhang2020active, chiang2024multiphase, boromand2018jamming}, which predict that cell tissues can be fluidized by increasing cell motility and deformability~\cite{bi2016motility, loewe2020solid, chiang2024multiphase}.
+The ability of cells to rearrange fluidly in collective migration may be controlled by an unjamming transition~\cite{loewe2020solid, bi2016motility, zhang2020active, chiang2024multiphase} shown in dense biological tissues, which is similar to the well-known solid-liquid phase transition of materials~\cite{loewe2020solid}.
+This jamming-unjamming transition has been extensively studied using different theoretical models~\cite{bi2016motility, loewe2020solid, zhang2020active, chiang2024multiphase, boromand2018jamming}, which predict that cell tissues can be fluidized by increasing cell motility and deformability~\cite{bi2016motility, loewe2020solid, chiang2024multiphase}.
 
 Collective cell migration \textit{in vivo} often occurs within confined spaces~\cite{tarle2017modeling, balzer2012physical, lin2025gradients}.
 For example, during cancer invasion, the primary tumor extends a strand of cells into surrounding tissues, resulting in cells being confined, followed by the detachment of a single cell or a group of cells from the strand.
@@ -89,7 +89,7 @@ Reprinted from Ref.~\cite{law2023cytokinesis}. Channel height from the substrate
 (a) Dissociation cluster size distributions for $W=6,\,10,\,20,$ and $50\,\mathrm{\mu m}$ microchannels, based on $137,\,92,\,138,$ and $95$ dissociation events, respectively.
 The dashed lines and gray areas denote the average cluster sizes $A=1.4,\,2.0,\,3.7,\,4.8$, and the associated standard errors of the mean (mean $\pm$ SE).
 Note that we are using cluster size categories 6--10 and $>$10 to group together similar-sized large clusters; full histograms are shown in Fig.~\ref{fig:ch2:SI_expt}(a).
-Panel (b) shows the survival curves for different channel widths extracted by Kaplan--Meier survival analysis~\cite{kaplan1958nonparametric}.
+Panel (b) shows the survival curves for different channel widths extracted by Kaplan-Meier survival analysis~\cite{kaplan1958nonparametric}.
 The shaded areas represent the 95\% confidence intervals; the final survival probabilities are $K_s=73/210\,(35\%),\,48/140\,(34\%),\,51/189\,(27\%),\,45/140\,(32\%)$, respectively; the denominators of $K_s$ represent the number of assays in the experiment.
 (c) Scatter plot in the $(\text{rupture time}, \text{cluster size})$ phase plane.
 Data points (red) are plotted with transparency; darker points indicate ruptures occurring in more than one assay with the same cluster size and rupture time.
@@ -118,7 +118,7 @@ For full histograms without categorization, see Sec.~\ref{sec:ch2:extra-figs}.
 How quickly do these ruptures happen?
 We characterize the timescale for the first rupture to happen by measuring the survival probability $S(t)$, defined as the probability that the monolayer in a microchannel has not ruptured at time $t$.
 By comparing $S(t)$ curves for different channel widths, we can see how fast ruptures happen in these channels, and the probability of any eventual rupture.
-Figure~\ref{fig:ch2:expt}(b) shows the survival curves (probability of no rupture in a channel) and the corresponding error intervals obtained by standard Kaplan--Meier survival analysis~\cite{kaplan1958nonparametric}.
+Figure~\ref{fig:ch2:expt}(b) shows the survival curves (probability of no rupture in a channel) and the corresponding error intervals obtained by standard Kaplan-Meier survival analysis~\cite{kaplan1958nonparametric}.
 By intuition, we would expect that larger channels would have more ruptures and ruptures occur sooner because more cells enter the larger channels---meaning more possible cells to dissociate.
 Surprisingly, the survival curves are---to the level of our statistical uncertainties---independent of channel width.
 We also see that the survival probability saturates to $\sim 30\%$ at long times, i.e., roughly $\sim 70\%$ of channels have a dissociation event within the experimental measurement.
@@ -152,16 +152,16 @@ The third term describes the evolution of $\phi_i$ due to cell-cell and cell-wal
 On the right-hand side we introduce the functional derivative of a Hamiltonian $\mathcal{H}$~\cite{bitbol2011forces, zhang2020active, mueller2019emergence}.
 This term tends to minimize $\mathcal{H}$~\cite{palmieri2015multiple}.
 $\gamma$ is a friction coefficient so the whole Eq.~\eqref{eq:ch2:EOM} can be thought of as a force balance in an overdamped environment~\cite{shao2010computational}---though see note~\footnote{We note this force balance interpretation is not quite correct for our model, because the terms $\left.\partial\phi_i/\partial t\right|_\textrm{adh}$ are not derived from a Hamiltonian.}.
-We include a Cahn--Hilliard term, an area constraint, and cell-cell and cell-wall exclusion in the Hamiltonian~\cite{loewe2020solid, mueller2019emergence}:
+We include a Cahn-Hilliard term, an area constraint, and cell-cell and cell-wall exclusion in the Hamiltonian~\cite{loewe2020solid, mueller2019emergence}:
 \begin{equation}\label{eq:ch2:Hamiltonian}
 \mathcal{H}=\mathcal{H}_{\text{CH}}+\mathcal{H}_{\text{area}}+\mathcal{H}_{\text{exclusion}}.
 \end{equation}
-The first term in $\mathcal{H}$ is the Cahn--Hilliard energy~\cite{mueller2019emergence, zhang2020active}
+The first term in $\mathcal{H}$ is the Cahn-Hilliard energy~\cite{mueller2019emergence, zhang2020active}
 \begin{equation*}
 \mathcal{H}_{\text{CH}}=\sum_i\int\mathrm{d}^2 r\left[\frac{\alpha}{4}\phi_i^2(\phi_i-1)^2+\frac{K}{2}(\bm{\nabla}\phi_i)^2\right],
 \end{equation*}
 where $\phi_i^2(\phi_i-1)^2$ in the integrand is a double-well potential ensuring there exist two minima corresponding to the two phases $\phi(\mathbf r)=0$ and $\phi(\mathbf r)=1$; the second term $(\bm{\nabla}\phi_i)^2$ tells the energy cost of forming a domain wall between the two phases.
-In general, the Cahn--Hilliard energy describes the interfacial tension~\cite{brown2008elastic} and controls the interfacial width $d=\sqrt{2K/\alpha}$ (see Sec.~\ref{sec:ch2:init}).
+In general, the Cahn-Hilliard energy describes the interfacial tension~\cite{brown2008elastic} and controls the interfacial width $d=\sqrt{2K/\alpha}$ (see Sec.~\ref{sec:ch2:init}).
 Also, we assume our cells resist changes in area, introducing a term~\cite{zhang2020active, mueller2019emergence}
 \begin{equation*}
 \mathcal{H}_{\text{area}}=\sum_i\lambda\left(1-\int\mathrm{d}^2 r\frac{\phi_i^2}{\pi R^2}\right)^2,
@@ -384,7 +384,7 @@ We expect that the rate of rupture could potentially be increased if the cells a
 This is in part controlled by the chemotaxis strength $k_\theta$.
 
 To better understand the magnitude of $k_\theta$, we think about the dynamics of cell orientation $\theta$ for a single isolated cell, which follows Eq.~\eqref{eq:ch2:OU}.
-We take the preferred direction $\theta_0=0$ then by the properties of Ornstein--Uhlenbeck processes~\cite{vankampen1992stochastic}, the average is $\langle\theta\rangle=0$, and the variance is $\langle\theta^2\rangle=D_r/k_\theta$.
+We take the preferred direction $\theta_0=0$ then by the properties of Ornstein-Uhlenbeck processes~\cite{vankampen1992stochastic}, the average is $\langle\theta\rangle=0$, and the variance is $\langle\theta^2\rangle=D_r/k_\theta$.
 Cell chemotactic accuracy is often characterized by a ``chemotactic index'' $\textrm{CI}=\langle \cos \theta \rangle$ (or related definitions)~\cite{camley2018collective}; $\textrm{CI} = -1$ would be perfect chemorepulsion, $\textrm{CI} = 0$ is undirected migration, and $\textrm{CI} = 1$ is perfect, deterministic motion up the gradient.
 For our model, we can compute for an isolated cell $\textrm{CI} = \langle\cos\theta\rangle=\exp(-\langle\theta^2\rangle/2)=\exp(-D_r/2k_\theta)$, using the Gaussian distribution of $\theta$.
 This gives us a way to interpret $k_\theta$.
@@ -432,7 +432,7 @@ Scale bars, $15\,\mathrm{\mu m}$.}
 \caption{Unjamming and rupture.
 (a) Mean squared displacement $\mathrm{MSD}(t)$ for different cell motility quantified by a dimensionless P\'{e}clet number $\mathrm{Pe}:= p_0 /(R D_r)$.
 The different $\mathrm{Pe}$ shown in this panel are $0.14$, $0.40$, $0.66$, $0.91$, $1.17$, and $1.43$ (default); we have rescaled $\mathrm{MSD}$ and $t$ to make them dimensionless; for each P\'{e}clet number, the dashed lines are results from three independent simulations, and the solid line is their average, and the dash-dotted lines are linear fit at late times where the effective diffusivity $\bar{D}_{\text{eff}}$ is extracted.
-(b) The effective diffusivity $\bar{D}_{\text{eff}}$ as an order parameter for solid--liquid transition.
+(b) The effective diffusivity $\bar{D}_{\text{eff}}$ as an order parameter for solid-liquid transition.
 (c) Corresponding rupture transition of average cluster size (blue) and rupture probability (green).
 Panels (d) and (e) are phase diagrams for rupture transition.
 Red points indicate values equal to $0$ and blue squares represent values greater than 0.
@@ -457,9 +457,9 @@ To compare with previous work, we characterize the cell's speed by computing the
 We measure the effective diffusivity of cells in the rectangular confinement (with periodic boundary condition in the $x$ direction, see Fig.~\ref{fig:ch2:snapshots_jamming}) of our previous simulations---but do not open the channel entrance, so all cells are confined in the original reservoir and there is no invasion.
 As shown in Fig.~\ref{fig:ch2:jamming}(a), we see a transition between near-ballistic motion at short time scales to more-diffusive motion at long times ($t > 1/D_r$).
 Mean squared displacements are naturally larger for cells with larger motility $p_0$ (larger $\mathrm{Pe}$).
-Fitting to a linear function to extrapolate to measure $\bar{D}_{\text{eff}}$, we can see that there is a clear transition in $\bar{D}_{\text{eff}}$ representing a fluid--solid transition [Fig.~\ref{fig:ch2:jamming}(b)].
+Fitting to a linear function to extrapolate to measure $\bar{D}_{\text{eff}}$, we can see that there is a clear transition in $\bar{D}_{\text{eff}}$ representing a fluid-solid transition [Fig.~\ref{fig:ch2:jamming}(b)].
 Cells with low motility (the first two data points below the red dashed line) are in the solid-like jammed state, and cells with high motility (the rest points above the red dashed line) are in the unjammed state, which is consistent with Refs.~\cite{loewe2020solid, bi2016motility}.
-The red dashed line is the threshold value $0.012$, which we use to indicate the presence of a solid--fluid transition.
+The red dashed line is the threshold value $0.012$, which we use to indicate the presence of a solid-fluid transition.
 This value is chosen both based on the sudden transition in Fig.~\ref{fig:ch2:jamming}(b), but also on the appearance of simulation movies showing the degree of cell rearrangement.
 Simulation snapshots for a typical jammed state and unjammed state are given in Fig.~\ref{fig:ch2:snapshots_jamming}.
 We see that cells in the jammed state are highly ordered and near-crystalline, while the unjammed state shows more elongated, disordered cell shapes, as in~\cite{loewe2020solid}.
@@ -643,7 +643,7 @@ After computing the corresponding median survival times, we find that the channe
 
 We first consider the static solution to the equation of motion [Eq.~\eqref{eq:ch2:EOM}] for an isolated cell in one dimension $\phi(x)$, so the active polarity vector $\mathbf{P}=0$, $\mathcal{H}_\textrm{exclusion}=0$, and all adhesion terms vanish.
 If the area of the cell is fixed, then the area deviation term can also be ignored.
-Thus Eq.~\eqref{eq:ch2:EOM} degenerates to $\delta\mathcal{H}_{\textrm{CH}}/\delta\phi=0$ now, and the corresponding Euler--Lagrange equation of $\mathcal{H}_\textrm{CH}$ is~\cite{mueller2019emergence}
+Thus Eq.~\eqref{eq:ch2:EOM} degenerates to $\delta\mathcal{H}_{\textrm{CH}}/\delta\phi=0$ now, and the corresponding Euler-Lagrange equation of $\mathcal{H}_\textrm{CH}$ is~\cite{mueller2019emergence}
 \begin{equation}\label{eq:ch2:EL}
     \frac{\mathrm{d}^2\phi(x)}{\mathrm{d} x^2}=\frac{\alpha}{K}\left[\phi^3(x)-\frac{3}{2}\phi^2(x)+\frac{1}{2}\phi(x)\right].
 \end{equation}
@@ -785,7 +785,7 @@ The mean squared displacement mentioned in Sec.~\ref{sec:ch2:jamming} is compute
 \end{equation}
 where the average $\langle\cdots\rangle$ is taken over time $\tau\in[0,\,T_{\text{tot}}-t]$.
 
-We apply standard Kaplan--Meier survival analysis~\cite{kaplan1958nonparametric} to handle the data and generate survival probability plots using the \texttt{lifelines.KaplanMeierFitter} class provided by the \texttt{Python} survival-analysis package \texttt{lifelines}~\cite{davidsonpilon2019lifelines}.
+We apply standard Kaplan-Meier survival analysis~\cite{kaplan1958nonparametric} to handle the data and generate survival probability plots using the \texttt{lifelines.KaplanMeierFitter} class provided by the \texttt{Python} survival-analysis package \texttt{lifelines}~\cite{davidsonpilon2019lifelines}.
 The 95\% confidence intervals are computed using the exponential Greenwood confidence interval method~\cite{greenwood1926natural}.
 
 

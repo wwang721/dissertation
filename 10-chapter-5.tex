@@ -17,23 +17,23 @@ More than half a century ago, researchers first observed contact inhibition of l
 During the following years, different variants of CIL were found in a large number of healthy and cancerous cell types~\cite{mayor2010keeping}.
 The outcomes of cell-cell collisions that can be called CIL may include both cells reversing or a single cell reversing, leading to cell train formation, depending on the cell environment and cell type~\cite{scarpa2013novel, desai2013contact, singh2021rules, kulawiak2016modeling, bruckner2021learning, li2018coordination}.
 The outcomes of cell-cell collisions are also known to be stochastic in nature~\cite{desai2013contact, singh2021rules, scarpa2013novel}.
-We will think of CIL as the phenomenon of a cell actively changing its polarization upon encountering -- and specifically recognizing -- another cell.
+We will think of CIL as the phenomenon of a cell actively changing its polarization upon encountering---and specifically recognizing---another cell.
 CIL can be classified into homotypic (occurring between cells of the same type) and heterotypic CIL (occurring between cells of different types), which is usually lost in cancer cells when confronted with normal cells~\cite{mayor2010keeping}.
 CIL is now a well-known characteristic of normal cells and plays an important role in regulating cell motility~\cite{singh2021rules, zadeh2022picking}, tissue growth~\cite{zimmermann2016contact}, and development~\cite{larranaga2022ephrin, lin2015interplay, davis2012emergence}.
 For example, experiments revealed that \textit{Drosophila} macrophages (haemocytes) require CIL for their uniform embryonic dispersal~\cite{davis2012emergence, stramer2010clasp}.
-CIL can happen -- though rarely -- even when cells are crawling on isolated nanofibers, leading to very small ($\sim \mathrm{\mu m}$) contact regions~\cite{singh2021rules}.
+CIL can happen---though rarely---even when cells are crawling on isolated nanofibers, leading to very small ($\sim \mathrm{\mu m}$) contact regions~\cite{singh2021rules}.
 How can cells reliably observe the presence of another cell just by such a small contact?
 
 CIL is regulated by the Eph-ephrin signaling pathway~\cite{davis2012emergence, larranaga2022ephrin, zapata2022efficacy, lisabeth2013eph}.
 Contact detected by Eph-ephrin or cadherin binding~\cite{roycroft2016molecular, noordstra2023cadherin} reorganizes the actin cytoskeleton~\cite{klein2012eph} by modulating the main elements of the Rho GTPase family~\cite{noren2004eph, arvanitis2008eph}, resulting in the increase of actomyosin contractility and the inhibition of lamellipodia formation at the cell-cell contact~\cite{pasquale2008eph, larranaga2022ephrin}.
 Eph receptors are a family of transmembrane receptor tyrosine kinases (RTK)~\cite{zapata2022efficacy, larranaga2022ephrin} that regulate tissue boundary formation in development~\cite{cayuso2015mechanisms} and tissue organization maintenance in adult organisms~\cite{larranaga2022ephrin}.
-Their ligands, known as ephrins, are normally anchored to the cell surface~\cite{zapata2022efficacy, larranaga2022ephrin, lin2015interplay} -- Eph-ephrin signaling occurs when cells come into contact with one another.
+Their ligands, known as ephrins, are normally anchored to the cell surface~\cite{zapata2022efficacy, larranaga2022ephrin, lin2015interplay}---Eph-ephrin signaling occurs when cells come into contact with one another.
 Ephrin cues can be used to reorganize and repolarize cells.
 Ephrin-coated beads lead to CIL when cells collide with them~\cite{lin2015interplay}, and micropatterned ephrin spatial cues can be used to align intestinal crypt cells~\cite{larranaga2022ephrin}.
 
 Cells can use receptors on their membrane to estimate external ligand concentrations~\cite{singh2020universal, carballo2019receptor, chakrabortty2019theoretical, berg1977physics} and also to sense spatial~\cite{hu2011how, wasnik2019accuracy, hopkins2020chemotaxis, ipina2022collective, hu2010physical, nwogbaga2023physical} or temporal~\cite{mora2010limits} gradients.
 The accuracy limits of these estimations have been extensively studied~\cite{carballo2019receptor, chakrabortty2019theoretical, hu2011how, wasnik2019accuracy, hopkins2020chemotaxis, ipina2022collective}, including related measurements of spatially localized extracellular signals~\cite{wasnik2019accuracy}.
-For a cell to undergo CIL, it must detect the presence and location of the cell-cell contact -- akin to measuring a spatially localized chemical.
+For a cell to undergo CIL, it must detect the presence and location of the cell-cell contact---akin to measuring a spatially localized chemical.
 The cell's ability to make this detection will be challenged if ligands other than ephrin, i.e., spurious ligands, bind non-specifically to the Eph receptors~\cite{mora2015physical, singh2017simple, feinerman2008quantitative, chylek2014interaction}.
 Potential candidates for the spurious ligands are soluble ephrins~\cite{wykosky2008soluble}, ephrins on extracellular vesicles~\cite{gong2016exosomes}, or ligands for other RTKs, e.g., growth factors~\cite{minami2011ephrina}.
 In scenarios where there is only a small patch of contact~\cite{singh2021rules}, such interference from other ligands poses a significant threat to the precision of cell sensing.
@@ -53,7 +53,7 @@ We find that cell-cell contact can be highly reliably detected even at large lev
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.7\textwidth]{chap5/sketch.png}
-\caption{Illustration of two cells in contact where they can sense each other through Eph-ephrin signaling. Both Eph receptors (blue receptors) and their ligands -- ephrins (green ellipses), are distributed on the cell membranes. Besides the cognate ligands, other spurious ligands (red squares) can also bind to the Eph receptors. These incorrect binding events mixed with the correct Eph-ephrin binding will affect the sensing accuracy of contact inhibition of locomotion.}
+\caption{Illustration of two cells in contact where they can sense each other through Eph-ephrin signaling. Both Eph receptors (blue receptors) and their ligands---ephrins (green ellipses), are distributed on the cell membranes. Besides the cognate ligands, other spurious ligands (red squares) can also bind to the Eph receptors. These incorrect binding events mixed with the correct Eph-ephrin binding will affect the sensing accuracy of contact inhibition of locomotion.}
 \label{fig:ch5:schematics}
 \end{figure}
 
@@ -62,8 +62,8 @@ We study the sensing accuracy for cell $1$ detecting cell $2$, as the mirror pro
 
 As an initial model for the fundamental sensing limits of contact inhibition of locomotion, we work in an effectively one-dimensional model, with Eph receptors characterized by their location $x$ around the perimeter of cell 1.
 We assume ephrins from cell 2 can bind to the Eph receptors on cell 1 with a rate $kc(x)$, i.e., a base rate $k$ times an effective ephrin concentration $c(x)$.
-The rate $kc(x)$ combines both the area density of the ephrin on the membrane with the reduced likelihood of binding for ephrins which are further away from the membrane of cell 1 -- so if we treat $k$ as constant we expect $c(x)$ to vary from its maximum value at the cell-cell contact to essentially zero far away from the contact.
-The details of the shape of $c(x)$ will depend on the details of the cell-cell junction and the cell-cell contact, but we make an initial hypothesis that $c(x)$ is effectively constant over the cell-cell contact width and then smoothly decreases to zero [Fig.~\ref{fig:ch5:time_series}, top].
+The rate $kc(x)$ combines both the area density of the ephrin on the membrane with the reduced likelihood of binding for ephrins which are further away from the membrane of cell 1---so if we treat $k$ as constant we expect $c(x)$ to vary from its maximum value at the cell-cell contact to essentially zero far away from the contact.
+The details of the shape of $c(x)$ will depend on the details of the cell-cell junction and the cell-cell contact, but we make an initial hypothesis that $c(x)$ is effectively constant over the cell-cell contact width and then smoothly decreases to zero (Fig.~\ref{fig:ch5:time_series}, top).
 We use a smooth rectangular function for the effective ephrin concentration that cell 1 senses on cell $2$'s surface:
 \begin{equation}\label{eq:ch5:cx}
     c(x)=c_0 S\bm{(}x-(x_0-\sigma)\bm{)} S\bm{(}(x_0+\sigma)-x\bm{)},
@@ -71,7 +71,7 @@ We use a smooth rectangular function for the effective ephrin concentration that
 where $S(x)=[1+\tanh(x/\omega)]/2$, and $\omega$ controls the steepness at the transition between $0$ and $c_0$.
 $x_0$ is the center of the region of cell-cell contact and $2\sigma$ is the contact width.
 Receptors bound with the correct ligand (ephrin) will unbind with rate $r$.
-Receptors can also bind the incorrect/spurious ligand with rate $kc'$ and unbind with rate $r'$ [Fig.~\ref{fig:ch5:time_series}, bottom], where we assume the effective concentration of incorrect ligands $c'$ is constant.
+Receptors can also bind the incorrect/spurious ligand with rate $kc'$ and unbind with rate $r'$ (Fig.~\ref{fig:ch5:time_series}, bottom), where we assume the effective concentration of incorrect ligands $c'$ is constant.
 
 \begin{figure}[t]
 \centering
@@ -87,7 +87,7 @@ First, even if ligands had identical unbinding rates, there would be more bound 
 Secondly, if the correct and incorrect ligands have different affinities ($r \neq r'$), the cell can discriminate between them statistically.
 Ligands with a larger unbinding rate remain bound to receptors for a shorter time compared to ligands with a smaller unbinding rate.
 Thus, the cell can discern the mixture of two different ligands if the detailed occupancy history of each receptor is available~\cite{mora2015physical}.
-This record can be summarized by the times the receptor spends unbound $\tau_{u,i}$ and the times it spends bound $\tau_{b,i}$~\cite{mora2010limits, mora2015physical, endres2009maximum}, e.g., $\{\tau_{u,1},\tau_{b,1},\tau_{u,2},\tau_{b,2},\cdots\}$ [as shown in Fig.~\ref{fig:ch5:time_series}, bottom].
+This record can be summarized by the times the receptor spends unbound $\tau_{u,i}$ and the times it spends bound $\tau_{b,i}$~\cite{mora2010limits, mora2015physical, endres2009maximum}, e.g., $\{\tau_{u,1},\tau_{b,1},\tau_{u,2},\tau_{b,2},\cdots\}$ (as shown in Fig.~\ref{fig:ch5:time_series}, bottom).
 Given the receptor record, $c(x)$ can be estimated, which allows the cell to identify the location of the cell-cell contact $x_0$.
 
 The probability densities to have a bound interval of length $\tau_b$ and an unbound interval of length $\tau_u$ for a receptor seeing concentration $c$ of correct ligand are~\cite{mora2015physical, hopkins2020chemotaxis}
@@ -98,17 +98,17 @@ The probability densities to have a bound interval of length $\tau_b$ and an unb
 where the factor $(c+c')$ in Eq.~\eqref{eq:ch5:p-tu} is the total concentration, and the factors $c/(c+c')$ and $c'/(c+c')$ in Eq.~\eqref{eq:ch5:p-tb} are the probabilities of the binding event being the correct ligand and incorrect ligand, respectively.
 We assume that there are $N$ receptors evenly spaced over the cell perimeter $L$, each with position $x_n$ so the $n$-th receptor has ephrin concentration $c(x_n)$.
 
-We assume that the cells observe the binding and unbinding events over a ``measuring time'' $T$ and use this to make a CIL decision -- estimating the position of the cell-cell contact.
+We assume that the cells observe the binding and unbinding events over a ``measuring time'' $T$ and use this to make a CIL decision---estimating the position of the cell-cell contact.
 The probability of a particular time record $\{\tau_{u,1},\tau_{b,1},\tau_{u,2},\tau_{b,2},\cdots\}$ for the $n$-th receptor is $P_n=\prod_{i=1}^{M_n}P(\tau_{u,i}^{(n)})\cdot P(\tau_{b,i}^{(n)})$ where $M_n$ is the number of pairs of binding-unbinding events during the time $T$.
 Therefore, given the three parameters $\boldsymbol{\theta}\equiv(c_0, c', x_0)$ in our model, the total probability of a trajectory of bound and unbound times arising from $N$ independent receptors is $P(\{\tau\}|\boldsymbol{\theta})=\prod_{n=1}^N P_n$.
 
 To derive the fundamental sensing limits, we use the method of maximum likelihood estimation (MLE)~\cite{endres2009maximum, hu2011how, kay1993fundamentals}.
 The log-likelihood function is $\ln\mathcal{L}(\boldsymbol{\theta}|\{\tau\})=\ln P(\{\tau\}|\boldsymbol{\theta})$.
 The MLE estimate of the parameters $\hat{\boldsymbol{\theta}}$ is obtained by maximizing the log-likelihood, e.g., by solving $\partial\ln\mathcal{L}/\partial \theta_\mu|_{\boldsymbol{\theta} = \hat{\boldsymbol{\theta}}}=0$, where the index $\mu=1,2,3$, or by numerical maximization of $\ln\mathcal{L}$.
-The error between any unbiased estimate of the parameters that the cell can make, $\hat{\boldsymbol{\theta}}$, and the true parameters is limited by the Fisher information matrix and the Cram\'{e}r-Rao bound (Eq.~\eqref{eq:ch5:CRB}).
+The error between any unbiased estimate of the parameters that the cell can make, $\hat{\boldsymbol{\theta}}$, and the true parameters is limited by the Fisher information matrix and the Cram\'{e}r-Rao bound [Eq.~\eqref{eq:ch5:CRB}].
 We can compute the Fisher information matrix $I(\boldsymbol{\theta})_{\mu\nu}=-\langle\partial^2\ln\mathcal{L}/\partial\theta_\mu\partial\theta_\nu\rangle$ for our model in a partially-analytic way.
 After taking the derivatives of the log-likelihood necessary to compute the Fisher information matrix, we get an equation that is a complicated function of the bound/unbound times $\{\tau_b,\tau_u\}$.
-This reduces the problem to quadrature -- we can calculate the average $\langle\cdots\rangle$ by numerical integration using the probability densities in Eq.~\eqref{eq:ch5:p-tu} and \eqref{eq:ch5:p-tb} (see Sec.~\ref{sec:ch5:fisher} for details).
+This reduces the problem to quadrature---we can calculate the average $\langle\cdots\rangle$ by numerical integration using the probability densities in Eq.~\eqref{eq:ch5:p-tu} and \eqref{eq:ch5:p-tb} (see Sec.~\ref{sec:ch5:fisher} for details).
 The Cram\'{e}r-Rao bound (CRB) then gives the lower bound for the variance of an unbiased estimator $\hat{\boldsymbol{\theta}}$ of parameters~\cite{ipina2022collective}:
 \begin{equation}\label{eq:ch5:CRB}
     \textrm{Var}({\hat{{\theta}}}_\mu)\geqslant [I(\boldsymbol{\theta})^{-1}]_{\mu\mu},
@@ -121,7 +121,7 @@ Eq.~\eqref{eq:ch5:CRB} sets the best precision with which a cell could measure, 
 \label{sec:ch5:results}
 
 How precisely can a cell detect the position of cell-cell contact, or the concentrations of ligands?
-This is set by Eq.~\eqref{eq:ch5:CRB} -- the best possible unbiased estimates we can make of our parameters.
+This is set by Eq.~\eqref{eq:ch5:CRB}---the best possible unbiased estimates we can make of our parameters.
 We will display our results in terms of the variables $\boldsymbol{\theta}'\equiv(c_t,\chi,x_0)$, where $c_t\equiv c_0+c'$ is the total concentration, i.e., the concentration that sets the total binding rate at the cell-cell contact and $\chi=c_0/c_t$ is the fraction of correct ligands.
 When $\chi \ll 1$, most bindings are the incorrect ligand, and we expect the cell to struggle to perform CIL.
 We also define the unbinding rate ratio of the two ligands as $\alpha\equiv r/r'$.
@@ -151,13 +151,13 @@ The standard deviations of all three parameters are small compared to their rele
 We also see that the errors relative to the mean are small [Fig.~\ref{fig:ch5:relative_err}].
 This means that the limits imposed by stochastic noise of ligand-receptor binding may not be that stringent in practice.
 For example, if the cell can locate the source of cell-cell contact to $\pm \textrm{SD}(\hat{x}_0)$ of $\sim0.4$ microns [the worst case of Fig.~\ref{fig:ch5:var}(f)], this means the cell has an angular uncertainty of the direction to go which is $2\pi\cdot\textrm{SD}(\hat{x}_0)/L$ of $\sim 1.5^\circ$.
-This angular uncertainty is much smaller than the typical angular range of acceleration vectors observed in CIL on two-dimensional substrates~\cite{davis2012emergence}, which indicates that cells likely have more positional information than they really use in CIL -- unless the concentration of spurious ligands is extraordinarily high ($\chi \ll 1$) or our model is incomplete or there is additional noise due to one of the other factors we raise later in Sec.~\ref{sec:ch5:discussion}.
+This angular uncertainty is much smaller than the typical angular range of acceleration vectors observed in CIL on two-dimensional substrates~\cite{davis2012emergence}, which indicates that cells likely have more positional information than they really use in CIL---unless the concentration of spurious ligands is extraordinarily high ($\chi \ll 1$) or our model is incomplete or there is additional noise due to one of the other factors we raise later in Sec.~\ref{sec:ch5:discussion}.
 
 In Figs.~\ref{fig:ch5:var}(a), \ref{fig:ch5:var}(c), and \ref{fig:ch5:var}(e), we also show the standard deviations for different correct ligand fractions $\chi=c_0/c_t$.
 We expect that, as the fraction of correct ligands decreases, the error in estimating each parameter should increase.
 We do see that errors associated with estimating the total concentration $c_t$ and the contact center position $x_0$ decrease as $\chi$ increases [Figs.~\ref{fig:ch5:var}(a) and \ref{fig:ch5:var}(e)].
 However, estimating the correct ligand fraction $\chi$ itself has a more complex behavior [Fig.~\ref{fig:ch5:var}(c)].
-Estimating $\chi$ in our model is akin to a spatially-dependent multi-receptor model of the question asked by Ref.~\cite{mora2015physical} -- how precisely can a single receptor detect a rare ligand binding?
+Estimating $\chi$ in our model is akin to a spatially-dependent multi-receptor model of the question asked by Ref.~\cite{mora2015physical}---how precisely can a single receptor detect a rare ligand binding?
 Our model, though, shows qualitative differences compared to the single receptor model of Ref.~\cite{mora2015physical}.
 For a single receptor in the easy discrimination regime when the cell is confident about what type of ligand is bound ($\alpha<1/2$), the uncertainty of sensing $\chi$ increases with $\chi$ as $\textrm{SD}(\hat{\chi}) \sim \chi^{\beta/2}$ with $\beta = 1-\alpha/(1-\alpha)$, though the relative error $\textrm{SD}(\hat{\chi})/\chi$ always decreases with $\chi$~\cite{mora2015physical}, while in the hard discrimination regime ($\alpha > 1/2$), $\textrm{SD}(\hat{\chi})$ is roughly independent of $\chi$, and diverges as $\alpha \to 1$, where a single receptor cannot discriminate between ligands.
 In our spatial, multi-receptor model, we find that when $\alpha < 1/2$ the error in $\chi$ increases with $\chi$, as seen in Ref.~\cite{mora2015physical}.
@@ -172,7 +172,7 @@ By contrast, for $\alpha < 1/2$, the estimation of $\chi$ is similar to the sing
 \subsection{How does contact width limit CIL?}
 \label{sec:ch5:width}
 
-As the contact width $\sigma$ expands, more receptors come inside the contact region and the cell can obtain more information about the concentration of the true ligands -- we expect that the accuracy of estimating our parameters should generally increase as the contact width increases.
+As the contact width $\sigma$ expands, more receptors come inside the contact region and the cell can obtain more information about the concentration of the true ligands---we expect that the accuracy of estimating our parameters should generally increase as the contact width increases.
 In Figs.~\ref{fig:ch5:var}(b) and \ref{fig:ch5:var}(d), we observe that both the standard deviation of total concentration $\textrm{SD}(\hat{c}_t)$ and the standard deviation of the fraction of correct ligands $\textrm{SD}(\hat{\chi})$ decrease with increasing contact width $\sigma$.
 Surprisingly, we find the error in estimating the contact position $\textrm{SD}(\hat{x}_0)$ remains almost constant as $\sigma$ ranges from $3\textrm{--}30\,\mathrm{\mu m}$ [Fig.~\ref{fig:ch5:var}(f)].
 Why?
@@ -188,20 +188,20 @@ In this toy model, we can compute the Fisher information:
 \begin{equation}
         I^\textrm{toy}_{\mu\nu}=-\left< \frac{\partial^2\ln \mathcal{L}^\textrm{toy}}{\partial\theta_\mu\partial \theta_\nu} \right> =\sum_{n}\frac{K_D}{[C(x_n)+K_D]^2 C}\frac{\partial C(x_n)}{\partial \theta_\mu}\frac{\partial C(x_n)}{\partial \theta_\nu}. \label{eq:ch5:I-snapshot}
 \end{equation}
-If the concentration $C(x)$ takes the form of a smooth rectangular function (Eq.~\eqref{eq:ch5:cx}), and we compute the $x_0$-$x_0$ component of the Fisher information matrix, the only terms that are nonzero in the sum in Eq.~\eqref{eq:ch5:I-snapshot} are those where the derivative $\partial C(x) / \partial x_0$ is nonzero -- which are the edges of the contact zone.
+If the concentration $C(x)$ takes the form of a smooth rectangular function (Eq.~\eqref{eq:ch5:cx}), and we compute the $x_0$-$x_0$ component of the Fisher information matrix, the only terms that are nonzero in the sum in Eq.~\eqref{eq:ch5:I-snapshot} are those where the derivative $\partial C(x) / \partial x_0$ is nonzero---which are the edges of the contact zone.
 By contrast, if we were going to estimate the concentration level of the contact, then we would get a non-zero term at every receptor within the contact, and we would expect the error to decrease with contact size.
 
 In Fig.~\ref{fig:ch5:var}(f) the uncertainty in measuring the contact center $x_0$ does increase for small enough $\sigma$, in the range of $\sigma = 1\textrm{--}2 \,\rm{\mu m}$.
-This happens when the contact width $\sigma$ is similar to the scale $\omega = 1\,\rm{\mu m}$ over which $c(x)$ is varying -- so then $\partial c/\partial x_0$ will be nonzero over the whole contact patch.
+This happens when the contact width $\sigma$ is similar to the scale $\omega = 1\,\rm{\mu m}$ over which $c(x)$ is varying---so then $\partial c/\partial x_0$ will be nonzero over the whole contact patch.
 If we increase $\omega$, the general behaviors of the errors will not change, but the increase in $\textrm{SD}(\hat{x}_0)$ at small $\sigma$ will occur at a larger $\sigma$, as the concentration profile becomes strongly dependent on $x$ when $\sigma \sim \omega$ [see Fig.~\ref{fig:ch5:large_omega}(f)].
 
-However, the derivative $\partial c/\partial x_0$ depends significantly on the chosen concentration profile -- it's zero except at the boundaries because we are using a smooth rectangular function (Eq.~\eqref{eq:ch5:cx}) here.
+However, the derivative $\partial c/\partial x_0$ depends significantly on the chosen concentration profile---it's zero except at the boundaries because we are using a smooth rectangular function (Eq.~\eqref{eq:ch5:cx}) here.
 If we choose a concentration profile where $\partial c/\partial x_0$ is non-zero throughout, such as a Gaussian function, all receptors within the contact region will contribute to the accuracy of position sensing, and the dependence of the estimation errors of $\hat{x}_0$ shown in Fig.~\ref{fig:ch5:var}(f) will be different.
 See Sec.~\ref{sec:ch5:discussion} and Fig.~\ref{fig:ch5:Gaussian} for more details.
 
 For most of Figs.~\ref{fig:ch5:var}(a)--(f), we see good agreement between our bound from the Fisher information in Eq.~\eqref{eq:ch5:CRB} and the variance of the maximum likelihood estimator computed from a stochastic simulation.
 However, at the smallest $\sigma$, we do see a larger deviation between Monte Carlo simulations and Fisher information results in Figs.~\ref{fig:ch5:var}(b), \ref{fig:ch5:var}(d), and \ref{fig:ch5:var}(f).
-This discrepancy likely arises from the difficulty of the maximization process when $\sigma$ is small -- when we do numerical optimization to find the maximum-likelihood estimator $\hat{\boldsymbol{\theta}}$, there might be some deviations from the true global maximum point -- if the optimizer becomes trapped in a local maximum, or if the number of iterations provided is too few, etc.
+This discrepancy likely arises from the difficulty of the maximization process when $\sigma$ is small---when we do numerical optimization to find the maximum-likelihood estimator $\hat{\boldsymbol{\theta}}$, there might be some deviations from the true global maximum point---if the optimizer becomes trapped in a local maximum, or if the number of iterations provided is too few, etc.
 These numerical problems are more likely to happen for small contact size $\sigma$ and $\alpha \to 1$, because in such cases, there is less difference between a cell with a very small contact patch and one with essentially no contact ($\chi = 0$).
 In fact, the reasons that make it difficult for us to do this numerical optimization also make it difficult for the cell to determine if another cell is present, which we address in the next section.
 In other words, we suspect that any effective biochemical optimization process would also be difficult in cases where numerical optimization fails.
@@ -212,13 +212,13 @@ In other words, we suspect that any effective biochemical optimization process w
 
 In many situations, determining the presence of another cell is more useful for the cell than precisely locating the contact point.
 For instance, a recent experiment~\cite{singh2021rules} studied CIL for cells on suspended nanofibers, which are used to mimic the extracellular matrix.
-In this biologically relevant case -- and in other experiments of CIL on micropatterns~\cite{desai2013contact, lin2015interplay} -- cells only have two possible directions.
+In this biologically relevant case---and in other experiments of CIL on micropatterns~\cite{desai2013contact, lin2015interplay}---cells only have two possible directions.
 Thus the precision in estimating the location of contact $x_0$ is not so important, but deciding whether there is contact or not is very important.
 
 We study the problem of how precisely a cell can detect the presence of a neighbor from a localized signal by using tools from statistical decision theory.
 First, if we regard the cell as a binary classifier, we can pose a question to the cell: ``Is there another cell in proximity?''
 This question can be formally translated into the task of distinguishing between two hypotheses: the presence vs.\ absence of another cell.
-In our model, if we denote the three-dimensional parameter space where $\boldsymbol{\theta}$ lives as $\Theta$, the two hypotheses -- presence or absence~\cite{mora2015physical, li2019graduate, lalanne2015chemodetection}, can be written as:
+In our model, if we denote the three-dimensional parameter space where $\boldsymbol{\theta}$ lives as $\Theta$, the two hypotheses---presence or absence~\cite{mora2015physical, li2019graduate, lalanne2015chemodetection}, can be written as:
 \begin{eqnarray}
 &&H_0: \boldsymbol{\theta}\in\Theta_0\equiv\{(c_0,c',x_0)|c_0=0\},\\
 &&H_1: \boldsymbol{\theta}\in\Theta_0^C\equiv\Theta\backslash\Theta_0,
@@ -260,14 +260,14 @@ We then repeat this many times to compute the FNR from Eq.~\eqref{eq:ch5:FNR}.
 \label{fig:ch5:FNR}
 \end{figure*}
 
-Fig.~\ref{fig:ch5:FNR}(a) shows the Monte Carlo simulation results of FNR for varying contact widths.
+Figure~\ref{fig:ch5:FNR}(a) shows the Monte Carlo simulation results of FNR for varying contact widths.
 At small $\sigma$, when there are relatively few receptors where the true concentration $c(x)$ is nonzero, the false negative rate is large.
 Essentially, in this case, the probability of small numbers of correct ligands binding from cell-cell contact being mistaken for a coincidence is large.
 The FNR decreases as the contact width is increased, leading more receptors to come into the contact region.
 However, when the contact width $2\sigma$ becomes very large and approaches the cell perimeter $L$, the false negative rate starts to rise again, particularly when $\alpha=1$.
 This $2\sigma\to L$ case could happen if the cell is nearly engulfed by another cell, or is in contact with many cells.
 FNR will increase as the contact region approaches $L$ only in the hard discrimination regime ($\alpha$ approaches 1), when the two ligands are indistinguishable.
-When $2\sigma$ approaches the cell perimeter, $c(x)$ becomes nearly constant $c(x) \approx c_0$ -- equivalent to a simple change in the background concentration $c'$, if the cell cannot discriminate between the two ligands.
+When $2\sigma$ approaches the cell perimeter, $c(x)$ becomes nearly constant $c(x) \approx c_0$---equivalent to a simple change in the background concentration $c'$, if the cell cannot discriminate between the two ligands.
 The rise in FNR at large $\sigma$ disappears as the cell becomes increasingly capable of distinguishing between the two ligands, i.e., when $\alpha<1$.
 
 We then perform a sweep across the unbinding rate ratio $\alpha$ and the correct ligand fraction $\chi$, both of which significantly impact the false negative rate.
@@ -287,9 +287,9 @@ We visualize the trade-off between false positives and false negatives by varyin
 The figures in Figs.~\ref{fig:ch5:ROC}(a)--(c) show how FPR varies as a function of FNR.
 For instance, if we look at Fig.~\ref{fig:ch5:ROC}(a), the contours indicate the best false positive rate the cell can achieve given a fixed false negative rate, or vice versa.
 If the cell can tolerate a false positive rate of $10^{-3}$, and the contact width is $\sigma=20\,\mathrm{\mu m}$, the cell can achieve a low false negative rate (down to $\sim 10^{-3}$, red line).
-However, either decreasing the contact to $\sigma=10\,\mathrm{\mu m}$, or expanding the contact to $\sigma=40\,\mathrm{\mu m}$ makes the FNR larger for this FPR -- the cell is more likely to overlook the contact.
+However, either decreasing the contact to $\sigma=10\,\mathrm{\mu m}$, or expanding the contact to $\sigma=40\,\mathrm{\mu m}$ makes the FNR larger for this FPR---the cell is more likely to overlook the contact.
 
-In Fig.~\ref{fig:ch5:ROC}(b), we see that the ability of the cell to reliably distinguish the presence of contact gets progressively worse as $\alpha \to 1$ -- the FPR-FNR tradeoff curve gets further from the origin.
+In Fig.~\ref{fig:ch5:ROC}(b), we see that the ability of the cell to reliably distinguish the presence of contact gets progressively worse as $\alpha \to 1$---the FPR-FNR tradeoff curve gets further from the origin.
 Increasing the cell's measurement time $T$ improves the accuracy with which the cell can sense cell-cell contact [Fig.~\ref{fig:ch5:ROC}(c)].
 
 \begin{figure*}[t]
@@ -300,11 +300,11 @@ Increasing the cell's measurement time $T$ improves the accuracy with which the 
 \end{figure*}
 
 We can summarize the efficacy of the cell's ability to distinguish the presence of a contacting cell by computing the area under the curve (AUC) of the tradeoff graphs in Figs.~\ref{fig:ch5:ROC}(a)--(c).
-A smaller AUC indicates that the cell exhibits higher accuracy in distinguishing between the two hypotheses $H_0$ and $H_1$ -- roughly, that the cell achieves a lower false negative rate for a given false positive rate.
+A smaller AUC indicates that the cell exhibits higher accuracy in distinguishing between the two hypotheses $H_0$ and $H_1$---roughly, that the cell achieves a lower false negative rate for a given false positive rate.
 We note that tradeoffs of this sort are also often plotted on a receiver operating characteristic (ROC) curve, which plots true positive rate against false positive rate.
 In our convention, a smaller area under the curve is more predictive, instead of larger; our AUC is $1-\textrm{AUC}_{\textrm{ROC}}$~\cite{navratil2007linear, fawcett2006introduction}.
 
-Fig.~\ref{fig:ch5:ROC}(d) shows the AUC value as a function of contact width, which initially decreases and then increases as $2\sigma$ gets closer to $L$.
+Figure~\ref{fig:ch5:ROC}(d) shows the AUC value as a function of contact width, which initially decreases and then increases as $2\sigma$ gets closer to $L$.
 This confirms the results of Fig.~\ref{fig:ch5:FNR}(a): The cell can better sense the existence or absence of the other cell when the contact width is at some intermediate value.
 Figs.~\ref{fig:ch5:ROC}(b) and \ref{fig:ch5:ROC}(e) show how the DET curve and the associated AUC change with the unbinding rate ratio $\alpha$.
 The area under the curve increases as $\alpha\to 1$, which means the cell is more likely to make incorrect decisions in the hard discrimination regime.
@@ -333,19 +333,19 @@ In addition, our results also suggest that the cell is more probable to make mis
 The cell can extend the time it takes to make a decision to improve decision-making robustness.
 
 A core element of our model is the profile $c(x)$ in Eq.~\eqref{eq:ch5:cx}, which represents a cell in contact with another cell with a clear contact region of fixed size and a smoothed rectangular form.
-This neglects many potential complications -- e.g., that the size of cell-cell contacts may evolve over time during CIL (see, e.g., the movies of Ref.~\cite{singh2021rules}), how ligand-receptor binding could drive changes in the size and spacing of the cell-cell contact~\cite{hu2013binding, dinapoli2021mesoscale}, and how cadherin proteins could facilitate the formation of contacting patches by zipping (or unzipping) regions of the contacting membrane, thereby leading the coalescence of a patch of defined size~\cite{adams1996quantitative}.
+This neglects many potential complications---e.g., that the size of cell-cell contacts may evolve over time during CIL (see, e.g., the movies of Ref.~\cite{singh2021rules}), how ligand-receptor binding could drive changes in the size and spacing of the cell-cell contact~\cite{hu2013binding, dinapoli2021mesoscale}, and how cadherin proteins could facilitate the formation of contacting patches by zipping (or unzipping) regions of the contacting membrane, thereby leading the coalescence of a patch of defined size~\cite{adams1996quantitative}.
 To check the robustness of some of our assumptions, we also explore the case where the ephrin concentration takes the form of a Gaussian function $c(x)=c_0\exp(-(x-x_0)^2/2\sigma^2)$.
 This would arise if we assume that our effective binding rate $kc(x)$ is suppressed when there is a gap large enough to require ephrin to undergo a strain in order to bind.
 If there is a gap $h(x)$ between the two cells, we would expect $kc \sim \mathrm{e}^{-\frac{1}{2}\kappa h^2 / k_B T}$ with $\kappa$ an effective spring stiffness~\cite{janes2022first}.
 If $h(x)$ increases linearly away from the point of closest approach $x_0$, we would get a Gaussian profile.
 Many of our core results are quite similar between the Gaussian and the smooth step profile for $c(x)$, see Figs.~\ref{fig:ch5:Gaussian}(a)--(e).
 However, in the scenario of a Gaussian concentration, we find that the error in contact position estimation $\textrm{SD}(\hat{x}_0)$ increases with increasing contact width [Fig.~\ref{fig:ch5:Gaussian}(f)].
-Unlike the case of rectangular profiles, the cell now can obtain spatial information from receptors away from the contact edges, as $\partial c/\partial x_0=c(x)(x-x_0)/\sigma^2$ is nonzero throughout the contact and depends systematically on $\sigma$ -- there is more spatial information at any given point as the width $\sigma$ becomes smaller.
+Unlike the case of rectangular profiles, the cell now can obtain spatial information from receptors away from the contact edges, as $\partial c/\partial x_0=c(x)(x-x_0)/\sigma^2$ is nonzero throughout the contact and depends systematically on $\sigma$---there is more spatial information at any given point as the width $\sigma$ becomes smaller.
 Therefore, the error of estimating the contact position $x_0$ does not remain constant as $\sigma$ expands; instead, it increases with increasing $\sigma$.
 
 Moreover, the concentration profile $c(x)$ may take on a more intricate form, such as comprising several small patches.
 Our model currently implicitly assumes a single patch.
-If a cell expecting a single patch had multiple patches in contact with it, it would do its best to interpret this -- either lumping together multiple patches or treating one patch as the ``real'' one and assuming the other was a coincidence.
+If a cell expecting a single patch had multiple patches in contact with it, it would do its best to interpret this---either lumping together multiple patches or treating one patch as the ``real'' one and assuming the other was a coincidence.
 In either case, we expect similar factors would control the cell's ability to detect the presence of a second cell, but the localization error we study here might not be as directly applicable.
 
 Can a cell reasonably reach the limits we suggest here?
@@ -356,7 +356,7 @@ We know that experimentally, CIL occurs through the regulation of Rho GTPase pol
 We speculate that modeling patterning occurring via Rho GTPases, regulated by the measured local concentrations as proposed by Ref.~\cite{mora2015physical}, may serve as a sensible first model for spatial decision-making.
 However, the details of this model would be much more complex than the approach we take here.
 
-The estimation errors shown in our model [Fig.~\ref{fig:ch5:var}] are generally small compared to their relevant scales, suggesting cells may have fairly precise knowledge of the cell-cell contact location and ephrin levels.
+The estimation errors shown in our model (Fig.~\ref{fig:ch5:var}) are generally small compared to their relevant scales, suggesting cells may have fairly precise knowledge of the cell-cell contact location and ephrin levels.
 This may reflect the large number of binding-unbinding events.
 With the total number of receptors $N=10^4$ and typical receptor correlation times of $\sim \mathrm{s}$ (Sec.~\ref{sec:ch5:corr-time}), and the measuring time $T=10\,\mathrm{s}$, there are $\sim 10^5$ binding-unbinding events during the time the cell makes its CIL measurement.
 Given our results, it is likely that, unless one of our assumptions is incorrect, or that the fraction of spurious ligands is extremely high (e.g., $\chi < 0.1$), stochastic ligand-receptor noise is not a crucial factor in CIL decisions.
@@ -408,7 +408,7 @@ Because the final solutions should converge to the steady state, we assume the c
     p_\textrm{incorrect}(t)&=C\mathrm{e}^{-t/\tau_1}+D\mathrm{e}^{-t/\tau_2}+p_\textrm{incorrect}^{\textrm{SS}},
 \end{align*}
 where $p_\textrm{correct}\to p_\textrm{correct}^\textrm{SS}$ and $p_\textrm{incorrect}\to p_\textrm{incorrect}^\textrm{SS}$ when $t\to\infty$.
-Here we are primarily interested in the two correlation times $\tau_1$ and $\tau_2$ -- which should not depend on the particular initial conditions.
+Here we are primarily interested in the two correlation times $\tau_1$ and $\tau_2$---which should not depend on the particular initial conditions.
 We then assume the receptor is bound to a correct ligand at $t=0$, so the initial conditions are $p_\textrm{correct}(0)=1$ and $p_\textrm{incorrect}(0)=0$, i.e., $A+B=1-p_\textrm{correct}^{\textrm{SS}}$ and $C+D=-p_\textrm{incorrect}^{\textrm{SS}}$.
 Substituting the solutions back to the master equations, we can find the four coefficients:
 \begin{eqnarray}
@@ -522,7 +522,7 @@ $N$ & Number of receptors & $1$ & $10000$\\
 \end{tabular}
 \end{table}
 
-We can see from Eq.~\eqref{eq:ch5:log-likelihood} that all terms in the Fisher information matrix should contain $\langle M_n\rangle$ or $\langle T_u\rangle$ -- so we expect that the Fisher information time is thus proportional to the total measuring time $T$, at least in the limit of $T\gg\tau_\textrm{corr}$ where our analytic theory is appropriate.
+We can see from Eq.~\eqref{eq:ch5:log-likelihood} that all terms in the Fisher information matrix should contain $\langle M_n\rangle$ or $\langle T_u\rangle$---so we expect that the Fisher information time is thus proportional to the total measuring time $T$, at least in the limit of $T\gg\tau_\textrm{corr}$ where our analytic theory is appropriate.
 After obtaining all the terms in the matrix numerically, we can compute its inverse and take the diagonal elements as the lower bound of the variances, namely the Cram\'{e}r-Rao bound in Eq.~\eqref{eq:ch5:CRB}.
 
 
@@ -531,7 +531,7 @@ After obtaining all the terms in the matrix numerically, we can compute its inve
 
 \subsubsection{Simulation methods}
 
-In the Monte Carlo simulations, we generate a series of random bound/unbound times for each receptor from the probability distribution in Eq.~\eqref{eq:ch5:p-tu} and \eqref{eq:ch5:p-tb}.
+In the Monte Carlo simulations, we generate a series of random bound/unbound times for each receptor from the probability distribution in Eqs.~\eqref{eq:ch5:p-tu} and \eqref{eq:ch5:p-tb}.
 To do this, we note that Eq.~\eqref{eq:ch5:p-tb} is essentially a composite of two exponential distributions: We draw samples from $r\mathrm{e}^{-r\tau_b}$ with a probability of $c/(c+c')$ and from $r'\mathrm{e}^{-r'\tau_b}$ with a probability of $c'/(c+c')$, which is equivalent to running a kinetic Monte Carlo simulation to generate these time series.
 Subsequently, we compute the log-likelihood function $\ln\mathcal{L}(\boldsymbol{\theta}'|{\tau})$ using Eq.~\eqref{eq:ch5:log-likelihood} and numerically maximize it to find the optimal parameters $(\hat{c}_t,\hat{\chi},\hat{x}_0)$.
 When doing the optimization, we use the modified Powell algorithm~\cite{powell1964efficient} (provided by SciPy~\cite{virtanen2020scipy}) to minimize $-\ln\mathcal{L}$ within the bounds $c_t\in[0, 10^{8}]\,\mathrm{\mu m}^{-2},~\chi\in[0, 1],~x_0\in[0, 100]\,\mathrm{\mu m}$, and set the relative error in solutions acceptable for convergence to $10^{-7}$.
@@ -541,7 +541,7 @@ We then plot the standard deviations of these estimator distributions in, e.g., 
 
 We have not been able to compute the false negative rates in Eq.~\eqref{eq:ch5:FNR} and false positive rates in Eq.~\eqref{eq:ch5:FPR} analytically.
 However, we can still calculate the FNR and FPR through Monte Carlo simulations.
-To compute FNR, we assume the other cell is present, i.e., $c_0\neq 0$, and then generate a time series to compute the likelihood ratio by computing the maximum log-likelihood (Eq.~\eqref{eq:ch5:log-likelihood}) numerically under both the assumption of the other cell being present and it being absent.
+To compute FNR, we assume the other cell is present, i.e., $c_0\neq 0$, and then generate a time series to compute the likelihood ratio by computing the maximum log-likelihood [Eq.~\eqref{eq:ch5:log-likelihood}] numerically under both the assumption of the other cell being present and it being absent.
 We then repeat this process many times to compute the FNR for a fixed value of $\lambda$.
 For the FPR, we do simulations by first assuming the other cell is absent (setting $c_0=0$), but keep all other parameters the same.
 We perform approximately $\sim 10^5$ simulations to do averages for each data point shown in Fig.~\ref{fig:ch5:FNR}, which allows us to obtain robust and reliable results for the analysis.
@@ -563,7 +563,7 @@ The fundamental assumption we utilize when deriving the Fisher information matri
 In this limit, it is reasonable to compare our theory, which has a fixed number of binding/unbinding events for each receptor, to the stochastic simulations, where we fix the measuring time $T$.
 This assumption leads to the theoretical Cram\'{e}r-Rao bound scaling as $\sim 1/T$ (Sec.~\ref{sec:ch5:fisher}).
 When we compare simulation and theory, we should check this dependence, to ensure we are exploring times $T\gg\tau_\textrm{corr}^\pm$.
-We find that the variances obtained from simulations don't depend strongly on $T$ when $T\ll$ 1 second and the discrepancy between simulation and theory grows with decreasing measuring time [Fig.~\ref{fig:ch5:T_scale}].
+We find that the variances obtained from simulations don't depend strongly on $T$ when $T\ll$ 1 second and the discrepancy between simulation and theory grows with decreasing measuring time (Fig.~\ref{fig:ch5:T_scale}).
 This makes sense: In the limit $T \ll \tau_\textrm{corr}$, the cell is effectively making a ``snapshot'' measurement, using the receptor state at one instant to estimate parameters, and the error in measurement will not depend strongly on the measurement time.
 The correlation timescale of about a second is consistent with our analysis in Sec.~\ref{sec:ch5:corr-time}.
 With the chosen binding rate $kc$ and unbinding rate $r$ in the order of $1\,\mathrm{s^{-1}}$ (Table~\ref{tab:ch5:params}), the correlation times $\tau_\textrm{corr}$ given by Eq.~\eqref{eq:ch5:t-corr} are $\tau_1\sim10^{-1}\,\mathrm{s}$ and $\tau_2\sim1\,\mathrm{s}$.
