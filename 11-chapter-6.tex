@@ -25,7 +25,7 @@ In Chapter~\ref{chap:voronoi} I found that this model has a numerical pathology:
 I traced the divergence to the Voronoi geometry analytically, proposed a cutoff that removes it and restores a well-defined fracture timescale, and calibrated the cutoff against a deformable polygon model with the same energy but without the Voronoi shape constraint.
 It also shows that a simulation method built for confluent tissues can fail in subtle ways when it is pushed to describe fracture and detachment.
 
-Contact inhibition of locomotion can fire even when two cells touch over only a micron-scale patch, which raises the question of how a cell reliably registers a neighbor through so small a contact.
+Contact inhibition of locomotion (CIL) can fire even when two cells touch over only a micron-scale patch, which raises the question of how a cell reliably registers a neighbor through so small a contact.
 Earlier work has focused on the downstream signaling, but had not asked whether the contact-detection step itself sets a physical limit.
 In Chapter~\ref{chap:cil} I treated CIL as a sensing problem and used maximum-likelihood estimation and the Cram\'er-Rao bound to find the best possible sensing accuracy.
 A cell can decide whether a neighbor is present with high reliability even when interfering ligands are nearly ten times as abundant as the correct ephrin ligand, and the accuracy of locating the contact depends only weakly on its width.
@@ -37,7 +37,7 @@ Both results are consistent with the robustness of CIL across very different con
 
 A clear extension of Chapters~\ref{chap:size-control} and~\ref{chap:voronoi} is to ask how an organism as simple as the metazoan \textit{Trichoplax adhaerens} regulates its size without any centralized genetic control.
 Several features seen in experiments lie beyond the simplest model of Chapter~\ref{chap:size-control}.
-The AOUP model almost always sheds small cell clusters, yet \textit{Trichoplax} often splits into two comparable halves, which hints at some alignment of cell polarity across the tissue that the model does not include~\cite{davidescu2023growth}, for example a velocity-alignment interaction that would make neighboring cells tend to crawl in the same direction~\cite{camley2014velocity}.
+The active Ornstein-Uhlenbeck particle model almost always sheds small cell clusters, yet \textit{Trichoplax} often splits into two comparable halves, which hints at some alignment of cell polarity across the tissue that the model does not include~\cite{davidescu2023growth}, for example a velocity-alignment interaction that would make neighboring cells tend to crawl in the same direction~\cite{camley2014velocity}.
 Experiments also report occasional rotation of the whole animal, and a wide separation of timescales: individual cells reorient within seconds, but fission events are separated by days~\cite{leria2025fast, prakash2021motility}.
 These observations point to a picture in which correlated, collective motion, rather than independent single-junction fluctuations, controls when and where the tissue breaks.
 The regularized finite Voronoi model of Chapter~\ref{chap:voronoi} can simulate large systems, and I am accelerating the code through domain-decomposition-based parallelization to reach the scale of \textit{Trichoplax}, which would make it a natural tool for exploring these questions.
