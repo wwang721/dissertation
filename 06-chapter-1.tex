@@ -1,25 +1,49 @@
 \chapter{Introduction} \label{chap:introduction}
 
 
-Groups of cells can both grow and break apart.
+The ability of cells to move is central to life.
+During embryonic development, cells migrate over long distances to build tissues and organs~\cite{scarpa2016collective, weijer2009collective}; in the adult, they crawl to close wounds~\cite{poujade2007collective} and patrol the body as part of the immune response~\cite{trepat2012cell}; and in disease, the same migratory ability allows cancer cells to escape a primary tumor and seed metastases~\cite{haeger2014cell, cheung2016collective}.
+Many of these processes are not carried out by isolated cells but by groups that move, grow, and remodel together~\cite{cheung2025collective, friedl2009collective, rorth2009collective}.
+A recurring theme is that the behavior of such a group is more than the sum of its cells: collective motion, mechanical properties, and the ability to sense the environment all emerge from interactions between neighboring cells~\cite{alert2020physical, hakim2017collective}.
+
+This dissertation studies two faces of this collective behavior.
+The first is mechanical: how a group of cells holds together and, just as importantly, how it comes apart.
+Tissues must be cohesive enough to maintain their shape, yet many biological processes depend on cells detaching in a controlled way~\cite{friedl2009collective, cheung2025collective}.
 A primary tumor extends a strand of cells into the surrounding tissue and then sheds single cells and small clusters that can seed metastases~\cite{cheung2016collective, haeger2014cell}.
 Germline cysts in the mouse reach different characteristic sizes during embryonic development through a balance between cell division, which grows the cluster, and fracture of intercellular bridges, which breaks it into smaller groups~\cite{levy2024tug}.
 The metazoan \textit{Trichoplax adhaerens}, one of the simplest known animals, reproduces by a motility-induced fracture~\cite{prakash2021motility}.
 In each case the outcome is set by mechanics: cells adhere to one another, crawl, generate forces, and eventually detach.
-What controls when a group of cells breaks apart, and what sets the size of the pieces that result?
-Cells must also sense their surroundings.
-When two crawling cells collide, each often repolarizes and the two move apart, a behavior known as contact inhibition of locomotion (CIL)~\cite{abercrombie1970contact, mayor2010keeping}, which can be triggered by a contact only a micron across~\cite{singh2021rules}.
-How accurately can a cell sense that it has touched a neighbor?
+This raises a pair of physical questions that run through the first half of this dissertation: what controls when a group of cells breaks apart, and what sets the size of the pieces that result?
+
+The second face is informational: to move sensibly, a cell must read its surroundings.
+Cells follow chemical gradients~\cite{camley2016emergent, ipina2022collective}, mechanical cues~\cite{pallares2023stiffness}, and electromagnetic signals~\cite{sun2023electric, nwogbaga2023physical}, and they do so with surprising accuracy despite the noise inherent in counting a finite number of molecules~\cite{berg1977physics}.
+A particularly basic version of this problem is sensing other cells.
+When two crawling cells collide, each often repolarizes and the two move apart, a behavior known as contact inhibition of locomotion (CIL)~\cite{abercrombie1970contact, mayor2010keeping}, which can be triggered by a contact only micron-scale in size~\cite{singh2021rules}.
+This motivates the question taken up in the second half of the dissertation: how accurately can a cell sense that it has touched a neighbor?
 
 This dissertation develops theoretical and computational models for these two problems: the mechanics of how cell groups detach and fracture, and the physical limits on how a cell senses its neighbors.
-My aim throughout is to use the simple models to expose the physical mechanisms behind these observed behaviors.
+My aim throughout is to use simple models to expose the physical mechanisms behind these observed behaviors.
 
 
 \section{Insights from experiments}
 \label{sec:ch1:experiments}
 
-Collective cell migration appears throughout development and disease, including wound healing~\cite{poujade2007collective}, embryogenesis~\cite{chuai2012collective, weijer2009collective}, and tumor invasion~\cite{haeger2014cell, cheung2016collective}.
-\textit{In vivo}, this migration is often confined by adjacent tissues, by the dense fibers of the extracellular matrix (ECM), and by the vasculature, the walls of blood and lymphatic vessels~\cite{tarle2017modeling, balzer2012physical, lin2025gradients}.
+Collective cell migration appears in many biological processes, from embryonic development to wound healing to cancer~\cite{friedl2009collective, cheung2025collective}.
+The border cells of the \textit{Drosophila} egg chamber move as a small cluster of six to eight cells through the surrounding nurse cells~\cite{montell2012group}; the vertebrate neural crest migrates as multicellular streams that disperse across the embryo to form cartilage, peripheral nerves, and pigment cells~\cite{scarpa2016collective}; and during wound healing a single epithelial sheet advances over the wound bed to close it~\cite{poujade2007collective}.
+In cancer, invasion of the surrounding tissue is often collective, with strands and buds of tumor cells extending from the primary tumor mass~\cite{cheung2025collective, friedl2009collective}.
+In each case the cells stay attached to their neighbors through cadherin junctions and coordinate their motion, so that the group migrates as one mechanical unit~\cite{friedl2009collective}.
+
+A group of cells can also display collective properties not seen in single cells~\cite{cheung2025collective}.
+A confluent monolayer can jam into a solid-like state, in which each cell is caged by its neighbors, or unjam into a fluid-like state, in which cells rearrange and flow past one another, with the transition controlled by cell shape, motility, and adhesion~\cite{park2015unjamming, bi2016motility, rustarazo2026adhesion}, and this has been proposed as a route by which tumor cells escape a primary tumor and invade~\cite{cai2025unjamming}.
+A migrating group can also be polarized supracellularly, as a whole rather than cell by cell: the cells at the front lead with forward protrusions while the rear is contractile, so the group has a single front-to-back axis, much like one large cell~\cite{friedl2009collective, cheung2025collective}.
+For instance, in the cranial neural crest of \textit{Xenopus}, the rear cells build a shared actomyosin cable that runs along the back of the cohort and helps propel it forward~\cite{cheung2025collective}.
+
+A question that recurs across these systems is how a group stays cohesive and yet still lets cells leave in a controlled way~\cite{friedl2009collective, cheung2025collective}.
+One route is the epithelial-mesenchymal transition (EMT), in which epithelial cells loosen their junctions and become individually migratory, a program that is reactivated during cancer invasion~\cite{youssef2024epithelial, tripathi2020physics}.
+But cells need not complete that transition to leave: in many epithelial cancers the disseminating cells retain E-cadherin and their cell-cell junctions, so cohesive clusters break away and travel together~\cite{cheung2025collective}.
+What sets when a group fragments, and how large the resulting pieces are, is then a question of mechanics, of how cells adhere, crawl, and pull on one another.
+
+\textit{In vivo}, collective migration is often confined by adjacent tissues, by the dense fibers of the extracellular matrix (ECM), and by the vasculature, the walls of blood and lymphatic vessels~\cite{tarle2017modeling, balzer2012physical, lin2025gradients}.
 During cancer invasion, the primary tumor extends a strand of cells into the surrounding tissue, and intravital microscopy shows that tumor cells preferentially move along channel-like tracks created by these anatomical structures, with widths from a few microns up to wider than a single cell~\cite{paul2017cancer, weigelin2012intravital, wolf2009collagen}.
 Whether cells leave the strand one at a time or as clusters matters for the disease: clusters of circulating tumor cells are rare, but they seed metastases far more efficiently than single cells~\cite{cheung2016collective, green2022pillarx, dirusso2024beyond}.
 Moreover, it has been reported that circulating tumor cells (CTCs) may even cluster with white blood cells or platelets to escape immune surveillance~\cite{saini2019circulating}.
@@ -38,13 +62,12 @@ Moreover, both \textit{Trichoplax} and germline cysts show significant variabili
 This combination of a well-defined typical size with substantial individual-to-individual variability raises the question of how reliably motility-driven fracture can regulate size at all.
 This question is taken up in Chapter~\ref{chap:size-control}.
 
-
-Chapter~\ref{chap:cil} studies the physical limits on contact inhibition of locomotion (CIL), the behavior in which two crawling cells that collide rapidly change direction and migrate apart.
-The behavior was first observed in fibroblasts by Abercrombie more than half a century ago~\cite{abercrombie1970contact, abercrombie1979contact}, has since been found in many healthy and cancerous cell types, and is now known to help regulate tissue growth and development~\cite{mayor2010keeping, zimmermann2016contact}.
-In the \textit{Drosophila} embryo, for example, macrophages require it to disperse evenly through the tissue~\cite{davis2012emergence, stramer2010clasp}.
-Research has shown that CIL is regulated by the Eph-ephrin signaling pathway: a cell carries Eph receptors that bind ephrin ligands anchored to the surface of the neighboring cell~\cite{larranaga2022ephrin, lin2015interplay}.
-What makes the phenomenon notable is its precision: CIL can occur even when cells crawling on isolated nanofibers touch over a region only a micron wide~\cite{singh2021rules}, which raises a sharp physical question about how a cell registers contact through so small a patch.
-
+Contact between cells does more than hold a group together: through contact inhibition of locomotion (CIL), it also helps steer and organize collective migration.
+When two crawling cells collide, each retracts its protrusions at the point of contact, repolarizes, and the two move apart, a behavior first seen in fibroblasts by Abercrombie more than half a century ago~\cite{abercrombie1970contact, abercrombie1979contact} and since found in many healthy and cancerous cell types~\cite{mayor2010keeping, zimmermann2016contact}.
+Because each cell turns away from the neighbors it touches, contacts in the interior of a group suppress protrusions there and bias them toward the free edge, so that the group spreads outward or streams in a common direction; in the vertebrate neural crest, this contact-driven repolarization controls the directional migration of the cell streams~\cite{scarpa2016collective, mayor2010keeping}.
+CIL also sets how cells space themselves out, and \textit{Drosophila} macrophages rely on it to disperse evenly through the embryo~\cite{davis2012emergence, stramer2010clasp}.
+At the molecular level the response can be triggered by the Eph-ephrin pathway, in which Eph receptors on one cell bind ephrin ligands anchored to the surface of the cell it touches~\cite{larranaga2022ephrin, lin2015interplay}, and it is precise enough to fire even when two cells crawling on nanofibers touch over a patch only a micron wide~\cite{singh2021rules}.
+Detecting a neighbor this way can therefore be cast as a sensing problem, namely how reliably a cell can tell that a neighbor is present, which we study in Chapter~\ref{chap:cil}.
 
 \section{Physical models of collective cell migration}
 \label{sec:ch1:models}
@@ -123,21 +146,33 @@ The phase-field model of Chapter~\ref{chap:dissociation} includes guided cells w
 \section{Physical limits on cell sensing}
 \label{sec:ch1:sensing}
 
+To migrate purposefully, adopt the correct developmental fate, and respond to neighboring cells, cells must sense and interpret their surroundings despite noisy molecular signals~\cite{sengupta2021principles}.
+These functions can all be cast as problems of information sensing and processing: chemotaxing cells follow shallow chemical gradients~\cite{hu2010physical}, cells in a developing tissue interpret morphogen concentrations to decide their fate~\cite{rogers2011morphogen}, and immune cells discriminate self from non-self at a cell-cell contact~\cite{feinerman2008quantitative}.
+A central question in cell biophysics is how accurately a cell can perform such tasks given that the underlying signals, the arrival of individual molecules at individual receptors, are inherently stochastic~\cite{berg1977physics}.
+Answering it sets a benchmark: If an observed behavior approaches the physical limit, the cell is using its information nearly optimally, whereas a large gap points to additional noise or unused information.
+
 A cell measures a chemical signal by counting molecules that bind to receptors on its membrane.
 Berg and Purcell showed that this counting is itself a fundamental source of noise: because molecules arrive at random, a receptor monitored for a finite time returns only an estimate of the concentration, with an error that shrinks slowly as the observation time and the number of receptors grow~\cite{berg1977physics}.
-This argument sets a physical limit that no downstream processing can beat, and it has become the starting point for the theory of cell sensing.
+This argument sets a physical limit that no downstream processing can beat, and it has become the starting point for a large body of theory on the physics of cellular information processing~\cite{bialek2005physical, ten2016fundamental, tkavcik2025information}.
 
 The Berg-Purcell argument has been extended to the harder tasks that real cells perform.
 Cells do not only measure a uniform concentration; they need to estimate signals that change in space and time.
 They read spatial gradients to decide which way to crawl~\cite{hu2011how, hu2010physical}, they estimate the position of a spatially localized signal~\cite{wasnik2019accuracy}, they sense gradients collectively as a group~\cite{ipina2022collective, camley2016emergent}, and they track signals that change in time~\cite{mora2010limits}.
+Even for the single task of finding a gradient, a cell faces a choice of strategy: it can compare concentrations across its body at one instant (spatial sensing) or compare them at different points along its path over time (temporal sensing), and which is more accurate depends on the cell's size, speed, and persistence~\cite{rode2024information}.
+The cell's shape matters too: because gradient information is limited by how widely the receptors are dispersed, an elongated or branched shape can sense a shallow gradient more accurately than a round one~\cite{mou2025optimal}.
 A useful way to treat all of these problems is as statistical estimation: the cell is assumed to extract as much information as it can from its receptors using maximum-likelihood estimation (MLE), and the best accuracy any such estimate can reach is bounded by the Cram\'er-Rao bound~\cite{endres2009maximum}.
 This framework gives a clean way to ask what limits a given sensing task, separate from the details of any particular signaling network.
 
+Several broad questions have guided this field.
+A major line of research concerns the fundamental limits and asks how cells can beat the naive Berg-Purcell limit: Time-averaging, spatial averaging over many receptors, and comparisons across the cell body can all reduce sensing error, although each strategy has its own trade-offs and ultimate limits.~\cite{ten2016fundamental}.
+A related line of work asks how groups of cells sense better than individuals, sharing information across cell-cell contacts to detect gradients that are too shallow for a single cell to resolve~\cite{ipina2022collective, camley2016emergent}.
+Some other questions concern adaptation and dynamic range, namely how a cell can stay sensitive to relative changes in signal across many orders of magnitude of background concentration~\cite{endres2006precise, srinivasan2026perfect}.
+
+The second half of this dissertation focuses on a different but closely related problem: specificity.
 Receptors are not perfectly specific.
 A receptor tuned to one ligand will also bind other molecules that resemble it, and these spurious binding events add noise that is distinct from counting noise~\cite{mora2015physical, singh2017simple}.
 When the correct ligand is rare and the interfering ligands are common, telling them apart becomes its own limit on sensing accuracy.
-This problem arises whenever a cell must read a specific molecular cue against a noisy chemical background.
-Receptors may also undergo allosteric changes that alter their binding affinity, providing a mechanism for adaptation across a wide dynamic range~\cite{may2003allosteric, srinivasan2026perfect}.
+This problem arises whenever a cell must read a specific molecular cue against a noisy chemical background, from immune recognition to the detection of a neighboring cell.
 
 CIL can be viewed in exactly these terms.
 Research has shown that CIL is regulated by the Eph-ephrin pathway on the cell membrane [Fig.~\ref{fig:ch1:models}(c)]: Eph receptors on one cell bind ephrin ligands on the other and initiate the contact response, modulating the Rho GTPases of Sec.~\ref{sec:ch1:interactions} to increase actomyosin contractility and inhibit lamellipodium formation at the contact, so that the cell repolarizes and moves away~\cite{klein2012eph, noren2004eph, pasquale2008eph, arvanitis2008eph}.

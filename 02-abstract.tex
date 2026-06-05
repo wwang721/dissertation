@@ -13,11 +13,11 @@ I first study how cancer cells dissociate from a collectively invading strand in
 Using a phase-field model, I find that single cells break off most often, that fast ``leader'' cells explain this, and that stronger cell-cell adhesion produces fewer but larger ruptures.
 Unjamming the tissue is necessary but not sufficient for rupture.
 Building on this, I ask what sets the size of a growing tissue, where division competes with motility-driven fracture.
-Modeling it as self-propelled particles joined by breakable junctions, I find that its size depends only on the ratio of the junction break rate to the cell division rate, so motility can effectively regulate organ size.
+Modeling the tissue as self-propelled particles joined by breakable junctions, I find that its size depends only on the ratio of the junction break rate to the cell division rate, so motility can effectively regulate organ size.
 
 To follow rupture into larger tissues, such as \textit{Trichoplax adhaerens}, I need a model that scales to many cells while keeping tissue fluidity.
-I resort to the finite Voronoi model, a variant of the standard Voronoi model for nonconfluent tissue, and find that, surprisingly, its detachment forces diverge as cells lose contact, so the fracture timescale unphysically depends on the simulation time step.
-I then introduce a regularization, calibrated against a deformable polygon model.
+I turn to the finite Voronoi model, a variant of the standard Voronoi model for nonconfluent tissue, but find that its detachment forces diverge as cells lose contact.
+This makes the simulated fracture timescale depend on the numerical time step rather than the physics, which I fix with a regularization calibrated against a deformable polygon model.
 
 Finally, I turn from mechanics to sensing.
 In contact inhibition of locomotion, a cell repolarizes away from a neighbor upon contact.

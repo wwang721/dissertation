@@ -18,6 +18,8 @@
 *.synctex.gz
 *.toc
 pdfa.xmpi
+*busy*
 
 # Generated PDF file
 00-main.pdf
+
