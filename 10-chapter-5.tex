@@ -53,7 +53,7 @@ We find that cell-cell contact can be highly reliably detected even at large lev
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.7\textwidth]{chap5/sketch.png}
-\caption{Illustration of two cells in contact where they can sense each other through Eph-ephrin signaling. Both Eph receptors (blue receptors) and their ligands---ephrins (green ellipses), are distributed on the cell membranes. Besides the cognate ligands, other spurious ligands (red squares) can also bind to the Eph receptors. These incorrect binding events mixed with the correct Eph-ephrin binding will affect the sensing accuracy of contact inhibition of locomotion.}
+\caption[Two cells sensing each other at contact through Eph-ephrin binding amid spurious ligands]{Illustration of two cells in contact where they can sense each other through Eph-ephrin signaling. Both Eph receptors (blue receptors) and their ligands---ephrins (green ellipses), are distributed on the cell membranes. Besides the cognate ligands, other spurious ligands (red squares) can also bind to the Eph receptors. These incorrect binding events mixed with the correct Eph-ephrin binding will affect the sensing accuracy of contact inhibition of locomotion.}
 \label{fig:ch5:schematics}
 \end{figure}
 
@@ -76,7 +76,7 @@ Receptors can also bind the incorrect/spurious ligand with rate $kc'$ and unbind
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.7\textwidth]{chap5/time_series.png}
-\caption{Extracting information from bound-unbound time series of receptors. Top: The ephrin concentration is a smooth rectangular function $c(x)$ that is high at the region of contact ($\sim \pm \sigma$ of the contact center at $x_0$). Bottom: The temporal record of the binding states of example receptors inside and outside the contact region.  Receptors within the contact region (blue) can bind to both ephrins (green) and incorrect ligands (red) while receptors outside (yellow) can only bind to the spurious ligands.}
+\caption[Extracting information from bound-unbound time series of receptors]{Extracting information from bound-unbound time series of receptors. Top: The ephrin concentration is a smooth rectangular function $c(x)$ that is high at the region of contact ($\sim \pm \sigma$ of the contact center at $x_0$). Bottom: The temporal record of the binding states of example receptors inside and outside the contact region.  Receptors within the contact region (blue) can bind to both ephrins (green) and incorrect ligands (red) while receptors outside (yellow) can only bind to the spurious ligands.}
 \label{fig:ch5:time_series}
 \end{figure}
 
@@ -133,7 +133,7 @@ Broadly, we see good agreement between simulation and theory, except for a few d
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{chap5/variances.pdf}
-\caption{Errors of maximum likelihood estimate (MLE) influenced by receptor-ligand affinity, fraction of correct ligands, and contact width. Panels (a), (b) show the standard deviation (SD) of the total concentration $\hat{c}_t$, panels (c), (d) show the SD of correct ligand fraction $\hat{\chi}$, and panels (e), (f) display the SD of contact center position $\hat{x}_0$. In all figures, the lines (solid, dashed, and dash-dot) represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations (the standard deviations are computed from $10^4$ simulations for each point). Measuring time is $T=10\,\rm{s}$. Corresponding relative errors (SD/average) are shown in Fig.~\ref{fig:ch5:relative_err}.}
+\caption[MLE errors versus affinity, ligand fraction, and contact width]{Errors of maximum likelihood estimate (MLE) influenced by receptor-ligand affinity, fraction of correct ligands, and contact width. Panels (a), (b) show the standard deviation (SD) of the total concentration $\hat{c}_t$, panels (c), (d) show the SD of correct ligand fraction $\hat{\chi}$, and panels (e), (f) display the SD of contact center position $\hat{x}_0$. In all figures, the lines (solid, dashed, and dash-dot) represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations (the standard deviations are computed from $10^4$ simulations for each point). Measuring time is $T=10\,\rm{s}$. Corresponding relative errors (SD/average) are shown in Fig.~\ref{fig:ch5:relative_err}.}
 \label{fig:ch5:var}
 \end{figure*}
 
@@ -256,7 +256,7 @@ We then repeat this many times to compute the FNR from Eq.~\eqref{eq:ch5:FNR}.
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{chap5/FNR.pdf}
-\caption{False negative rates showing how the probability of a cell missing the presence of a contacting cell is affected by contact width $\sigma$, unbinding rate ratio $\alpha$, and the fraction of correct ligands $\chi$. Panel (a) illustrates the change in FNR as contact width varies, and the phase diagram in panel (b) shows a sharp transition from low $\alpha$, high $\chi$ values to high $\alpha$, low $\chi$ values. We conduct $\sim 10^5$ simulations for each data point. The threshold parameter $\lambda_c=7$ is chosen somewhat arbitrarily to show when the maximum value of FNR can be close to $1$ in these figures.}
+\caption[How the false-negative rate of detecting a neighbor depends on contact width, affinity, and ligand fraction]{False negative rates showing how the probability of a cell missing the presence of a contacting cell is affected by contact width $\sigma$, unbinding rate ratio $\alpha$, and the fraction of correct ligands $\chi$. Panel (a) illustrates the change in FNR as contact width varies, and the phase diagram in panel (b) shows a sharp transition from low $\alpha$, high $\chi$ values to high $\alpha$, low $\chi$ values. We conduct $\sim 10^5$ simulations for each data point. The threshold parameter $\lambda_c=7$ is chosen somewhat arbitrarily to show when the maximum value of FNR can be close to $1$ in these figures.}
 \label{fig:ch5:FNR}
 \end{figure*}
 
@@ -295,7 +295,7 @@ Increasing the cell's measurement time $T$ improves the accuracy with which the 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{chap5/ROC.pdf}
-\caption{Detection error tradeoff (DET) graphs and the associated area under the curve (AUC) showing how the cell's ability of making accurate decisions varies with the contact width $\sigma$, unbinding rate ratio $\alpha$, and measuring time $T$. Panels (a) and (d) show that the optimal contact width is at some intermediate value. Panels (b) and (e) show that the cell is more likely to make incorrect decisions when it is difficult to distinguish the two ligands. Panels (c) and (f) show that the cell can more reliably detect the presence or absence of another cell with a longer measuring time $T$. Correct ligand fraction is set to $\chi=0.1$ in all figures.}
+\caption[Detection error tradeoff (DET) graphs and the associated area under the curve (AUC) for deciding whether a neighbor is present]{Detection error tradeoff (DET) graphs and the associated area under the curve (AUC) showing how the cell's ability of making accurate decisions varies with the contact width $\sigma$, unbinding rate ratio $\alpha$, and measuring time $T$. Panels (a) and (d) show that the optimal contact width is at some intermediate value. Panels (b) and (e) show that the cell is more likely to make incorrect decisions when it is difficult to distinguish the two ligands. Panels (c) and (f) show that the cell can more reliably detect the presence or absence of another cell with a longer measuring time $T$. Correct ligand fraction is set to $\chi=0.1$ in all figures.}
 \label{fig:ch5:ROC}
 \end{figure*}
 
@@ -414,8 +414,7 @@ Substituting the solutions back to the master equations, we can find the four co
 \begin{eqnarray}
     &&A=-\frac{kc}{2\sqrt{\Delta}}p_\textrm{incorrect}^\textrm{SS}+\frac{1}{2}(1-p_\textrm{correct}^\textrm{SS})+\frac{(kc+r)-(kc'+r')}{2\sqrt{\Delta}}(1-p_\textrm{correct}^\textrm{SS}),\nonumber\\
     &&B=\frac{kc}{2\sqrt{\Delta}}p_\textrm{incorrect}^\textrm{SS}+\frac{1}{2}(1-p_\textrm{correct}^\textrm{SS})-\frac{(kc+r)-(kc'+r')}{2\sqrt{\Delta}}(1-p_\textrm{correct}^\textrm{SS}),\nonumber\\
-    &&C=\frac{1}{\tau_2}\frac{p_\textrm{incorrect}^\textrm{SS}}{\sqrt{\Delta}},\nonumber\\
-    &&D=-\frac{1}{\tau_1}\frac{p_\textrm{incorrect}^\textrm{SS}}{\sqrt{\Delta}},\nonumber
+    &&C=\frac{1}{\tau_2}\frac{p_\textrm{incorrect}^\textrm{SS}}{\sqrt{\Delta}},\qquad\quad D=-\frac{1}{\tau_1}\frac{p_\textrm{incorrect}^\textrm{SS}}{\sqrt{\Delta}},\nonumber
 \end{eqnarray}
 and the two characteristic times:
 \begin{eqnarray}
@@ -501,7 +500,7 @@ where the last term is computed by numerical integration using Gaussian quadratu
 
 \begin{table}[t]
 \centering
-\caption{Table of simulation parameters. These parameters are used throughout this chapter; any deviation from them is explicitly noted.}
+\caption[Default parameters of the CIL sensing model]{Table of simulation parameters. These parameters are used throughout this chapter; any deviation from them is explicitly noted.}
 \label{tab:ch5:params}
 \begin{tabular}{llll}
 \toprule\toprule
@@ -573,12 +572,12 @@ Therefore, to effectively compare the simulation results with the theoretical Cr
 \clearpage
 \subsection{Additional figures}
 \label{sec:ch5:additional-figures}
-\vspace{0.5cm}
+\vspace{2.0cm}
 
 \begin{figure*}[htp]
 \centering
 \includegraphics[width=0.85\textwidth]{chap5/Gaussian.pdf}
-\caption{Estimating errors of MLE when the correct ligand concentration $c(x)$ takes the form of a Gaussian function $c(x)=c_0\exp(-(x-x_0)^2/2\sigma^2)$ rather than the rectangular function given in Eq.~\eqref{eq:ch5:cx}. Panels (a), (b) show the standard deviation (SD) of the total concentration $\hat{c}_t$, panels (c), (d) show the SD of correct ligand fraction $\hat{\chi}$, and panels (e), (f) display the SD of contact center position $\hat{x}_0$, where the estimating error of $x_0$ increases as the contact width $\sigma$ expands. In all figures, the lines (solid, dashed, and dash-dot) represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations (the standard deviations are computed from $10^4$ simulations for each point). Measuring time is $T=10\,\rm{s}$.}
+\caption[Estimation errors of MLE for a Gaussian contact-concentration profile]{Estimating errors of MLE when the correct ligand concentration $c(x)$ takes the form of a Gaussian function $c(x)=c_0\exp(-(x-x_0)^2/2\sigma^2)$ rather than the rectangular function given in Eq.~\eqref{eq:ch5:cx}. Panels (a), (b) show the standard deviation (SD) of the total concentration $\hat{c}_t$, panels (c), (d) show the SD of correct ligand fraction $\hat{\chi}$, and panels (e), (f) display the SD of contact center position $\hat{x}_0$, where the estimating error of $x_0$ increases as the contact width $\sigma$ expands. In all figures, the lines (solid, dashed, and dash-dot) represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations (the standard deviations are computed from $10^4$ simulations for each point). Measuring time is $T=10\,\rm{s}$.}
 \label{fig:ch5:Gaussian}
 \end{figure*}
 
@@ -586,27 +585,27 @@ Therefore, to effectively compare the simulation results with the theoretical Cr
 \centering
 \hspace{-0.3cm}
 \includegraphics[width=0.54\textwidth]{chap5/T_scale.pdf}
-\caption{Variances of MLE decrease with increasing measuring time $T$. The variances from the Cram\'{e}r-Rao bound scale as $\sim 1/T$ in our derivation (Sec.~\ref{sec:ch5:fisher}). Though the simulation results show a slower decrease compared to the theoretical predictions at small $T$, they still converge as the measuring time $T\gg\tau_\textrm{corr}$. Lines represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations. Correct ligand fraction is $\chi=0.1$.}
+\caption[MLE variances decrease with increasing measuring time $T$]{Variances of MLE decrease with increasing measuring time $T$. The variances from the Cram\'{e}r-Rao bound scale as $\sim 1/T$ in our derivation (Sec.~\ref{sec:ch5:fisher}). Though the simulation results show a slower decrease compared to the theoretical predictions at small $T$, they still converge as the measuring time $T\gg\tau_\textrm{corr}$. Lines represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations. Correct ligand fraction is $\chi=0.1$.}
 \label{fig:ch5:T_scale}
 \end{figure*}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{chap5/chi_AUC.pdf}
-\caption{Area under the DET curve changing with unbinding rate ratio $\alpha$ when the correct ligand fraction $\chi=10^{-2}$. Black points are exactly the results in Fig.~\ref{fig:ch5:ROC}(e) when $\chi=10^{-1}$.}
+\caption[Area under the DET curve changing with unbinding rate ratio $\alpha$ when the correct ligand fraction $\chi=10^{-2}$]{Area under the DET curve changing with unbinding rate ratio $\alpha$ when the correct ligand fraction $\chi=10^{-2}$. Black points are exactly the results in Fig.~\ref{fig:ch5:ROC}(e) when $\chi=10^{-1}$.}
 \label{fig:ch5:chi_AUC}
 \end{figure*}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{chap5/relative_errors.pdf}
-\caption{Relative errors (SD/average) for Fig.~\ref{fig:ch5:var} in the main text, which are generally small everywhere. In all figures, the lines (solid, dashed, and dash-dot) represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations (the standard deviations are computed from $10^4$ simulations for each point). Measuring time is $T=10\,\rm{s}$.}
+\caption[Relative errors of the MLE estimates are small everywhere]{Relative errors (SD/average) for Fig.~\ref{fig:ch5:var} in the main text, which are generally small everywhere. In all figures, the lines (solid, dashed, and dash-dot) represent theoretical results obtained from Eq.~\eqref{eq:ch5:CRB}, while the points are obtained from Monte Carlo simulations (the standard deviations are computed from $10^4$ simulations for each point). Measuring time is $T=10\,\rm{s}$.}
 \label{fig:ch5:relative_err}
 \end{figure*}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{chap5/large_omega.pdf}
-\caption{Estimating errors of MLE when $\omega=10\,\mathrm{\mu m}$. All SDs have a similar pattern to Fig.~\ref{fig:ch5:var} where $\omega=1\,\mathrm{\mu m}$. Besides, we note that the $\textrm{SD}(\hat{x}_0)$ also starts to rise as $\sigma$ decreases to $\sim\omega$.}
+\caption[MLE errors for a wider transition width $\omega=10\,\mathrm{\mu m}$]{Estimating errors of MLE when $\omega=10\,\mathrm{\mu m}$. All SDs have a similar pattern to Fig.~\ref{fig:ch5:var} where $\omega=1\,\mathrm{\mu m}$. Besides, we note that the $\textrm{SD}(\hat{x}_0)$ also starts to rise as $\sigma$ decreases to $\sim\omega$.}
 \label{fig:ch5:large_omega}
 \end{figure*}

@@ -70,7 +70,7 @@ Furthermore, we explore the relationship between cell dissociation behavior and 
 \begin{figure}[tp]
 \centering
 \includegraphics[width=0.7\textwidth]{chap2/expt_snapshot.png}
-\caption{Experimental setup.
+\caption[Microfluidic setup for cancer cells invading microchannels of different widths under a serum gradient]{Experimental setup.
 (a) Schematic of microfluidic device with microchannels of prescribed dimensions and phase-contrast images of microchannels of different widths.
 Cells were cultured in Dulbecco's modified Eagle's medium (DMEM).
 (b) Representative phase-contrast snapshots of invading human A431 epidermoid carcinoma cells confined in $50\,\mathrm{\mu m}$ and $6\,\mathrm{\mu m}$ microchannels.
@@ -82,10 +82,10 @@ Reprinted from Ref.~\cite{law2023cytokinesis}. Channel height from the substrate
 \label{fig:ch2:expt_snapshot}
 \end{figure}
 
-\begin{figure}[tp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/expt.pdf}
-\caption{Analysis of experimental dissociation events.
+\caption[Experimental cluster-size, survival, and rupture-time statistics across channel widths]{Analysis of experimental dissociation events.
 (a) Dissociation cluster size distributions for $W=6,\,10,\,20,$ and $50\,\mathrm{\mu m}$ microchannels, based on $137,\,92,\,138,$ and $95$ dissociation events, respectively.
 The dashed lines and gray areas denote the average cluster sizes $A=1.4,\,2.0,\,3.7,\,4.8$, and the associated standard errors of the mean (mean $\pm$ SE).
 Note that we are using cluster size categories 6--10 and $>$10 to group together similar-sized large clusters; full histograms are shown in Fig.~\ref{fig:ch2:SI_expt}(a).
@@ -201,7 +201,7 @@ This representation of cell polarity is a very simplified one, and could be exte
 \begin{figure}[tbp]
 \centering\vspace{0.3cm}
 \includegraphics[width=0.7\textwidth]{chap2/schematic.pdf}
-\caption{Schematic of the model. For each cell, the blue arrow represents its polarity $\mathbf{P}_i$, and the red arrow shows its center of mass velocity $\mathbf{v}_i^{\textrm{c.m.}}$; chemoattractant concentration increases in the $+y$ direction. Scale bar, $15\,\mathrm{\mu m}$.}
+\caption[Schematic of the phase-field model of cells crawling through a microchannel]{Schematic of the model. For each cell, the blue arrow represents its polarity $\mathbf{P}_i$, and the red arrow shows its center of mass velocity $\mathbf{v}_i^{\textrm{c.m.}}$; chemoattractant concentration increases in the $+y$ direction. Scale bar, $15\,\mathrm{\mu m}$.}
 \label{fig:ch2:schematics}
 \end{figure}
 
@@ -252,7 +252,7 @@ Alternate models without leader cells are shown in Sec.~\ref{sec:ch2:alt-models}
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/snapshots.pdf}
-\caption{Evolution of rupture for simulations of cells in microchannels with different widths.
+\caption[Simulation snapshots of rupture in microchannels of different widths]{Evolution of rupture for simulations of cells in microchannels with different widths.
 Panels (a)--(d) correspond to $W=6$, $10$, $20$, and $50\,\mathrm{\mu m}$, respectively.
 There are chemical gradients along the microchannels ($+y$ direction) driving cells to move upwards.
 Scale bars, $15\,\mathrm{\mu m}$.}
@@ -285,7 +285,7 @@ We note that the single-cell ruptures being predominant depends on the presence 
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=\textwidth]{chap2/simu.pdf}
-\caption{Simulation results to match experimental data. We adjust $\omega=0.7\omega_0$ for the two narrowest channels, $\omega=0.8\omega_0$ for $20\,\mathrm{\mu m}$ channels, and $\omega=\omega_0$ for $50\,\mathrm{\mu m}$ channels.
+\caption[Simulation results reproducing the dissociation experiments across channel widths]{Simulation results to match experimental data. We adjust $\omega=0.7\omega_0$ for the two narrowest channels, $\omega=0.8\omega_0$ for $20\,\mathrm{\mu m}$ channels, and $\omega=\omega_0$ for $50\,\mathrm{\mu m}$ channels.
 (a) Cluster-size distributions for $W=6,\,10,\,20,\,50\,\mathrm{\mu m}$ microchannels, based on $284,\,257,\,292,\,287$ dissociation events, respectively.
 The corresponding average cluster sizes (dashed lines; mean $\pm$ SE) are $A=1.6,\,2.7,\,3.8,\,4.4$.
 The complete histograms are shown in Fig.~\ref{fig:ch2:SI_simu}(a).
@@ -327,7 +327,7 @@ We test all of these ideas below.
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=\textwidth]{chap2/cell_wall_adh.pdf}
-\caption{Cell-wall adhesion helps cells invade into narrow channels.
+\caption[Cell-wall adhesion helps cells invade narrow channels and shapes the rupture probability]{Cell-wall adhesion helps cells invade into narrow channels.
 Panels (a) and (b) are simulation results ($100$ independent simulations) when there is no cell-wall adhesion term.
 The corresponding average cluster sizes (dashed lines; mean $\pm$ SE) are $A=0,\,1.0,\,1.6,\,3.1$, and the final survival probabilities are $K_s=100/100,\,76/100,\,8/100,\,1/100$.
 The complete histograms are shown in Fig.~\ref{fig:ch2:SI_vary}(a).
@@ -351,10 +351,10 @@ Cell-wall adhesion thus has two effects: some amount of cell-wall adhesion helps
 
 \subsection{Strong cell-cell adhesion leads to rarer but larger ruptures}
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/vary.pdf}
-\caption{How intercellular adhesion, chemotaxis, and leader cells affect the dissociation behaviors.
+\caption[Effects of intercellular adhesion, chemotaxis, and leader cells on dissociation]{How intercellular adhesion, chemotaxis, and leader cells affect the dissociation behaviors.
 Panels (a), (b) are simulation results for different cell-cell adhesion strength $\omega$ in $W=50\,\mathrm{\mu m}$ channels.
 The corresponding average cluster sizes (dashed lines; mean $\pm$ SE) are $A=2.6,\,3.4,\,4.2,\,4.6$, and the final survival probabilities are $K_s=0,\,1/100,\,4/100,\,11/100$.
 Panels (c), (d) are simulation results for different chemotaxis strength $k_\theta$ in $W=50\,\mathrm{\mu m}$ microchannels.
@@ -420,16 +420,16 @@ Since leaders are relatively rare in our default parameters, this may explain th
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=0.7\textwidth]{chap2/snapshots2.pdf}
-\caption{Simulation snapshots for typical systems in jammed ($\textrm{Pe}=0.14$) and unjammed ($\textrm{Pe}=1.43$) states at the same simulation time.
+\caption[Simulation snapshots of cell polarity and velocity in jammed and unjammed states]{Simulation snapshots for typical systems in jammed ($\textrm{Pe}=0.14$) and unjammed ($\textrm{Pe}=1.43$) states at the same simulation time.
 Blue arrows represent the polarity $\mathbf{P}_i$ and red arrows indicate the center of mass velocity $\mathbf{v}_i^\textrm{c.m.}$.
 Scale bars, $15\,\mathrm{\mu m}$.}
 \label{fig:ch2:snapshots_jamming}
 \end{figure}
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/jamming.pdf}
-\caption{Unjamming and rupture.
+\caption[The unjamming and rupture transitions as functions of cell motility and adhesion]{Unjamming and rupture.
 (a) Mean squared displacement $\mathrm{MSD}(t)$ for different cell motility quantified by a dimensionless P\'{e}clet number $\mathrm{Pe}:= p_0 /(R D_r)$.
 The different $\mathrm{Pe}$ shown in this panel are $0.14$, $0.40$, $0.66$, $0.91$, $1.17$, and $1.43$ (default); we have rescaled $\mathrm{MSD}$ and $t$ to make them dimensionless; for each P\'{e}clet number, the dashed lines are results from three independent simulations, and the solid line is their average, and the dash-dotted lines are linear fit at late times where the effective diffusivity $\bar{D}_{\text{eff}}$ is extracted.
 (b) The effective diffusivity $\bar{D}_{\text{eff}}$ as an order parameter for solid-liquid transition.
@@ -564,10 +564,10 @@ Data and code to reproduce this chapter have been deposited at Zenodo, doi:~\hre
 
 In this section, we present various models with different assumptions we have tested and show the process of how we reach our final model given in the main text.
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/SI_no_tuning.pdf}
-\caption{Simulation results for alternate models.
+\caption[Dissociation statistics for alternate model variants with and without leader cells and adhesion tuning]{Simulation results for alternate models.
 Panels (a), (b) are simulation results with neither leader cells nor tuning of cell-cell adhesion ($\omega=\omega_0$ in all microchannels).
 Panels (c), (d) are simulation results after we tune down cell-cell adhesion in narrow microchannels (but no leader cells).
 Panels (e), (f) are simulation results after we introduce the leader cells but still keep cell-cell adhesion $\omega=\omega_0$ in all microchannels.
@@ -612,7 +612,7 @@ Our final model featured in the main text combines the adjustments made in the t
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=\textwidth]{chap2/SI_small_radius.pdf}
-\caption{Simulation results for different cell sizes without special tunings ($300$ independent simulations, $\omega=\omega_0$ in all microchannels, $k_\theta=1.4k_\theta^0$, no leader cells).
+\caption[Effect of cell size on survival curves and dissociation across channel widths]{Simulation results for different cell sizes without special tunings ($300$ independent simulations, $\omega=\omega_0$ in all microchannels, $k_\theta=1.4k_\theta^0$, no leader cells).
 Panels (a) and (b) show the survival curves for different channel widths when the cell radius $R=3.5\,\mathrm{\mu m}$ and $10\,\mathrm{\mu m}$, respectively.
 We notice that the 6-micron channels are too narrow for cells with a radius of $10\,\mathrm{\mu m}$ to enter, resulting in no ruptures occurring [blue curve in Panel (b)].
 Panel (c) shows the median survival time $t_{1/2}$ as a function of microchannel width $W$ for different cell sizes; the results for $R=7\,\mathrm{\mu m}$ (black) are extracted from Fig.~\ref{fig:ch2:SI_no_tuning}(b); the error bars indicate the 95\% confidence intervals.
@@ -666,7 +666,7 @@ The geometric-confinement field $\phi_\textrm{wall}(\mathbf r)$ is defined by a 
 
 \begin{table}[tbp]
 \centering
-\caption{Table of simulation parameters. These parameters are used throughout the chapter; any deviation from them is explicitly noted.}
+\caption[Default parameters of the phase-field dissociation simulations]{Table of simulation parameters. These parameters are used throughout the chapter; any deviation from them is explicitly noted.}
 \label{tab:ch2:param}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lllll}
@@ -778,8 +778,8 @@ The center of mass position for each cell is computed using the following equati
     \mathbf{R}_i^\text{c.m.}=\frac{1}{M_i}\int\mathrm{d}^2r~\mathbf{r}\,\phi_i(\mathbf{r}),
 \end{equation}
 where $M_i:=\int\mathrm{d}^2r~\phi_i(\mathbf{r})$ is the total ``mass'' of the cell.
-Thus the center of mass velocity is readily given by $\mathbf{v}_i^\text{c.m.}=\mathrm{d}\mathbf{R}_i^\text{c.m.}/\mathrm{d} t$.
-The mean squared displacement mentioned in Sec.~\ref{sec:ch2:jamming} is computed by~\cite{loewe2020solid}
+Thus the center-of-mass velocity is readily given by $\mathbf{v}_i^\text{c.m.}=\mathrm{d}\mathbf{R}_i^\text{c.m.}/\mathrm{d} t$.
+The mean-squared displacement (MSD) mentioned in Sec.~\ref{sec:ch2:jamming} is computed by~\cite{loewe2020solid}
 \begin{equation}
     \mathrm{MSD}(t)=\left\langle\frac{1}{N}\sum_{i=1}^N\left[\mathbf{R}_i^{\text{c.m.}}(t+\tau)-\mathbf{R}_i^{\text{c.m.}}(\tau)\right]^2\right\rangle_\tau,
 \end{equation}
@@ -799,7 +799,7 @@ We also show the scatter plots of cluster size vs.\ rupture time for different c
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{chap2/SI_expt.pdf}
-\caption{Experimental results.
+\caption[Full experimental histograms and rupture-time scatter plots]{Experimental results.
 (a) Cluster-size distributions for microchannels of different widths.
 The dashed lines and gray areas denote the average cluster sizes $A$ and their corresponding standard errors of the mean (SEM, or just SE).
 The error bars of the probabilities are determined by the binomial interval formula $\pm\sqrt{p(1-p)/n}$.
@@ -812,7 +812,7 @@ The standard error of the mean (SE) is calculated as $\textrm{SE} = \textrm{SD}/
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{chap2/SI_simu.pdf}
-\caption{Simulation results with $\omega=0.7\omega_0$ for narrow channels, $\omega=0.8\omega_0$ for $20\,\mathrm{\mu m}$ channels, and $\omega=\omega_0$ for $50\,\mathrm{\mu m}$ channels.
+\caption[Full simulated histograms and rupture-time scatter plots]{Simulation results with $\omega=0.7\omega_0$ for narrow channels, $\omega=0.8\omega_0$ for $20\,\mathrm{\mu m}$ channels, and $\omega=\omega_0$ for $50\,\mathrm{\mu m}$ channels.
 (a) Cluster-size distributions for different channel widths.
 The dashed lines and gray areas denote the average cluster sizes $A$ and their corresponding standard errors of the mean (SE).
 Panel (b) displays the $(\text{rupture time}, \text{cluster size})$ phase plane scatter plots.
@@ -823,7 +823,7 @@ The circles represent the average cluster sizes within each time bin (2 hours), 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{chap2/SI_vary.pdf}
-\caption{Simulation results.
+\caption[Cluster-size histograms for varying cell-wall adhesion, cell-cell adhesion, and chemotaxis strength]{Simulation results.
 (a) Histograms when cell-wall adhesion $\kappa$ is set to $0$.
 (b) Histograms for different adhesion strength $\omega$ in $50\,\mathrm{\mu m}$ channels.
 (c) Histograms for different chemotaxis strength $k_\theta$ in $50\,\mathrm{\mu m}$ channels.
@@ -834,7 +834,7 @@ The dashed lines and gray areas in (a)--(c) denote the average cluster sizes $A$
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{chap2/SI_W100.pdf}
-\caption{Simulation results for $W=100\,\mathrm{\mu m}$ channels with cell-cell adhesion fixed at $\omega=\omega_0$.
+\caption[Simulation results for wide $100\,\mathrm{\mu m}$ channels with and without leader cells]{Simulation results for $W=100\,\mathrm{\mu m}$ channels with cell-cell adhesion fixed at $\omega=\omega_0$.
 (a) Histograms for Model 1 (without leader cells) and Model 3 (with leader cells).
 (b) Survival curves for Model 1 and Model 3, which are also presented in Figs.~\ref{fig:ch2:SI_no_tuning}(b) and~\ref{fig:ch2:SI_no_tuning}(f).
 (c) Median survival time $t_{1/2}$ for $R=7\,\mathrm{\mu m}$, extended to $100\,\mathrm{\mu m}$ based on Fig.~\ref{fig:ch2:SI_small_radius}(c).
