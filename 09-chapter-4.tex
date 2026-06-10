@@ -239,6 +239,7 @@ Default parameters: $K_P=1$, $A_0=\pi$.}
 
 \subsection{Force-distance curves in the deformable polygon model}
 
+
 We want to find the relationship of force between cell pairs and distance in the DP model, akin to the values predicted for the finite Voronoi model in Fig.~\ref{fig:ch4:doublet}b. To do this, we apply equal and opposite forces to each cell in an initially relaxed doublet in the DP model, and measure the resulting displacement of the cell centroids $d$. (Note that to be consistent in our sense of cell-cell separation between the DP and FV model, here and throughout this section, we use $d$ to denote the centroid-centroid separation of both the DP and FV cells---cells in the DP model are not perfectly circular and do not have a ``center'' defined as in the FV model.)
 We distribute the force on one cell uniformly over all vertices of each cell to avoid spurious torques~\cite{smeets2019effect}, as shown in Fig.~\ref{fig:ch4:detachment}a.
 We then record the centroid separation and contact length $P^{(c)}$ (red segments in Fig.~\ref{fig:ch4:doublet}a) as functions of the external force $f$. We define the detachment force $f_{\textrm{detach}}^\textrm{DP}$ as the force at which the contact length falls below the typical distance $\ell_c=2\pi\ell_0/M$ between neighboring vertices (see Sec.~\ref{sec:ch4:appendices}).
@@ -249,13 +250,6 @@ What behavior should we expect for detachment forces' dependence on $P_0$? In ou
 However, $P_0$ and $\Lambda=\lambda^{(n)}-\lambda^{(c)}$ both depend on the more fundamental parameter $\lambda^{(c)}$.
 If $\lambda^{(n)}$ is held fixed and only $\lambda^{(c)}$ is varied, increasing adhesion corresponds to moving along the line $\Lambda=\lambda^{(n)}+2K_P P_0$ in the $\Lambda$--$P_0$ plane.
 Along this path, the detachment forces in both the finite Voronoi model and the deformable polygon model increase as cell-cell adhesion is made stronger (Fig.~\ref{fig:ch4:detachment}d).
-
-We compute the force-distance curve in the DP model and track the contact length as the cells are pulled apart from one another. We show these curves in Fig.~\ref{fig:ch4:calibrate}a,b for two different values of $P_0$. Here $f>0$ corresponds to a pull-off force dipole while $f<0$ corresponds to a pushing force dipole.
-The contact length $P^{(c)}$ of the cell doublet decreases roughly linearly with the cell-centroid distance, and in the pulling limit ($f>0$) the force for the DP model increases with centroid distance almost linearly, consistent with Ref.~\cite{smeets2019effect}, where cells are modeled as three-dimensional elastic triangulated shells.
-
-Comparing the analytical curves of the FV model and the DP simulation results in Fig.~\ref{fig:ch4:calibrate}a,b, we find two key results: 1) for small perturbations away from the relaxed state (zero force), the DP and FV models agree well, and 2) the DP model does not have a divergent detachment force, staying attached over a much larger cell-cell distance than the FV model. We also see by looking at the cell doublet shapes in Fig.~\ref{fig:ch4:detachment}a that at larger forces, the finite Voronoi shape assumption starts to fail---cells can have centroids separated by more than $2\ell_0$ without losing contact, and at higher forces cells are no longer well described by circular arcs (rightmost panel of Fig.~\ref{fig:ch4:detachment}a).
-
-We have found that, simply by choosing the energy-minimizing $\ell_0$, the small forces near the equilibrium are in agreement between FV and DP models. However, the detachment forces are clearly not in good agreement. Fig.~\ref{fig:ch4:calibrate} shows two potential approaches to address this.
 
 \begin{figure*}[tp]
 \centering
@@ -269,6 +263,13 @@ Preferred perimeter is set to $P_0=4.8$ and $\Lambda=0.2$, yielding the optimal 
 Default parameters: $K_P=1$, $A_0=\pi$.}
 \label{fig:ch4:detachment}
 \end{figure*}
+
+We compute the force-distance curve in the DP model and track the contact length as the cells are pulled apart from one another. We show these curves in Fig.~\ref{fig:ch4:calibrate}a,b for two different values of $P_0$. Here $f>0$ corresponds to a pull-off force dipole while $f<0$ corresponds to a pushing force dipole.
+The contact length $P^{(c)}$ of the cell doublet decreases roughly linearly with the cell-centroid distance, and in the pulling limit ($f>0$) the force for the DP model increases with centroid distance almost linearly, consistent with Ref.~\cite{smeets2019effect}, where cells are modeled as three-dimensional elastic triangulated shells.
+
+Comparing the analytical curves of the FV model and the DP simulation results in Fig.~\ref{fig:ch4:calibrate}a,b, we find two key results: 1) for small perturbations away from the relaxed state (zero force), the DP and FV models agree well, and 2) the DP model does not have a divergent detachment force, staying attached over a much larger cell-cell distance than the FV model. We also see by looking at the cell doublet shapes in Fig.~\ref{fig:ch4:detachment}a that at larger forces, the finite Voronoi shape assumption starts to fail---cells can have centroids separated by more than $2\ell_0$ without losing contact, and at higher forces cells are no longer well described by circular arcs (rightmost panel of Fig.~\ref{fig:ch4:detachment}a).
+
+We have found that, simply by choosing the energy-minimizing $\ell_0$, the small forces near the equilibrium are in agreement between FV and DP models. However, the detachment forces are clearly not in good agreement. Fig.~\ref{fig:ch4:calibrate} shows two potential approaches to address this.
 
 
 \subsection{Calibration strategy 1: setting a critical length}
@@ -284,6 +285,19 @@ In standard active Voronoi and vertex models, it is well established that larger
 Our result shows that holding all other parameters constant, a larger preferred perimeter $P_0$---corresponding to a more fluid-like state with a lower line tension $\lambda^{(c)}$ for contacting edges---makes clusters harder to rupture (Fig.~\ref{fig:ch4:calibrate}d). This differs from Ref.~\cite{huang2023bridging}, where clusters with larger $P_0$ were more likely to be in dispersed states.
 We attribute this discrepancy not to the choice of cutoff $\delta$, but to calibrating the maximum cell radius $\ell$ to its energy-minimizing value $\ell_0$, which leads to detachment forces that increase with $P_0$ (Fig.~\ref{fig:ch4:detachment}c).
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chap4/calibrate.pdf}
+\caption[Calibrating the finite Voronoi model against the deformable polygon model]{Calibrating the finite Voronoi model (FV) to a deformable polygon (DP) model.
+\textbf{a},\textbf{b} show how the forces in both models and also the contact length $P^{(c)}$ in DP model (green) vary with increasing centroid distance at two different $P_0$ values ($\Lambda=0.2$ and $\delta=0.45$).
+\textbf{c},\textbf{d} are the phase diagrams of median survival time $t_{1/2}$ on $P_0$--$\Lambda$ and $P_0$--$v_0$ planes, where red crosses ($t_{1/2}=0$) indicate tissues are already ruptured at the start (after initial relaxation time), and purple stars indicate that $t_{1/2}$ exceeds the total simulation time. Threshold value is set to $\delta=0.45$.
+\textbf{e}--\textbf{h}, Calibrate FV model by matching the detachment forces $f_\textrm{detach}$ to DP model with varying cutoff $\delta$.
+Gray dashed lines in \textbf{e},\textbf{f} indicate the match of detachment forces in both models.
+Each data point of $t_{1/2}$ in the phase diagrams is obtained by computing the survival probability from the results of $480$ independent simulations.
+Default parameters: $K_P=1$, $A_0=\pi$, $D_r=1.33$.}
+\label{fig:ch4:calibrate}
+\end{figure*}
+
 
 \subsection{Calibration strategy 2: matching detachment forces}
 \label{sec:ch4:cal2}
@@ -297,19 +311,6 @@ As shown in Fig.~\ref{fig:ch4:calibrate}e,f, this calibration strategy introduce
 In the phase diagram of the median survival time $t_{1/2}$ (Fig.~\ref{fig:ch4:calibrate}g,h), this calibration generally makes clusters harder to detach than under the previous strategy (more points appear as stars), since the detachment forces $f_\textrm{detach}^\textrm{FV}$ are much larger now.
 Moreover, because the detachment forces are matched to those of the DP model, the transition lines between no-rupture and rupture states differ from those in Fig.~\ref{fig:ch4:calibrate}c,d: the fracture timescale depends only weakly on the preferred perimeter $P_0$ now, consistent with the detachment-force phase diagram in Fig.~\ref{fig:ch4:detachment}b, whereas the previous strategy (Fig.~\ref{fig:ch4:calibrate}c,d) corresponds to Fig.~\ref{fig:ch4:detachment}c.
 The other trends remain similar to the earlier results: decreasing $\Lambda$ or increasing $v_0$ both promote fracture.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{chap4/calibrate.pdf}
-\caption[Calibrating the finite Voronoi model against the deformable polygon model]{Calibrating the finite Voronoi model (FV) to a deformable polygon (DP) model.
-\textbf{a},\textbf{b} show how the forces in both models and also the contact length $P^{(c)}$ in DP model (green) vary with increasing centroid distance at two different $P_0$ values ($\Lambda=0.2$ and $\delta=0.45$).
-\textbf{c},\textbf{d} are the phase diagrams of median survival time $t_{1/2}$ on $P_0$--$\Lambda$ and $P_0$--$v_0$ planes, where red crosses ($t_{1/2}=0$) indicate tissues are already ruptured at the start (after initial relaxation time), and purple stars indicate that $t_{1/2}$ exceeds the total simulation time. Threshold value is set to $\delta=0.45$.
-\textbf{e}--\textbf{h}, Calibrate FV model by matching the detachment forces $f_\textrm{detach}$ to DP model with varying cutoff $\delta$.
-Gray dashed lines in \textbf{e},\textbf{f} indicate the match of detachment forces in both models.
-Each data point of $t_{1/2}$ in the phase diagrams is obtained by computing the survival probability from the results of $480$ independent simulations.
-Default parameters: $K_P=1$, $A_0=\pi$, $D_r=1.33$.}
-\label{fig:ch4:calibrate}
-\end{figure*}
 
 
 \section{Discussion}

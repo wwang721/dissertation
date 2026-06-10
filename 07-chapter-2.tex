@@ -82,7 +82,7 @@ Reprinted from Ref.~\cite{law2023cytokinesis}. Channel height from the substrate
 \label{fig:ch2:expt_snapshot}
 \end{figure}
 
-\begin{figure}[tp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/expt.pdf}
 \caption[Experimental cluster-size, survival, and rupture-time statistics across channel widths]{Analysis of experimental dissociation events.
@@ -351,7 +351,7 @@ Cell-wall adhesion thus has two effects: some amount of cell-wall adhesion helps
 
 \subsection{Strong cell-cell adhesion leads to rarer but larger ruptures}
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/vary.pdf}
 \caption[Effects of intercellular adhesion, chemotaxis, and leader cells on dissociation]{How intercellular adhesion, chemotaxis, and leader cells affect the dissociation behaviors.
@@ -426,7 +426,7 @@ Scale bars, $15\,\mathrm{\mu m}$.}
 \label{fig:ch2:snapshots_jamming}
 \end{figure}
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/jamming.pdf}
 \caption[The unjamming and rupture transitions as functions of cell motility and adhesion]{Unjamming and rupture.
@@ -564,7 +564,7 @@ Data and code to reproduce this chapter have been deposited at Zenodo, doi:~\hre
 
 In this section, we present various models with different assumptions we have tested and show the process of how we reach our final model given in the main text.
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{chap2/SI_no_tuning.pdf}
 \caption[Dissociation statistics for alternate model variants with and without leader cells and adhesion tuning]{Simulation results for alternate models.
@@ -778,8 +778,8 @@ The center of mass position for each cell is computed using the following equati
     \mathbf{R}_i^\text{c.m.}=\frac{1}{M_i}\int\mathrm{d}^2r~\mathbf{r}\,\phi_i(\mathbf{r}),
 \end{equation}
 where $M_i:=\int\mathrm{d}^2r~\phi_i(\mathbf{r})$ is the total ``mass'' of the cell.
-Thus the center of mass velocity is readily given by $\mathbf{v}_i^\text{c.m.}=\mathrm{d}\mathbf{R}_i^\text{c.m.}/\mathrm{d} t$.
-The mean squared displacement mentioned in Sec.~\ref{sec:ch2:jamming} is computed by~\cite{loewe2020solid}
+Thus the center-of-mass velocity is readily given by $\mathbf{v}_i^\text{c.m.}=\mathrm{d}\mathbf{R}_i^\text{c.m.}/\mathrm{d} t$.
+The mean-squared displacement (MSD) mentioned in Sec.~\ref{sec:ch2:jamming} is computed by~\cite{loewe2020solid}
 \begin{equation}
     \mathrm{MSD}(t)=\left\langle\frac{1}{N}\sum_{i=1}^N\left[\mathbf{R}_i^{\text{c.m.}}(t+\tau)-\mathbf{R}_i^{\text{c.m.}}(\tau)\right]^2\right\rangle_\tau,
 \end{equation}
