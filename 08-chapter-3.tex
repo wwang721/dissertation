@@ -22,7 +22,7 @@ In this chapter, we first develop a one-dimensional theory for motility-driven f
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chap3/cysts.pdf}
-\caption[Germline cysts grow by cell division and fragment by fracture of intercellular bridges]{(a) Live image of an E12.5 ovary shows a germline cyst undergoing both cell division and fracture. Green arrows indicate cells that are about to divide, and orange arrows show the fracture of an intercellular bridge. {Reprinted from Ref.~\cite{levy2024tug}, with permission from Elsevier (License Number: 6105550597121).}
+\caption[Germline cysts grow by division and fragment by fracture]{(a) Live image of an E12.5 ovary shows a germline cyst undergoing both cell division and fracture. Green arrows indicate cells that are about to divide, and orange arrows show the fracture of an intercellular bridge. {Reprinted from Ref.~\cite{levy2024tug}, with permission from Elsevier (License Number: 6105550597121).}
 (b) Schematic illustration of cell division and fracture. Red lines denote intercellular bridges that undergo fracture.}
 \label{fig:ch3:cysts}
 \end{figure}
@@ -119,7 +119,7 @@ where $\gamma \equiv k_b/k_d$ is the ratio of the break rate to the division rat
 \centering
 \vspace{0.3cm}
 \includegraphics[width=0.7\textwidth]{chap3/sketch.pdf}
-\caption[Growth and fracture of cell chains under the all-cell, one-end, and two-end growth modes]{Growth and fracture of cell groups under different assumptions. (a) All cells can divide. After a rupture occurs, one daughter chain is selected at random. (b) Only the cell at one end of the chain can divide. (c) Only the cells at the two ends can divide. (d) Potential rupture points when a minimum cluster size $N_\textrm{min}$ is enforced. Rupture can only occur when the chain length $n\geqslant 2N_\textrm{min}$. Red cells have a non-zero division rate $k_d$, while blue cells have a division rate of zero; gray crosses indicate actual or potential rupture points.}
+\caption[Growth and fracture of cell chains under different growth modes]{Growth and fracture of cell groups under different assumptions. (a) All cells can divide. After a rupture occurs, one daughter chain is selected at random. (b) Only the cell at one end of the chain can divide. (c) Only the cells at the two ends can divide. (d) Potential rupture points when a minimum cluster size $N_\textrm{min}$ is enforced. Rupture can only occur when the chain length $n\geqslant 2N_\textrm{min}$. Red cells have a non-zero division rate $k_d$, while blue cells have a division rate of zero; gray crosses indicate actual or potential rupture points.}
 \label{fig:ch3:schematics}
 \end{figure}
 
@@ -127,7 +127,7 @@ where $\gamma \equiv k_b/k_d$ is the ratio of the break rate to the division rat
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{chap3/statistics.pdf}
-\caption[Steady-state cluster-size distributions and their mean, variance, and CV across growth modes]{(a) Steady-state distribution of chain length $p_n$ for the three growth modes, with $\gamma=0.1$ for the all-cell growth and two-end growth models, and $\gamma$ replaced by $\gamma'=\gamma/2=0.05$ for the one-end growth model (doubled division rate). Crosses represent simulation results, while lines correspond to theoretical predictions.
+\caption[Steady-state cluster-size distributions and statistics across growth modes]{(a) Steady-state distribution of chain length $p_n$ for the three growth modes, with $\gamma=0.1$ for the all-cell growth and two-end growth models, and $\gamma$ replaced by $\gamma'=\gamma/2=0.05$ for the one-end growth model (doubled division rate). Crosses represent simulation results, while lines correspond to theoretical predictions.
 Panels (b)--(d) display the mean $\langle n\rangle$, variance $\langle n^2\rangle-\langle n\rangle^2$, and coefficient of variation $\mathrm{CV}=\sigma_n/\langle n\rangle$, where $\sigma_n=\sqrt{\langle n^2\rangle-\langle n\rangle^2}$. Purple dashed lines are the one-end result after doubling the division rate [$\gamma \to \gamma'=\gamma/2$ in Eq.~\eqref{eq:ch3:ss_solution_one}], while the purple dotted lines show Eq.~\eqref{eq:ch3:ss_solution_one}.
 (e) Steady-state distribution $p_n$ when minimum cluster size $N_{\min}=200$. Crosses are simulation results, lines are theoretical predictions by the matrix method.
 Panels (f)--(h) show how mean, variance, and $\mathrm{CV}$ vary with $N_\mathrm{min}$ in the all-cell growth model. Gray dashed lines show predictions assuming log-uniform distributions [Eq.~\eqref{eq:ch3:loguniform}].}
@@ -272,7 +272,7 @@ An essential assumption in this derivation is the all-cell growth mechanism. Whe
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth]{chap3/2d_simulations.pdf}
-\caption[Two-dimensional active-particle simulations of cluster growth, fracture, and size distributions]{Two-dimensional simulation results.
+\caption[Two-dimensional active-particle simulations of growth and fracture]{Two-dimensional simulation results.
 (a) Representative snapshots from a simulation with $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. The first dashed box shows a cell division event; the second dashed box shows a fracture event (highlighted by the white arrow), where only one of the two resulting sub-clusters is retained. Green arrows indicate instantaneous cell velocities, orange arrows indicate active self-propulsion velocity, and white dashed lines denote intercellular junctions.
 (b) Fractures per hour connected increase with the root-mean-square cell speed $v_\textrm{rms}$.
 (c) Lineage size distributions $p_n$ for different values of $v_\textrm{rms}$, compared to the 1D theoretical prediction $\gamma/(1+\gamma)^n$ (dashed lines), where we have used the corresponding fractures per hour connected in panel (b) as the break rate $k_b$ to compute $\gamma=k_b/k_d$.
@@ -538,7 +538,7 @@ If a basal division rate $k_d^0$ is introduced, the results are relatively strai
 \begin{figure}
 \centering
 \includegraphics[width=0.85\textwidth]{chap3/suppl_basal.pdf}
-\caption[Effect of basal break and division rates on the steady-state size distributions]{Effect of basal break and division rates on the steady-state distributions $p_n$. (a) Cluster sizes when $N_\textrm{min} = 500$ and $\gamma$ is varied, but with a basal break rate $k_b^0=10^{-3}k_b$; this figure should be compared to Fig.~\ref{fig:ch3:sm_distrib_all_models}(e). (b) The near-deterministic case $\gamma=10$ with varying basal break rates $k_b^0$. Minimum cluster size is set to $N_\mathrm{min}=500$; gray dashed lines are the corresponding log-uniform distributions. (c) The same distribution as in Fig.~\ref{fig:ch3:sm_distrib_all_models}(b), but with a basal division rate $k_d^0=k_d$. (d) Coefficients of variation ($\mathrm{CV}$) as a function of $\gamma$ for different basal division rates $k_d^0$. Note that we have used $\gamma\to\gamma'=\gamma/2$, as in Figs.~\ref{fig:ch3:sm_distrib_all_models}(b) and \ref{fig:ch3:statistics}(d).}
+\caption[Effect of basal break and division rates on the steady-state distributions $p_n$]{Effect of basal break and division rates on the steady-state distributions $p_n$. (a) Cluster sizes when $N_\textrm{min} = 500$ and $\gamma$ is varied, but with a basal break rate $k_b^0=10^{-3}k_b$; this figure should be compared to Fig.~\ref{fig:ch3:sm_distrib_all_models}(e). (b) The near-deterministic case $\gamma=10$ with varying basal break rates $k_b^0$. Minimum cluster size is set to $N_\mathrm{min}=500$; gray dashed lines are the corresponding log-uniform distributions. (c) The same distribution as in Fig.~\ref{fig:ch3:sm_distrib_all_models}(b), but with a basal division rate $k_d^0=k_d$. (d) Coefficients of variation ($\mathrm{CV}$) as a function of $\gamma$ for different basal division rates $k_d^0$. Note that we have used $\gamma\to\gamma'=\gamma/2$, as in Figs.~\ref{fig:ch3:sm_distrib_all_models}(b) and \ref{fig:ch3:statistics}(d).}
 \label{fig:ch3:suppl_basal}
 \end{figure}
 
