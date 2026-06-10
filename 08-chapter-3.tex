@@ -22,7 +22,7 @@ In this chapter, we first develop a one-dimensional theory for motility-driven f
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chap3/cysts.pdf}
-\caption{(a) Live image of an E12.5 ovary shows a germline cyst undergoing both cell division and fracture. Green arrows indicate cells that are about to divide, and orange arrows show the fracture of an intercellular bridge. {Reprinted from Ref.~\cite{levy2024tug}, with permission from Elsevier (License Number: 6105550597121).}
+\caption[Germline cysts grow by cell division and fragment by fracture of intercellular bridges]{(a) Live image of an E12.5 ovary shows a germline cyst undergoing both cell division and fracture. Green arrows indicate cells that are about to divide, and orange arrows show the fracture of an intercellular bridge. {Reprinted from Ref.~\cite{levy2024tug}, with permission from Elsevier (License Number: 6105550597121).}
 (b) Schematic illustration of cell division and fracture. Red lines denote intercellular bridges that undergo fracture.}
 \label{fig:ch3:cysts}
 \end{figure}
@@ -86,7 +86,7 @@ which is different from the two-particle result $\langle\delta\ell^2\rangle_2$ a
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{chap3/mechanics.pdf}
-\caption{(a) Illustration of the active chain model. Cells are connected by springs; each cell has active velocity $v_n$.
+\caption[Mechanics of the active chain model and its motility-driven fracture rate]{(a) Illustration of the active chain model. Cells are connected by springs; each cell has active velocity $v_n$.
 (b) Variance of the spring stretch $\langle\delta\ell_n^2\rangle$ as a function of $\mu k\tau$. Gray dashed line is the thermal variance $\langle\delta\ell^2\rangle_\mathrm{th}=D/\mu k$. We change $\mu k\tau$ by varying $\tau$ while fixing $\mu k$ in the simulations. Red dashed line is the two-particle result $\langle\delta\ell^2\rangle_2$.
 (c) Mean escape time $\tau_\mathrm{esc}=1/k_b$. Empty circles are simulation results with $N=1000$ cells; solid lines are theory, Eq.~\eqref{eq:ch3:break_rate}.}
 \label{fig:ch3:mechanics}
@@ -119,7 +119,7 @@ where $\gamma \equiv k_b/k_d$ is the ratio of the break rate to the division rat
 \centering
 \vspace{0.3cm}
 \includegraphics[width=0.7\textwidth]{chap3/sketch.pdf}
-\caption{Growth and fracture of cell groups under different assumptions. (a) All cells can divide. After a rupture occurs, one daughter chain is selected at random. (b) Only the cell at one end of the chain can divide. (c) Only the cells at the two ends can divide. (d) Potential rupture points when a minimum cluster size $N_\textrm{min}$ is enforced. Rupture can only occur when the chain length $n\geqslant 2N_\textrm{min}$. Red cells have a non-zero division rate $k_d$, while blue cells have a division rate of zero; gray crosses indicate actual or potential rupture points.}
+\caption[Growth and fracture of cell chains under the all-cell, one-end, and two-end growth modes]{Growth and fracture of cell groups under different assumptions. (a) All cells can divide. After a rupture occurs, one daughter chain is selected at random. (b) Only the cell at one end of the chain can divide. (c) Only the cells at the two ends can divide. (d) Potential rupture points when a minimum cluster size $N_\textrm{min}$ is enforced. Rupture can only occur when the chain length $n\geqslant 2N_\textrm{min}$. Red cells have a non-zero division rate $k_d$, while blue cells have a division rate of zero; gray crosses indicate actual or potential rupture points.}
 \label{fig:ch3:schematics}
 \end{figure}
 
@@ -127,7 +127,7 @@ where $\gamma \equiv k_b/k_d$ is the ratio of the break rate to the division rat
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{chap3/statistics.pdf}
-\caption{(a) Steady-state distribution of chain length $p_n$ for the three growth modes, with $\gamma=0.1$ for the all-cell growth and two-end growth models, and $\gamma$ replaced by $\gamma'=\gamma/2=0.05$ for the one-end growth model (doubled division rate). Crosses represent simulation results, while lines correspond to theoretical predictions.
+\caption[Steady-state cluster-size distributions and their mean, variance, and CV across growth modes]{(a) Steady-state distribution of chain length $p_n$ for the three growth modes, with $\gamma=0.1$ for the all-cell growth and two-end growth models, and $\gamma$ replaced by $\gamma'=\gamma/2=0.05$ for the one-end growth model (doubled division rate). Crosses represent simulation results, while lines correspond to theoretical predictions.
 Panels (b)--(d) display the mean $\langle n\rangle$, variance $\langle n^2\rangle-\langle n\rangle^2$, and coefficient of variation $\mathrm{CV}=\sigma_n/\langle n\rangle$, where $\sigma_n=\sqrt{\langle n^2\rangle-\langle n\rangle^2}$. Purple dashed lines are the one-end result after doubling the division rate [$\gamma \to \gamma'=\gamma/2$ in Eq.~\eqref{eq:ch3:ss_solution_one}], while the purple dotted lines show Eq.~\eqref{eq:ch3:ss_solution_one}.
 (e) Steady-state distribution $p_n$ when minimum cluster size $N_{\min}=200$. Crosses are simulation results, lines are theoretical predictions by the matrix method.
 Panels (f)--(h) show how mean, variance, and $\mathrm{CV}$ vary with $N_\mathrm{min}$ in the all-cell growth model. Gray dashed lines show predictions assuming log-uniform distributions [Eq.~\eqref{eq:ch3:loguniform}].}
@@ -192,7 +192,7 @@ Our results suggest that clusters of cells may regulate their size not only by c
 \vspace{0.3cm}
 \hspace{-0.2cm}
 \includegraphics[width=0.7\textwidth]{chap3/expt.pdf}
-\caption{A modest change in cell motility can account for the observed decrease in fracture rates over embryonic time. The upper panel shows a logistic decrease in the typical cell speed, $v_\textrm{rms}=\sqrt{D/\tau}$, which we hypothesize underlies the fracture rate reduction. In the lower panel, symbols with error bars are experimental data from Fig.~4C of Ref.~\cite{levy2024tug}; the red dashed line shows the corresponding theoretical predictions for the break rate $k_b$, calculated from the upper panel's $v_\textrm{rms}$ using Eq.~\eqref{eq:ch3:break_rate}.}
+\caption[A declining cell motility can explain the observed fracture-rate decrease over embryonic time]{A modest change in cell motility can account for the observed decrease in fracture rates over embryonic time. The upper panel shows a logistic decrease in the typical cell speed, $v_\textrm{rms}=\sqrt{D/\tau}$, which we hypothesize underlies the fracture rate reduction. In the lower panel, symbols with error bars are experimental data from Fig.~4C of Ref.~\cite{levy2024tug}; the red dashed line shows the corresponding theoretical predictions for the break rate $k_b$, calculated from the upper panel's $v_\textrm{rms}$ using Eq.~\eqref{eq:ch3:break_rate}.}
 \label{fig:ch3:expt}
 \end{figure}
 
@@ -225,7 +225,7 @@ As this is a generalization of the all-cell growth model, the solution in Eq.~\e
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{chap3/survival_probs.pdf}
-\caption{Dependence of survival probability $S(t)$ on break and division rates in the one-dimensional all-cell growth model.
+\caption[Dependence of survival probability on break and division rates in the all-cell model]{Dependence of survival probability $S(t)$ on break and division rates in the one-dimensional all-cell growth model.
 (a) Survival curves for varying break rates $k_b$, with fixed division rate $k_d$, all collapse onto the exponential decay $S(t)=\mathrm{e}^{-k_d t}$ (dashed line).
 (b) Survival probabilities $S(t)$ for three different division rates $k_d$, corresponding to cell cycles of $4, 16$, and $64$ hours, respectively.
 We apply standard Kaplan-Meier survival analysis~\cite{kaplan1958nonparametric} to the data from our rejection-free kinetic Monte Carlo simulations; error bars represent 95\% confidence intervals.}
@@ -272,7 +272,7 @@ An essential assumption in this derivation is the all-cell growth mechanism. Whe
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth]{chap3/2d_simulations.pdf}
-\caption{Two-dimensional simulation results.
+\caption[Two-dimensional active-particle simulations of cluster growth, fracture, and size distributions]{Two-dimensional simulation results.
 (a) Representative snapshots from a simulation with $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. The first dashed box shows a cell division event; the second dashed box shows a fracture event (highlighted by the white arrow), where only one of the two resulting sub-clusters is retained. Green arrows indicate instantaneous cell velocities, orange arrows indicate active self-propulsion velocity, and white dashed lines denote intercellular junctions.
 (b) Fractures per hour connected increase with the root-mean-square cell speed $v_\textrm{rms}$.
 (c) Lineage size distributions $p_n$ for different values of $v_\textrm{rms}$, compared to the 1D theoretical prediction $\gamma/(1+\gamma)^n$ (dashed lines), where we have used the corresponding fractures per hour connected in panel (b) as the break rate $k_b$ to compute $\gamma=k_b/k_d$.
@@ -447,7 +447,7 @@ and the variance is $\langle n^2\rangle-\langle n\rangle^2 = (1+\gamma)/\gamma^2
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{chap3/suppl_distributions.pdf}
-\caption{How the steady-state distributions $p_n$ vary with $\gamma$ and $N_{\min}$ across different growth models. (a) Steady-state distribution $p_n$ for various values of $\gamma$ in the all-cell growth model [Eq.~\eqref{eq:ch3:app_pn_all}]. (b) Steady-state distribution $p_n$ for different $\gamma$ in the one-end growth model, where we have doubled the division rate [$\gamma\to\gamma'=\gamma/2$ in Eq.~\eqref{eq:ch3:app_pn_1}]. (c) Steady-state distribution $p_n$ for different $\gamma$ in the two-end growth model from Eq.~\eqref{eq:ch3:app_pn_2}. (d) Steady-state distribution $p_n$ obtained from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$ incorporating different values of minimum cluster size $N_\mathrm{min}$ with $\gamma=0.1$. (e) Steady-state distribution $p_n$ obtained from the matrix equation method for different values of $\gamma$ with $N_\mathrm{min}=500$. The gray dashed line represents the corresponding log-uniform distribution $1/(n\ln2)$ within the range $[N_\mathrm{min}, 2N_\mathrm{min}]$.}
+\caption[How the steady-state distributions vary with $\gamma$ and $N_\mathrm{min}$ across the growth models]{How the steady-state distributions $p_n$ vary with $\gamma$ and $N_{\min}$ across different growth models. (a) Steady-state distribution $p_n$ for various values of $\gamma$ in the all-cell growth model [Eq.~\eqref{eq:ch3:app_pn_all}]. (b) Steady-state distribution $p_n$ for different $\gamma$ in the one-end growth model, where we have doubled the division rate [$\gamma\to\gamma'=\gamma/2$ in Eq.~\eqref{eq:ch3:app_pn_1}]. (c) Steady-state distribution $p_n$ for different $\gamma$ in the two-end growth model from Eq.~\eqref{eq:ch3:app_pn_2}. (d) Steady-state distribution $p_n$ obtained from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$ incorporating different values of minimum cluster size $N_\mathrm{min}$ with $\gamma=0.1$. (e) Steady-state distribution $p_n$ obtained from the matrix equation method for different values of $\gamma$ with $N_\mathrm{min}=500$. The gray dashed line represents the corresponding log-uniform distribution $1/(n\ln2)$ within the range $[N_\mathrm{min}, 2N_\mathrm{min}]$.}
 \label{fig:ch3:sm_distrib_all_models}
 \end{figure*}
 
@@ -519,7 +519,7 @@ where $\Theta(x)$ is the Heaviside step function. The master equation can be org
 \vspace{0.4cm}
 \hspace{-0.5cm}
 \includegraphics[width=0.7\textwidth]{chap3/suppl_matrix.pdf}
-\caption{Comparison of the analytical solution obtained using the generating function method with numerical results from the matrix equation method. Lines represent the same analytical solutions for $\gamma=0.1$ as shown in Fig.~\ref{fig:ch3:statistics}(a) ($\gamma'=\gamma/2=0.05$ for the one-end growth model). Empty symbols denote exact numerical results from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$.}
+\caption[The generating-function solution compared with numerical matrix-equation results]{Comparison of the analytical solution obtained using the generating function method with numerical results from the matrix equation method. Lines represent the same analytical solutions for $\gamma=0.1$ as shown in Fig.~\ref{fig:ch3:statistics}(a) ($\gamma'=\gamma/2=0.05$ for the one-end growth model). Empty symbols denote exact numerical results from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$.}
 \label{fig:ch3:suppl_matrix}
 \end{figure}
 
@@ -538,7 +538,7 @@ If a basal division rate $k_d^0$ is introduced, the results are relatively strai
 \begin{figure}
 \centering
 \includegraphics[width=0.85\textwidth]{chap3/suppl_basal.pdf}
-\caption{Effect of basal break and division rates on the steady-state distributions $p_n$. (a) Cluster sizes when $N_\textrm{min} = 500$ and $\gamma$ is varied, but with a basal break rate $k_b^0=10^{-3}k_b$; this figure should be compared to Fig.~\ref{fig:ch3:sm_distrib_all_models}(e). (b) The near-deterministic case $\gamma=10$ with varying basal break rates $k_b^0$. Minimum cluster size is set to $N_\mathrm{min}=500$; gray dashed lines are the corresponding log-uniform distributions. (c) The same distribution as in Fig.~\ref{fig:ch3:sm_distrib_all_models}(b), but with a basal division rate $k_d^0=k_d$. (d) Coefficients of variation ($\mathrm{CV}$) as a function of $\gamma$ for different basal division rates $k_d^0$. Note that we have used $\gamma\to\gamma'=\gamma/2$, as in Figs.~\ref{fig:ch3:sm_distrib_all_models}(b) and \ref{fig:ch3:statistics}(d).}
+\caption[Effect of basal break and division rates on the steady-state size distributions]{Effect of basal break and division rates on the steady-state distributions $p_n$. (a) Cluster sizes when $N_\textrm{min} = 500$ and $\gamma$ is varied, but with a basal break rate $k_b^0=10^{-3}k_b$; this figure should be compared to Fig.~\ref{fig:ch3:sm_distrib_all_models}(e). (b) The near-deterministic case $\gamma=10$ with varying basal break rates $k_b^0$. Minimum cluster size is set to $N_\mathrm{min}=500$; gray dashed lines are the corresponding log-uniform distributions. (c) The same distribution as in Fig.~\ref{fig:ch3:sm_distrib_all_models}(b), but with a basal division rate $k_d^0=k_d$. (d) Coefficients of variation ($\mathrm{CV}$) as a function of $\gamma$ for different basal division rates $k_d^0$. Note that we have used $\gamma\to\gamma'=\gamma/2$, as in Figs.~\ref{fig:ch3:sm_distrib_all_models}(b) and \ref{fig:ch3:statistics}(d).}
 \label{fig:ch3:suppl_basal}
 \end{figure}
 
@@ -585,7 +585,7 @@ which depends explicitly on both $k_b$ and $k_d$, as shown in Fig.~\ref{fig:ch3:
 \centering
 \hspace{-0.2cm}
 \includegraphics[width=0.7\textwidth]{chap3/conditional_survival.pdf}
-\caption{Conditional survival probability $u_n(t)$ for different initial cluster sizes $N(0)=n$ in the one-dimensional all-cell growth model, using the estimated break and division rates for germline cysts: $k_b = 0.02\,\mathrm{h}^{-1}$ and $k_d=(\ln2/16)\,\mathrm{h}^{-1}$. The gray dashed line shows the total survival probability $S(t)=\mathrm{e}^{-k_d t}$, averaged over the corresponding steady-state distribution in Eq.~\eqref{eq:ch3:app_pn_all}.}
+\caption[Conditional survival probability for different initial cluster sizes in the all-cell model]{Conditional survival probability $u_n(t)$ for different initial cluster sizes $N(0)=n$ in the one-dimensional all-cell growth model, using the estimated break and division rates for germline cysts: $k_b = 0.02\,\mathrm{h}^{-1}$ and $k_d=(\ln2/16)\,\mathrm{h}^{-1}$. The gray dashed line shows the total survival probability $S(t)=\mathrm{e}^{-k_d t}$, averaged over the corresponding steady-state distribution in Eq.~\eqref{eq:ch3:app_pn_all}.}
 \label{fig:ch3:suppl_conditional_survival}
 \end{figure}
 
@@ -608,7 +608,7 @@ The default parameter values used in our model are listed in Table~\ref{tab:ch3:
 
 \begin{table}
 \centering
-\caption{Table of simulation parameters. These serve as the default parameter values for the AOUP simulations; any deviations from them are explicitly specified.\label{tab:ch3:param}}
+\caption[Default parameters of the AOUP fracture simulations]{Table of simulation parameters. These serve as the default parameter values for the AOUP simulations; any deviations from them are explicitly specified.\label{tab:ch3:param}}
 \begin{tabular}{llcc}
 \toprule\toprule
 Parameter & Description & Dimension & Value \\
@@ -644,7 +644,7 @@ We note that the cluster sizes of germline cysts shown in Fig.~5 of Ref.~\cite{l
 \vspace{0.4cm}
 \hspace{-0.5cm}
 \includegraphics[width=0.7\textwidth]{chap3/suppl_simulation.pdf}
-\caption{A representative time trajectory of chain length $n(t)$ from rfKMC simulation with $N_\textrm{min}=200$ and $\gamma=0.1$. The initial chain length is set to $n_0=1000$, and the simulation begins at $t=0$. The time unit is $1/k_d$.}
+\caption[A representative chain-length trajectory from an rfKMC simulation]{A representative time trajectory of chain length $n(t)$ from rfKMC simulation with $N_\textrm{min}=200$ and $\gamma=0.1$. The initial chain length is set to $n_0=1000$, and the simulation begins at $t=0$. The time unit is $1/k_d$.}
 \label{fig:ch3:suppl_simulation}
 \end{figure}
 
@@ -656,6 +656,6 @@ We note that the cluster sizes of germline cysts shown in Fig.~5 of Ref.~\cite{l
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\textwidth]{chap3/suppl_survival.pdf}
-\caption{(a) Survival probability $S(t)$ from rfKMC simulations of the one-end growth model at fixed division rate $k_d$ with varying break rate $k_b$. (b) Survival probability $S(t)$ from rfKMC simulations of the all-cell growth model with minimum cluster size $N_\textrm{min}=200$, again varying $k_b$ at fixed $k_d$. Dashed lines are the exponential decay $\mathrm{e}^{-k_d t}$. Error bars on $S(t)$ represent 95\% confidence intervals. (c) Distribution of post-fracture size $n$ for pre-fracture size $m=10$ in 2D AOUP simulations with cell motility $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. Division rate $k_d=(\ln 2/16)\,\mathrm{h^{-1}}$.}
+\caption[Survival probabilities and post-fracture size distributions]{(a) Survival probability $S(t)$ from rfKMC simulations of the one-end growth model at fixed division rate $k_d$ with varying break rate $k_b$. (b) Survival probability $S(t)$ from rfKMC simulations of the all-cell growth model with minimum cluster size $N_\textrm{min}=200$, again varying $k_b$ at fixed $k_d$. Dashed lines are the exponential decay $\mathrm{e}^{-k_d t}$. Error bars on $S(t)$ represent 95\% confidence intervals. (c) Distribution of post-fracture size $n$ for pre-fracture size $m=10$ in 2D AOUP simulations with cell motility $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. Division rate $k_d=(\ln 2/16)\,\mathrm{h^{-1}}$.}
 \label{fig:ch3:suppl_survival}
 \end{figure*}
