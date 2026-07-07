@@ -31,8 +31,8 @@ Their ligands, known as ephrins, are normally anchored to the cell surface~\cite
 Ephrin cues can be used to reorganize and repolarize cells.
 Ephrin-coated beads lead to CIL when cells collide with them~\cite{lin2015interplay}, and micropatterned ephrin spatial cues can be used to align intestinal crypt cells~\cite{larranaga2022ephrin}.
 
-Cells can use receptors on their membrane to estimate external ligand concentrations~\cite{singh2020universal, carballo2019receptor, chakrabortty2019theoretical, berg1977physics} and also to sense spatial~\cite{hu2011how, wasnik2019accuracy, hopkins2020chemotaxis, ipina2022collective, hu2010physical, nwogbaga2023physical} or temporal~\cite{mora2010limits} gradients.
-The accuracy limits of these estimations have been extensively studied~\cite{carballo2019receptor, chakrabortty2019theoretical, hu2011how, wasnik2019accuracy, hopkins2020chemotaxis, ipina2022collective}, including related measurements of spatially localized extracellular signals~\cite{wasnik2019accuracy}.
+Cells can use receptors on their membrane to estimate external ligand concentrations~\cite{singh2020universal, carballo2019receptor, berg1977physics} and also to sense spatial~\cite{hu2011how, wasnik2019accuracy, hopkins2020chemotaxis, ipina2022collective, hu2010physical, nwogbaga2023physical} or temporal~\cite{mora2010limits} gradients.
+The accuracy limits of these estimations have been extensively studied~\cite{carballo2019receptor, hu2011how, wasnik2019accuracy, hopkins2020chemotaxis, ipina2022collective}, including related measurements of spatially localized extracellular signals~\cite{wasnik2019accuracy}.
 For a cell to undergo CIL, it must detect the presence and location of the cell-cell contact---akin to measuring a spatially localized chemical.
 The cell's ability to make this detection will be challenged if ligands other than ephrin, i.e., spurious ligands, bind non-specifically to the Eph receptors~\cite{mora2015physical, singh2017simple, feinerman2008quantitative, chylek2014interaction}.
 Potential candidates for the spurious ligands are soluble ephrins~\cite{wykosky2008soluble}, ephrins on extracellular vesicles~\cite{gong2016exosomes}, or ligands for other RTKs, e.g., growth factors~\cite{minami2011ephrina}.
@@ -368,7 +368,7 @@ Moreover, for A549 lung cancer cells, it has been observed that the vast majorit
 As a result, receptor clustering could significantly reduce the number of distinct receptor locations in our model, thereby substantially increasing the errors when estimating the cell-cell contact.
 Additionally, the precise values of the binding constant $k$ and unbinding rate $r$ for ligands and receptors tethered to cell membranes, such as Eph-ephrin, are not entirely clear~\cite{bihr2014association, janes2022first, zarnitsyna2012t, bicknell2015limits}.
 These parameters can also significantly influence the number of binding-unbinding events $M$ that occur during the measuring time $T$.
-Sources of noise downstream of the initial ephrin binding, such as stochasticity in the polarization of the cell's Rho GTPases~\cite{walther2012deterministic, kulawiak2016modeling, copos2020hybrid, ipina2023secreted}, might lead to significant additional noise in responses to CIL.
+Sources of noise downstream of the initial ephrin binding, such as stochasticity in the polarization of the cell's Rho GTPases~\cite{walther2012deterministic, kulawiak2016modeling, copos2020hybrid, perez2024deposited}, might lead to significant additional noise in responses to CIL.
 Incorporating these factors into our model could provide a more comprehensive understanding of cell-cell interaction and response mechanisms.
 
 Code to reproduce this chapter has been deposited at Zenodo, doi:~\href{https://doi.org/10.5281/zenodo.11094134}{10.5281/zenodo.11094134}.
