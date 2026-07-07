@@ -176,8 +176,18 @@
 %% Nature style bibliography
 \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
      date=year, isbn=false, url=false, doi=true]{biblatex}
-\AtEveryBibitem{\clearfield{doi}}  % suppress DOI for the final bibliography
-\DeclareFieldFormat{doi}{%
+%% In the reference list we do NOT print the DOI as standalone text.
+%% Instead, for @article entries the "journal volume, pages (year)" run is
+%% turned into a single hyperlink (to the DOI, or the URL if no DOI is
+%% given) -- APS style.  \fullcite (the chapter openers) is a citation, not
+%% a bibitem, so the hooks below never touch it: it keeps showing the DOI as
+%% "DOI: <link>" text exactly as before.
+\newtoggle{bbx@biblink}                 % true only inside the reference list
+\AtEveryBibitem{%
+  \toggletrue{bbx@biblink}%
+  \ifentrytype{article}{}{\clearfield{doi}}}% non-articles: drop DOI as before
+\AtEveryCite{\togglefalse{bbx@biblink}}
+\DeclareFieldFormat{doi}{%              % used by \fullcite (DOI shown as text)
   DOI:\addspace
   \ifhyperref
     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
@@ -190,6 +200,65 @@
     }
   }
 }
+%% "journal volume, pages (year)" run used as the hyperlink text
+\newbibmacro*{nat@jouryear}{%
+  \usebibmacro{journal+issuetitle}%
+  \newunit
+  \usebibmacro{byeditor+others}%
+  \newunit
+  \usebibmacro{note+pages}%
+  \setunit{\addspace}%
+  \usebibmacro{issue+date}}
+%% wrap that run in an \href to the DOI (else the URL); plain text if neither
+\newbibmacro*{nat@jouryear+link}{%
+  \iffieldundef{doi}
+    {\iffieldundef{url}
+       {\usebibmacro{nat@jouryear}}
+       {\href{\thefield{url}}{\usebibmacro{nat@jouryear}}}}
+    {\href{https://doi.org/\thefield{doi}}{\usebibmacro{nat@jouryear}}}}
+%% article driver: identical to nature.bbx, except that the journal->year
+%% block is emitted as one hyperlink in the reference list (bbx@biblink
+%% true); \fullcite (bbx@biblink false) keeps the original layout with the
+%% visible "DOI: <link>".
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \iftoggle{bbx:articletitle}
+    {\usebibmacro{title}\newblock}
+    {}%
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{bytranslator+others}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit\newblock
+  \iftoggle{bbx@biblink}
+    {\usebibmacro{nat@jouryear+link}}
+    {\usebibmacro{journal+issuetitle}%
+     \newunit
+     \usebibmacro{byeditor+others}%
+     \newunit
+     \usebibmacro{note+pages}%
+     \newunit
+     \iftoggle{bbx:isbn}{\printfield{issn}}{}%
+     \newunit\newblock
+     \usebibmacro{doi+eprint+url}%
+     \setunit{\addspace}\newblock
+     \usebibmacro{issue+date}}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
 
 %% APA style
 % \usepackage[backend=biber, defernumbers=true, style=apa, maxnames=99,
