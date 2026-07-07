@@ -177,21 +177,22 @@
 \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
      date=year, isbn=false, url=false, doi=true]{biblatex}
 %% In the reference list we do NOT print the DOI as standalone text.
-%% Instead, for @article entries the "journal volume, pages (year)" run is
-%% turned into a single hyperlink (to the DOI, or the URL if no DOI is
-%% given) -- APS style.  \fullcite (the chapter openers) is a citation, not
-%% a bibitem, so the hooks below never touch it: it keeps showing the DOI as
-%% "DOI: <link>" text exactly as before.
+%% Instead each entry gets ONE hyperlink (to its DOI, or its URL when no DOI
+%% is given): for @article the "journal volume, pages (year)" run (APS
+%% style; see the article driver below), and for books and other types the
+%% title (see the \nattitlelink hook further down).  \fullcite (the chapter
+%% openers) is a citation, not a bibitem, so the toggle below stays false
+%% there: it keeps showing the DOI as "DOI: <link>" text exactly as before.
 \newtoggle{bbx@biblink}                 % true only inside the reference list
-\AtEveryBibitem{%
-  \toggletrue{bbx@biblink}%
-  \ifentrytype{article}{}{\clearfield{doi}}}% non-articles: drop DOI as before
+\AtEveryBibitem{\toggletrue{bbx@biblink}}
 \AtEveryCite{\togglefalse{bbx@biblink}}
-\DeclareFieldFormat{doi}{%              % used by \fullcite (DOI shown as text)
-  DOI:\addspace
-  \ifhyperref
-    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
-    {\nolinkurl{#1}}}
+\DeclareFieldFormat{doi}{%              % \fullcite shows "DOI: <link>"; the
+  \iftoggle{bbx@biblink}                % reference list suppresses that text
+    {}%
+    {DOI:\addspace
+     \ifhyperref
+       {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+       {\nolinkurl{#1}}}}
 \DeclareSourcemap{
   \maps[datatype=bibtex]{
     \map{
@@ -200,7 +201,13 @@
     }
   }
 }
-%% "journal volume, pages (year)" run used as the hyperlink text
+%% wrap #1 in an \href to the entry's DOI (else its URL); plain if neither
+\newcommand{\nathref}[1]{%
+  \iffieldundef{doi}
+    {\iffieldundef{url}{#1}{\href{\thefield{url}}{#1}}}
+    {\href{https://doi.org/\thefield{doi}}{#1}}}
+%% @article and @inproceedings link the trailing publication run:
+%% "journal volume, pages (year)" for an article ...
 \newbibmacro*{nat@jouryear}{%
   \usebibmacro{journal+issuetitle}%
   \newunit
@@ -209,13 +216,29 @@
   \usebibmacro{note+pages}%
   \setunit{\addspace}%
   \usebibmacro{issue+date}}
-%% wrap that run in an \href to the DOI (else the URL); plain text if neither
 \newbibmacro*{nat@jouryear+link}{%
-  \iffieldundef{doi}
-    {\iffieldundef{url}
-       {\usebibmacro{nat@jouryear}}
-       {\href{\thefield{url}}{\usebibmacro{nat@jouryear}}}}
-    {\href{https://doi.org/\thefield{doi}}{\usebibmacro{nat@jouryear}}}}
+  \printtext{\relax}% flush the pending "." (after the title) OUTSIDE the link
+  \nathref{\usebibmacro{nat@jouryear}}}% (\printtext{} alone is a no-op)
+%% ... and "booktitle volume (year), pages" for a proceedings paper
+\newbibmacro*{nat@procrun}{%
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \usebibmacro{event+venue+date}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit
+  \iffieldundef{maintitle}{\printfield{volume}\printfield{part}}{}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}}
+\newbibmacro*{nat@procrun+link}{%
+  \printtext{\relax}% keep the leading "In" / punctuation outside the link
+  \nathref{\usebibmacro{nat@procrun}}}
 %% article driver: identical to nature.bbx, except that the journal->year
 %% block is emitted as one hyperlink in the reference list (bbx@biblink
 %% true); \fullcite (bbx@biblink false) keeps the original layout with the
@@ -249,6 +272,40 @@
      \usebibmacro{doi+eprint+url}%
      \setunit{\addspace}\newblock
      \usebibmacro{issue+date}}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+%% inproceedings driver: article-like.  Identical to nature.bbx, except the
+%% "booktitle volume (year), pages" run becomes one hyperlink in the
+%% reference list (bbx@biblink true) while the paper title is NOT linked;
+%% \fullcite (bbx@biblink false) keeps the original layout incl. "DOI: <link>".
+\DeclareBibliographyDriver{inproceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \iftoggle{bbx:articletitle}
+    {\usebibmacro{title}\newblock}
+    {}%
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{in:}%
+  \iftoggle{bbx@biblink}
+    {\usebibmacro{nat@procrun+link}}
+    {\usebibmacro{nat@procrun}}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}{\printfield{isbn}}{}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -363,22 +420,43 @@
 %% the following block ensures articles are sentence case 
 %% but the journal names are title case 
 \DeclareFieldFormat{sentencecase}{\MakeSentenceCase{#1}}
+%% in the reference list, hyperlink the title of every NON-article entry
+%% (books etc.) to its DOI (else URL); articles link their journal run
+%% instead, and \fullcite / entries without a DOI or URL are left plain.
+\newcommand{\nattitlelink}[1]{%
+  \ifboolexpr{ togl {bbx@biblink}
+               and not test {\ifentrytype{article}}
+               and not test {\ifentrytype{inproceedings}}
+               and ( not test {\iffieldundef{doi}}
+                     or not test {\iffieldundef{url}} ) }
+    {\nathref{\printtext[title]{#1}}}%
+    {\printtext[title]{#1}}}
 \renewbibmacro*{title}{%
   \ifthenelse{\iffieldundef{title}\AND\iffieldundef{subtitle}}
     {}
     {\ifthenelse{\ifentrytype{article}\OR\ifentrytype{inbook}%
       \OR\ifentrytype{incollection}\OR\ifentrytype{inproceedings}%
       \OR\ifentrytype{inreference}}
-      {\printtext[title]{%
+      {\nattitlelink{%
         \printfield[sentencecase]{title}%
         \setunit{\subtitlepunct}%
         \printfield[sentencecase]{subtitle}}}%
-      {\printtext[title]{%
+      {\nattitlelink{%
         \printfield[titlecase]{title}%
         \setunit{\subtitlepunct}%
         \printfield[titlecase]{subtitle}}}%
      \newunit}%
   \printfield{titleaddon}}
+%% in the reference list, hyperlink the booktitle of @inbook / @incollection
+%% entries (whose own chapter title is not printed by this style) to the DOI.
+\DeclareFieldFormat{booktitle}{%
+  \ifboolexpr{ togl {bbx@biblink}
+               and ( test {\ifentrytype{inbook}}
+                     or test {\ifentrytype{incollection}} )
+               and ( not test {\iffieldundef{doi}}
+                     or not test {\iffieldundef{url}} ) }
+    {\nathref{\mkbibemph{#1}}\nopunct}%
+    {\mkbibemph{#1}\nopunct}}
 
 
 %%%% separate category for papers to be not cited in the bibliography
