@@ -614,8 +614,9 @@
 
 %%%% TOCLOFT: modified macros/ commands for printing ToC, LoF, LoT
 \newcommand{\mytableofcontents}{
-    \clearpage
+    \clearpage \phantomsection
     \renewcommand{\contentsname}{Table of Contents}
+    \addcontentsline{toc}{chapter}{Table of Contents}
     \tableofcontents
     \clearpage
 }
@@ -744,12 +745,16 @@
 
 
 %%%% MUST ADD ABSTRACT (includes committee as well)
+\fancyhead[L]{\large\nouppercase \leftmark} % enlarged running header, Abstract only
 \include{02-abstract}
+\fancyhead[L]{\nouppercase \leftmark}       % restore normal header for the rest
 
 
 %%%% OPTIONAL but COMMON: preface chapters
 \include{03-dedication}
-\include{04-acknowledgement}        
+\fancyhead[L]{\large\nouppercase \leftmark} % enlarged running header, Acknowledgement only
+\include{04-acknowledgement}
+\fancyhead[L]{\nouppercase \leftmark}       % restore normal header for the rest
 \include{05-epigraph}
 %% you can have other chapters and the order does not matter
 
