@@ -386,6 +386,8 @@
 
 
 %%%% HYPERREF PACKAGE
+\definecolor{dark_blue}{rgb}{0.176,0.184,0.569}
+\def\HyperlinkColor{dark_blue}      % color for hyperlinks
 \hypersetup{linktocpage, unicode, linktoc=all, colorlinks=true,
     citecolor=\HyperlinkColor, filecolor=\HyperlinkColor,
     linkcolor=\HyperlinkColor, urlcolor=\HyperlinkColor}
@@ -772,7 +774,8 @@
 %
 %% OPTIONAL: you can add more lists here (but you will have to define those)
 %
-\hypersetup{linkcolor=blue}                 % revert it back to blue
+% \hypersetup{linkcolor=blue}                 % revert it back to blue
+\hypersetup{linkcolor=dark_blue}
 \microtypesetup{protrusion=true}            % turn on protrusion from microtype
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% END FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
