@@ -48,7 +48,9 @@
 \def\BibFileName{thesis.bib}                % name of BibLaTeX-compatible bib file 
 
 
-\def\FontPackage{lmodern}                   % default font package
+% \def\FontPackage{lmodern}                   % default font package
+\def\FontPackage{newtxtext}                 % Times-like text font (was: lmodern);
+                                            % matching math font newtxmath below
 
 \def\HyperlinkColor{blue}                   % color for hyperlinks
 
@@ -157,8 +159,15 @@
 
 
 %%%% COMMON MATH PACKAGES
-\usepackage{amsfonts,amssymb,amsmath,amsthm,autobreak,
-    bm,cancel,dsfont,mathtools,mathbbol,mathrsfs,siunitx,upgreek}
+% \usepackage{amsfonts,amssymb,amsmath,amsthm,autobreak,
+%     bm,cancel,dsfont,mathtools,mathbbol,mathrsfs,siunitx,upgreek}
+\usepackage{amsmath,amsthm,autobreak,cancel,mathtools,siunitx}
+%% Times-compatible math font.  newtxmath supplies \mathbb and the amssymb
+%% symbols itself, so amssymb / amsfonts / mathbbol / mathrsfs / dsfont /
+%% upgreek are dropped (none of their commands are used, and keeping them
+%% exceeds LaTeX's 16 math-alphabet limit).  Load after amsmath; bm after it.
+\usepackage{newtxmath}
+\usepackage{bm}
 
 
 %%%% TABLE-RELATED PACKAGES

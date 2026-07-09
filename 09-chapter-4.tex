@@ -79,14 +79,6 @@ Time is scaled by the mechanical relaxation time $1/\mu K_A L^2$. Unless otherwi
 \subsection{Tissue fracture timescale depends systematically on time step}
 \label{sec:ch4:timestep}
 
-When performing a simple time-step convergence check of the AFV model, we find a strange phenomenon: when the tension difference $\Lambda > 0$ and a smaller time step $\Delta t$ is used to evolve the dynamics, cells appear to be more adherent to each other, and fewer gaps form between cells.
-As shown in Fig.~\ref{fig:ch4:timestep}a, we evolve a cluster of $N=100$ cells using different time steps, $\Delta t=0.01$ and $\Delta t=0.005$.
-After a simulation of $100$ time units, the cluster evolved with the smaller $\Delta t$ is more compact than the one evolved with the larger $\Delta t$, and unlike the large-$\Delta t$ cluster, it has not fractured or formed holes.
-We have also confirmed that this behavior occurs in the code released by Ref.~\cite{huang2023bridging}. One way to quantify cluster cohesion is to consider the time scale of rupture of the cluster---i.e., for an initially $N$-cell cluster, due to the random motility of individual cells, when does it rupture into two disconnected clusters?
-This can be measured using the survival probability $S(t)=\mathbb{P}(T>t)$, where we monitor the time $T$ of the \emph{first} rupture event~\cite{wang2026controlling, wang2025confinement}.
-Fig.~\ref{fig:ch4:timestep}b shows $S(t)$ for a range of $\Delta t$: as $\Delta t$ decreases, rupture is delayed, and the survival curves shift to longer times.
-A convenient summary statistic is the median survival time $t_{1/2}=S^{-1}(1/2)$---the time at which the survival probability drops to one half---which grows rapidly as $\Delta t$ is reduced (blue curve in Fig.~\ref{fig:ch4:timestep}c).
-
 \begin{figure}[tp]
 \centering
 \includegraphics[width=0.85\textwidth]{chap4/timestep.pdf}
@@ -99,6 +91,16 @@ For each value of $\Delta t$, we apply standard Kaplan-Meier survival analysis~\
 Parameters: number of cells $N=100$, initial packing fraction $\phi=0.5$, $\ell=1$, $K_P=1$, $A_0=\pi$, $P_0=4.8$, $\Lambda=0.1$, angular diffusion coefficient $D_r=1.33$, and active velocity $v_0=1.5$.}
 \label{fig:ch4:timestep}
 \end{figure}
+
+
+When performing a simple time-step convergence check of the AFV model, we find a strange phenomenon: when the tension difference $\Lambda > 0$ and a smaller time step $\Delta t$ is used to evolve the dynamics, cells appear to be more adherent to each other, and fewer gaps form between cells.
+As shown in Fig.~\ref{fig:ch4:timestep}a, we evolve a cluster of $N=100$ cells using different time steps, $\Delta t=0.01$ and $\Delta t=0.005$.
+After a simulation of $100$ time units, the cluster evolved with the smaller $\Delta t$ is more compact than the one evolved with the larger $\Delta t$, and unlike the large-$\Delta t$ cluster, it has not fractured or formed holes.
+We have also confirmed that this behavior occurs in the code released by Ref.~\cite{huang2023bridging}. One way to quantify cluster cohesion is to consider the time scale of rupture of the cluster---i.e., for an initially $N$-cell cluster, due to the random motility of individual cells, when does it rupture into two disconnected clusters?
+This can be measured using the survival probability $S(t)=\mathbb{P}(T>t)$, where we monitor the time $T$ of the \emph{first} rupture event~\cite{wang2026controlling, wang2025confinement}.
+Fig.~\ref{fig:ch4:timestep}b shows $S(t)$ for a range of $\Delta t$: as $\Delta t$ decreases, rupture is delayed, and the survival curves shift to longer times.
+A convenient summary statistic is the median survival time $t_{1/2}=S^{-1}(1/2)$---the time at which the survival probability drops to one half---which grows rapidly as $\Delta t$ is reduced (blue curve in Fig.~\ref{fig:ch4:timestep}c).
+
 
 Fig.~\ref{fig:ch4:timestep}b,c shows that our qualitative visual analysis is correct: the cells become more adherent as the time step $\Delta t$ decreases. Why does this happen? Does this reflect an issue with numerical algorithms, such as an incorrect choice of time integration schemes, or is it something more fundamental? In the next section, we show that this is an unavoidable consequence of the underlying geometric assumptions of the model.
 
@@ -182,7 +184,14 @@ Thus, a minimal practical regularization is to bound the vanishing denominator i
 \end{equation}
 This prescription renders forces finite at detachment while leaving them unchanged for $|\mathbf{r}_i-\mathbf{r}_j|<\sqrt{4\ell^2-\delta^2}=2\ell-(\delta^2/4\ell)+\mathcal{O}(\delta^4)$, at the cost of introducing a new microscopic length scale $\delta$. This cutoff can be interpreted as a threshold contact length below which the Voronoi shape assumption is faulty, analogous to the finite edge-length criterion used to trigger T1 transitions in vertex models~\cite{chen2022activation, bi2015density, fletcher2014vertex, spahn2013vertex}.
 
-\begin{figure}[ht]
+
+From the shapes of the curves in Fig.~\ref{fig:ch4:doublet}b, for $\Lambda>0$ the force-distance relation exhibits a local minimum near $d\approx2\ell$, after which the force increases rapidly toward divergence.
+For typical parameters, this rapid growth sets in around $d=1.95\ell$, corresponding to a threshold value $\delta=\sqrt{4\ell^2-d^2}\approx 0.45\ell$.
+Applying the cutoff of Eq.~\eqref{eq:ch4:cutoff} with $\delta = 0.45$ (as $\ell = 1$), we successfully regularize the detachment forces around $d=2\ell$ (see Fig.~\ref{fig:ch4:truncated}a), and the truncation effect kicks in at $d_c\approx1.95$ as expected (inset of Fig.~\ref{fig:ch4:truncated}a). With this truncation, we eliminate the time-step dependence of the tissue fracture timescale (Fig.~\ref{fig:ch4:timestep}c, red curve).
+
+In the finite Voronoi model, cell doublets are forced to detach when the cell-center distance $d$ exceeds $2\ell$. We extract the final detachment forces $f_\textrm{detach}$ at $d=2\ell$ numerically, and we find that, after introducing the regularization, this force is no longer divergent even when sweeping through the parameter space of $P_0$ and $\Lambda$ (Fig.~\ref{fig:ch4:truncated}b). The detachment forces in Fig.~\ref{fig:ch4:truncated}b increase strongly with $\Lambda$, as we would expect---increasing $\Lambda$ corresponds to a higher energy cost for the cell-medium interface, increasing the cost for separation. We also see that increasing $P_0$ while holding other parameters constant weakly decreases the detachment force. This is consistent with, e.g., looking at the analytical detachment force in Eq.~\eqref{eq:ch4:force} at the distance at which regularization kicks in, $\epsilon_c = \ell - d_c/2$.
+
+\begin{figure}[t]
 \centering
 \vspace{0.3cm}
 \includegraphics[width=0.75\textwidth]{chap4/truncated.pdf}
@@ -192,12 +201,6 @@ This prescription renders forces finite at detachment while leaving them unchang
 Default parameters: $\ell=1$, $K_P=1$, and $A_0=\pi$.}
 \label{fig:ch4:truncated}
 \end{figure}
-
-From the shapes of the curves in Fig.~\ref{fig:ch4:doublet}b, for $\Lambda>0$ the force-distance relation exhibits a local minimum near $d\approx2\ell$, after which the force increases rapidly toward divergence.
-For typical parameters, this rapid growth sets in around $d=1.95\ell$, corresponding to a threshold value $\delta=\sqrt{4\ell^2-d^2}\approx 0.45\ell$.
-Applying the cutoff of Eq.~\eqref{eq:ch4:cutoff} with $\delta = 0.45$ (as $\ell = 1$), we successfully regularize the detachment forces around $d=2\ell$ (see Fig.~\ref{fig:ch4:truncated}a), and the truncation effect kicks in at $d_c\approx1.95$ as expected (inset of Fig.~\ref{fig:ch4:truncated}a). With this truncation, we eliminate the time-step dependence of the tissue fracture timescale (Fig.~\ref{fig:ch4:timestep}c, red curve).
-
-In the finite Voronoi model, cell doublets are forced to detach when the cell-center distance $d$ exceeds $2\ell$. We extract the final detachment forces $f_\textrm{detach}$ at $d=2\ell$ numerically, and we find that, after introducing the regularization, this force is no longer divergent even when sweeping through the parameter space of $P_0$ and $\Lambda$ (Fig.~\ref{fig:ch4:truncated}b). The detachment forces in Fig.~\ref{fig:ch4:truncated}b increase strongly with $\Lambda$, as we would expect---increasing $\Lambda$ corresponds to a higher energy cost for the cell-medium interface, increasing the cost for separation. We also see that increasing $P_0$ while holding other parameters constant weakly decreases the detachment force. This is consistent with, e.g., looking at the analytical detachment force in Eq.~\eqref{eq:ch4:force} at the distance at which regularization kicks in, $\epsilon_c = \ell - d_c/2$.
 
 
 \section{Calibration with a deformable polygon model}
@@ -272,6 +275,19 @@ Comparing the analytical curves of the FV model and the DP simulation results in
 
 We have found that, simply by choosing the energy-minimizing $\ell_0$, the small forces near the equilibrium are in agreement between FV and DP models. However, the detachment forces are clearly not in good agreement. Fig.~\ref{fig:ch4:calibrate} shows two potential approaches to address this.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chap4/calibrate.pdf}
+\caption[Calibrating the finite Voronoi model against the deformable polygon model]{Calibrating the finite Voronoi model (FV) to a deformable polygon (DP) model.
+\textbf{a},\textbf{b} show how the forces in both models and also the contact length $P^{(c)}$ in DP model (green) vary with increasing centroid distance at two different $P_0$ values ($\Lambda=0.2$ and $\delta=0.45$).
+\textbf{c},\textbf{d} are the phase diagrams of median survival time $t_{1/2}$ on $P_0$--$\Lambda$ and $P_0$--$v_0$ planes, where red crosses ($t_{1/2}=0$) indicate tissues are already ruptured at the start (after initial relaxation time), and purple stars indicate that $t_{1/2}$ exceeds the total simulation time. Threshold value is set to $\delta=0.45$.
+\textbf{e}--\textbf{h}, Calibrate FV model by matching the detachment forces $f_\textrm{detach}$ to DP model with varying cutoff $\delta$.
+Gray dashed lines in \textbf{e},\textbf{f} indicate the match of detachment forces in both models.
+Each data point of $t_{1/2}$ in the phase diagrams is obtained by computing the survival probability from the results of $480$ independent simulations.
+Default parameters: $K_P=1$, $A_0=\pi$, $D_r=1.33$.}
+\label{fig:ch4:calibrate}
+\end{figure*}
+
 
 \subsection{Calibration strategy 1: setting a critical length}
 \label{sec:ch4:cal1}
@@ -285,19 +301,6 @@ Given this strategy, how does cluster rupture, as we explored in Fig.~\ref{fig:c
 In standard active Voronoi and vertex models, it is well established that larger preferred perimeter or higher motility $v_0$ leads to more fluid-like behavior.
 Our result shows that holding all other parameters constant, a larger preferred perimeter $P_0$---corresponding to a more fluid-like state with a lower line tension $\lambda^{(c)}$ for contacting edges---makes clusters harder to rupture (Fig.~\ref{fig:ch4:calibrate}d). This differs from Ref.~\cite{huang2023bridging}, where clusters with larger $P_0$ were more likely to be in dispersed states.
 We attribute this discrepancy not to the choice of cutoff $\delta$, but to calibrating the maximum cell radius $\ell$ to its energy-minimizing value $\ell_0$, which leads to detachment forces that increase with $P_0$ (Fig.~\ref{fig:ch4:detachment}c).
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{chap4/calibrate.pdf}
-\caption[Calibrating the finite Voronoi model against the deformable polygon model]{Calibrating the finite Voronoi model (FV) to a deformable polygon (DP) model.
-\textbf{a},\textbf{b} show how the forces in both models and also the contact length $P^{(c)}$ in DP model (green) vary with increasing centroid distance at two different $P_0$ values ($\Lambda=0.2$ and $\delta=0.45$).
-\textbf{c},\textbf{d} are the phase diagrams of median survival time $t_{1/2}$ on $P_0$--$\Lambda$ and $P_0$--$v_0$ planes, where red crosses ($t_{1/2}=0$) indicate tissues are already ruptured at the start (after initial relaxation time), and purple stars indicate that $t_{1/2}$ exceeds the total simulation time. Threshold value is set to $\delta=0.45$.
-\textbf{e}--\textbf{h}, Calibrate FV model by matching the detachment forces $f_\textrm{detach}$ to DP model with varying cutoff $\delta$.
-Gray dashed lines in \textbf{e},\textbf{f} indicate the match of detachment forces in both models.
-Each data point of $t_{1/2}$ in the phase diagrams is obtained by computing the survival probability from the results of $480$ independent simulations.
-Default parameters: $K_P=1$, $A_0=\pi$, $D_r=1.33$.}
-\label{fig:ch4:calibrate}
-\end{figure*}
 
 
 \subsection{Calibration strategy 2: matching detachment forces}
