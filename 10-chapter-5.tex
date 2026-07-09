@@ -53,7 +53,7 @@ We find that cell-cell contact can be highly reliably detected even at large lev
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.7\textwidth]{chap5/sketch.png}
-\caption[Two cells sensing each other at contact through Eph-ephrin binding amid spurious ligands]{Illustration of two cells in contact where they can sense each other through Eph-ephrin signaling. Both Eph receptors (blue receptors) and their ligands---ephrins (green ellipses), are distributed on the cell membranes. Besides the cognate ligands, other spurious ligands (red squares) can also bind to the Eph receptors. These incorrect binding events mixed with the correct Eph-ephrin binding will affect the sensing accuracy of contact inhibition of locomotion.}
+\caption[Two cells sensing each other at contact through Eph-ephrin binding]{Illustration of two cells in contact where they can sense each other through Eph-ephrin signaling. Both Eph receptors (blue receptors) and their ligands---ephrins (green ellipses), are distributed on the cell membranes. Besides the cognate ligands, other spurious ligands (red squares) can also bind to the Eph receptors. These incorrect binding events mixed with the correct Eph-ephrin binding will affect the sensing accuracy of contact inhibition of locomotion.}
 \label{fig:ch5:schematics}
 \end{figure}
 
@@ -498,28 +498,6 @@ To sum up, to go from the analytical derivatives of Eq.~\eqref{eq:ch5:log-likeli
 \end{eqnarray}
 where the last term is computed by numerical integration using Gaussian quadrature (\texttt{integrate.quad} method provided by SciPy~\cite{virtanen2020scipy}).
 
-\begin{table}[t]
-\centering
-\caption[Default parameters of the CIL sensing model]{Table of simulation parameters. These parameters are used throughout this chapter; any deviation from them is explicitly noted.}
-\label{tab:ch5:params}
-\begin{tabular}{llll}
-\toprule\toprule
-Parameter & Description & Dimension & Value\\\midrule
-$c_0$ & Ephrin concentration & $L^{-2}$ & $10^2\,\mathrm{\mu m}^{-2}$~\cite{xu2011epha2}\\
-$\chi$ & Fraction of correct ligands $c_0/c_t$ & $1$ & Varying\\
-$k$ & Eph-ephrin binding constant & $L^2/T$ & $10^{-2}\,\mathrm{\mu m^2/s}$\\
-$r$ & Eph-ephrin unbinding rate & $T^{-1}$ & $1\,\mathrm{s}^{-1}$\\
-$\alpha$ & Ratio of unbinding rates $r/r'$ & $1$ & Varying\\
-$x_0$ & Contact center position & $L$ & $50\,\mathrm{\mu m}$ \\
-$\sigma$ & Contact width & $L$ & Varying\\
-$\omega$ & Boundary steepness & $L$ & $1\,\mathrm{\mu m}$\\
-$T$ & Measuring time & $T$ & $1\,\mathrm{s}$\\
-$L$ & Cell perimeter & $L$ & $100\,\mathrm{\mu m}$ \\
-$a$ & Eph receptor spacing & $L$ & $0.01\,\mathrm{\mu m}$ \\
-$N$ & Number of receptors & $1$ & $10000$\\
-\bottomrule\bottomrule
-\end{tabular}
-\end{table}
 
 We can see from Eq.~\eqref{eq:ch5:log-likelihood} that all terms in the Fisher information matrix should contain $\langle M_n\rangle$ or $\langle T_u\rangle$---so we expect that the Fisher information time is thus proportional to the total measuring time $T$, at least in the limit of $T\gg\tau_\textrm{corr}$ where our analytic theory is appropriate.
 After obtaining all the terms in the matrix numerically, we can compute its inverse and take the diagonal elements as the lower bound of the variances, namely the Cram\'{e}r-Rao bound in Eq.~\eqref{eq:ch5:CRB}.
@@ -546,6 +524,30 @@ For the FPR, we do simulations by first assuming the other cell is absent (setti
 We perform approximately $\sim 10^5$ simulations to do averages for each data point shown in Fig.~\ref{fig:ch5:FNR}, which allows us to obtain robust and reliable results for the analysis.
 
 \subsubsection{Parameters}
+
+
+\begin{table}[t]
+\centering
+\caption[Default parameters of the CIL sensing model]{Table of simulation parameters. These parameters are used throughout this chapter; any deviation from them is explicitly noted.}
+\label{tab:ch5:params}
+\begin{tabular}{llll}
+\toprule\toprule
+Parameter & Description & Dimension & Value\\\midrule
+$c_0$ & Ephrin concentration & $L^{-2}$ & $10^2\,\mathrm{\mu m}^{-2}$~\cite{xu2011epha2}\\
+$\chi$ & Fraction of correct ligands $c_0/c_t$ & $1$ & Varying\\
+$k$ & Eph-ephrin binding constant & $L^2/T$ & $10^{-2}\,\mathrm{\mu m^2/s}$\\
+$r$ & Eph-ephrin unbinding rate & $T^{-1}$ & $1\,\mathrm{s}^{-1}$\\
+$\alpha$ & Ratio of unbinding rates $r/r'$ & $1$ & Varying\\
+$x_0$ & Contact center position & $L$ & $50\,\mathrm{\mu m}$ \\
+$\sigma$ & Contact width & $L$ & Varying\\
+$\omega$ & Boundary steepness & $L$ & $1\,\mathrm{\mu m}$\\
+$T$ & Measuring time & $T$ & $1\,\mathrm{s}$\\
+$L$ & Cell perimeter & $L$ & $100\,\mathrm{\mu m}$ \\
+$a$ & Eph receptor spacing & $L$ & $0.01\,\mathrm{\mu m}$ \\
+$N$ & Number of receptors & $1$ & $10000$\\
+\bottomrule\bottomrule
+\end{tabular}
+\end{table}
 
 The default parameter values in our model are shown in Table~\ref{tab:ch5:params}.
 The typical radius of the \emph{Drosophila} haemocytes cell is in the order of $10\,\mathrm{\mu m}$~\cite{davis2012emergence}, which makes the cell perimeter roughly $10^2\,\mathrm{\mu m}$.

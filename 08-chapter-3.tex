@@ -222,16 +222,6 @@ This would include fracture rates in models where, for instance, each bond in a 
 \end{equation}
 As this is a generalization of the all-cell growth model, the solution in Eq.~\eqref{eq:ch3:ss_solution_all} automatically satisfies the recurrence relation.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.7\textwidth]{chap3/survival_probs.pdf}
-\caption[Dependence of survival probability on break and division rates in the all-cell model]{Dependence of survival probability $S(t)$ on break and division rates in the one-dimensional all-cell growth model.
-(a) Survival curves for varying break rates $k_b$, with fixed division rate $k_d$, all collapse onto the exponential decay $S(t)=\mathrm{e}^{-k_d t}$ (dashed line).
-(b) Survival probabilities $S(t)$ for three different division rates $k_d$, corresponding to cell cycles of $4, 16$, and $64$ hours, respectively.
-We apply standard Kaplan-Meier survival analysis~\cite{kaplan1958nonparametric} to the data from our rejection-free kinetic Monte Carlo simulations; error bars represent 95\% confidence intervals.}
-\label{fig:ch3:survival_probs}
-\end{figure}
-
 To compute the total survival probability $S(t)$, we first consider the conditional survival probability $u_n(t)=\mathbb{P}(T>t|N(0)=n)$, defined as the probability that no fracture occurs by time $t$ given an initial chain length $N(0)=n$. For a Markov process with a time-varying hazard rate $\lambda(t)$, the probability that no failure occurs over a time interval can be generalized with an integral $\exp\left(-\int_0^{\Delta t}\lambda(t')\mathrm{d}t'\right)$~\cite{kalbfleisch2002statistical}. In our case, the total hazard rate $\lambda(t)=\lambda\bm{(}N(t)\bm{)}$ depends on a stochastic process $N(t)$, so we must average over all possible trajectories of $N(t)$:
 \begin{equation}
 \label{eq:ch3:conditional_average}
@@ -260,6 +250,16 @@ By computing the time derivative of $S(t)$ and substituting Eq.~\eqref{eq:ch3:KB
     \dot{S}(t)=-k_d\sum_{n\geqslant 1} p_n u_n =-k_d S(t).
 \end{equation}
 Therefore, we arrive at the striking result that the survival probability decays exponentially as $S(t)=\mathrm{e}^{-k_d t}$, independent of the break rate $k_b$, and determined solely by the division rate $k_d$. We note that this derivation is independent of dimensionality and relies only on the assumption in Eq.~\eqref{eq:ch3:survival_assm} and the all-cell growth mechanism. In our one-dimensional all-cell growth model, where $q_{mn}=k_b$ is constant, the derived $S(t)=\mathrm{e}^{-k_d t}$ is the exact solution, as confirmed by the Monte Carlo simulation results shown in Fig.~\ref{fig:ch3:survival_probs}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{chap3/survival_probs.pdf}
+\caption[Dependence of survival probability on break and division rates in the all-cell model]{Dependence of survival probability $S(t)$ on break and division rates in the one-dimensional all-cell growth model.
+(a) Survival curves for varying break rates $k_b$, with fixed division rate $k_d$, all collapse onto the exponential decay $S(t)=\mathrm{e}^{-k_d t}$ (dashed line).
+(b) Survival probabilities $S(t)$ for three different division rates $k_d$, corresponding to cell cycles of $4, 16$, and $64$ hours, respectively.
+We apply standard Kaplan-Meier survival analysis~\cite{kaplan1958nonparametric} to the data from our rejection-free kinetic Monte Carlo simulations; error bars represent 95\% confidence intervals.}
+\label{fig:ch3:survival_probs}
+\end{figure}
 
 The intriguing result that the survival probability depends only on $k_d$ depends on the assumption of steady state. However, germline cysts do not reach steady state---so for a comparison to experiment, an ensemble starting from a fixed number of cells corresponding to the initially observed condition would be easier to observe and compare to experiment. The quantity $u_1(t)$---the survival probability conditional on starting from a single cell---might be of particular interest. We present the analytical expression for the conditional survival probability $u_n(t)$ in our one-dimensional all-cell growth model in Sec.~\ref{sec:ch3:conditional_survival}.
 
@@ -499,6 +499,15 @@ Observe that the results are quite similar to the one-end growth case, but with 
 \subsection{Generalizations with a matrix equation method}
 \label{sec:ch3:matrix}
 
+\begin{figure}
+\centering
+\vspace{0.4cm}
+\hspace{-0.5cm}
+\includegraphics[width=0.7\textwidth]{chap3/suppl_matrix.pdf}
+\caption[The generating-function solution compared with numerical matrix-equation results]{Comparison of the analytical solution obtained using the generating function method with numerical results from the matrix equation method. Lines represent the same analytical solutions for $\gamma=0.1$ as shown in Fig.~\ref{fig:ch3:statistics}(a) ($\gamma'=\gamma/2=0.05$ for the one-end growth model). Empty symbols denote exact numerical results from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$.}
+\label{fig:ch3:suppl_matrix}
+\end{figure}
+
 A general master equation with a minimum cluster size $N_\textrm{min}$---i.e., the cluster size $n\geqslant N_\textrm{min}$---and different growth mechanisms can be written as
 \begin{equation}\label{eq:ch3:generalmaster}
    \frac{\mathrm{d} p_n}{\mathrm{d} t} = k_b\sum_{m\geqslant n+N_{\min}}p_m - k_b\max(n-2N_{\min}+1, 0)p_n + g(n-1)p_{n-1}-g(n)p_n,
@@ -513,15 +522,6 @@ where in the first term a cluster of size $m$ can only break into one of size $n
     \end{cases}
 \end{equation}
 where $\Theta(x)$ is the Heaviside step function. The master equation can be organized as $\dot{\mathbf{p}} = \bm{K}\mathbf{p}$, where $\bm{K}$ is the generator on the state space $\{N_\textrm{min}, N_{\textrm{min}}+1, \ldots\}$. We decompose $\bm{K}=\bm{A}+\bm{B}$, where $\bm{A}$ is an upper triangular matrix corresponding to fragmentation events, and $\bm{B}$ is a lower bidiagonal matrix with main diagonal $B_{nn}=-\lambda(n)$ and subdiagonal $B_{n+1, n}=g(n)$, where $\lambda(n)\coloneq k_b\max(n-2N_{\min}+1, 0)+g(n)$ is the total transition rate from the $n$-mer state. In the steady state, we obtain the homogeneous equation $\bm{K}\mathbf{p}=\mathbf{0}$. We find the null space of $\bm{K}$ and normalize to obtain the steady-state distribution $\mathbf{p}$. We must truncate to a maximum possible cluster size $N_\mathrm{max}\gg 2N_\mathrm{min}$, where $p_n$ is negligible for $n>N_\mathrm{max}$; $N_\textrm{max}$ is set to $N_\mathrm{min}+5000$ by default. When setting $N_{\min}=1$, the solutions $\mathbf{p}$ match those derived in Sec.~\ref{sec:ch3:gen_func} using the generating function method (see Fig.~\ref{fig:ch3:suppl_matrix}).
-
-\begin{figure}
-\centering
-\vspace{0.4cm}
-\hspace{-0.5cm}
-\includegraphics[width=0.7\textwidth]{chap3/suppl_matrix.pdf}
-\caption[The generating-function solution compared with numerical matrix-equation results]{Comparison of the analytical solution obtained using the generating function method with numerical results from the matrix equation method. Lines represent the same analytical solutions for $\gamma=0.1$ as shown in Fig.~\ref{fig:ch3:statistics}(a) ($\gamma'=\gamma/2=0.05$ for the one-end growth model). Empty symbols denote exact numerical results from the matrix equation $\bm{K}\mathbf{p}=\mathbf{0}$.}
-\label{fig:ch3:suppl_matrix}
-\end{figure}
 
 
 \subsection{Basal rates}
@@ -633,13 +633,7 @@ For the 2D AOUP simulations in Sec.~\ref{sec:ch3:2d}, we integrate the dynamics 
 \subsubsection{Fragmentation-growth simulations}
 \label{sec:ch3:rfKMC}
 
-We implement a rejection-free kinetic Monte Carlo (rfKMC) algorithm to simulate the fragmentation-growth processes. The initial chain length is set to $n_0\gg N_\text{min}$. For a chain of $N$ particles, there are $N-1$ connections, each with a break rate. If breaking a connection violates the minimum cluster size $N_\textrm{min}$, the break rate is set to zero. Each particle has a division rate, which is set to zero for particles not allowed to divide (e.g., in the end-growth mechanism).
-
-In our simulations, we fix the division rate $k_d=1$ and vary the ratio $\gamma$ by adjusting the break rate $k_b=\gamma$, i.e., the time unit is $1/k_d$. In the rfKMC algorithm, the time step for each MC step is calculated as $\Delta t =Q_{k}^{-1}\ln(1/u)$, where the total rate $Q_k$ is the sum of all break and division rates, and $u$ is a uniform random number in $(0,1]$. Each step permits either a fragmentation or a division event. After fragmentation, one of the daughter chains is randomly selected as the new tracked chain. To obtain the steady-state distribution $p_n$, we must wait for a sufficiently long time $T$ for the chain length $n(t)$ to reach a stable increase-then-drop pattern (as shown in Fig.~\ref{fig:ch3:suppl_simulation}). The distribution is then generated from the results of $10^4$ independent simulation runs.
-
-We note that the cluster sizes of germline cysts shown in Fig.~5 of Ref.~\cite{levy2024tug} are smaller than our steady-state predictions using their measured break and division rates, as their system has not yet reached steady state. For instance, the break rate is approximately $0.015\,\mathrm{h^{-1}}$ at E11.5 and E12.5 ovaries (Fig.~4C of Ref.~\cite{levy2024tug}), while the division rate for germline cysts is about $\ln 2/16\,\mathrm{h^{-1}}$. Our steady-state solution predicts a mean cluster size $(1+\gamma)/\gamma\approx 4$, whereas their simulated average cyst sizes are $1.73$ and $3.26$ at E11.5 and E12.5, respectively. If we similarly evolve a single cell only from E10.5 to E11.5 and E12.5, as in Ref.~\cite{levy2024tug}, we obtain mean cluster sizes of approximately $2$ and $3$, which closely match their results.
-
-\begin{figure}
+\begin{figure}[t]
 \centering
 \vspace{0.4cm}
 \hspace{-0.5cm}
@@ -648,14 +642,21 @@ We note that the cluster sizes of germline cysts shown in Fig.~5 of Ref.~\cite{l
 \label{fig:ch3:suppl_simulation}
 \end{figure}
 
-\clearpage
+We implement a rejection-free kinetic Monte Carlo (rfKMC) algorithm to simulate the fragmentation-growth processes. The initial chain length is set to $n_0\gg N_\text{min}$. For a chain of $N$ particles, there are $N-1$ connections, each with a break rate. If breaking a connection violates the minimum cluster size $N_\textrm{min}$, the break rate is set to zero. Each particle has a division rate, which is set to zero for particles not allowed to divide (e.g., in the end-growth mechanism).
+
+In our simulations, we fix the division rate $k_d=1$ and vary the ratio $\gamma$ by adjusting the break rate $k_b=\gamma$, i.e., the time unit is $1/k_d$. In the rfKMC algorithm, the time step for each MC step is calculated as $\Delta t =Q_{k}^{-1}\ln(1/u)$, where the total rate $Q_k$ is the sum of all break and division rates, and $u$ is a uniform random number in $(0,1]$. Each step permits either a fragmentation or a division event. After fragmentation, one of the daughter chains is randomly selected as the new tracked chain. To obtain the steady-state distribution $p_n$, we must wait for a sufficiently long time $T$ for the chain length $n(t)$ to reach a stable increase-then-drop pattern (as shown in Fig.~\ref{fig:ch3:suppl_simulation}). The distribution is then generated from the results of $10^4$ independent simulation runs.
+
+We note that the cluster sizes of germline cysts shown in Fig.~5 of Ref.~\cite{levy2024tug} are smaller than our steady-state predictions using their measured break and division rates, as their system has not yet reached steady state. For instance, the break rate is approximately $0.015\,\mathrm{h^{-1}}$ at E11.5 and E12.5 ovaries (Fig.~4C of Ref.~\cite{levy2024tug}), while the division rate for germline cysts is about $\ln 2/16\,\mathrm{h^{-1}}$. Our steady-state solution predicts a mean cluster size $(1+\gamma)/\gamma\approx 4$, whereas their simulated average cyst sizes are $1.73$ and $3.26$ at E11.5 and E12.5, respectively. If we similarly evolve a single cell only from E10.5 to E11.5 and E12.5, as in Ref.~\cite{levy2024tug}, we obtain mean cluster sizes of approximately $2$ and $3$, which closely match their results.
+
+
+% \clearpage
 \subsection{Additional figures}
 \label{sec:ch3:extra-figs}
 \vspace{0.5cm}
 
-\begin{figure*}[h]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{chap3/suppl_survival.pdf}
 \caption[Survival probabilities and post-fracture size distributions]{(a) Survival probability $S(t)$ from rfKMC simulations of the one-end growth model at fixed division rate $k_d$ with varying break rate $k_b$. (b) Survival probability $S(t)$ from rfKMC simulations of the all-cell growth model with minimum cluster size $N_\textrm{min}=200$, again varying $k_b$ at fixed $k_d$. Dashed lines are the exponential decay $\mathrm{e}^{-k_d t}$. Error bars on $S(t)$ represent 95\% confidence intervals. (c) Distribution of post-fracture size $n$ for pre-fracture size $m=10$ in 2D AOUP simulations with cell motility $v_\textrm{rms}=22\,\textrm{\textmu}\mathrm{m/h}$. Division rate $k_d=(\ln 2/16)\,\mathrm{h^{-1}}$.}
 \label{fig:ch3:suppl_survival}
-\end{figure*}
+\end{figure}
